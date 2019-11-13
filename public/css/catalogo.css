@@ -1,0 +1,102 @@
+/* Normalize */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Variables css para los colores */
+:root {
+  --navbar: rgba(55, 229, 156, 1);
+  --link-details: rgb(121, 35, 200);
+  --color1: rgba(210, 241, 228, 1);
+  --color2: rgba(199, 249, 229, 1);
+  --color3: rgba(101, 247, 186, 1);
+  --color5: rgba(47, 76, 64, 1);
+}
+
+/* BODY */
+
+body {
+  background-color: #fcfcfc;
+}
+
+/* -----HEADER ----- */
+
+nav {
+  background: var(--navbar);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: whitesmoke;
+}
+
+/* ----CATALOGO---- */
+
+/* Cards de cada producto */
+.product__card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 3px;
+  padding: 10px 8px 20px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 2px 4px 0;
+}
+
+.product__card:first-child {
+  margin-top: 10px;
+}
+
+/* Imagen de cada card */
+
+.product__card figure {
+  text-align: center;
+  width: 100px;
+  margin: 0;
+}
+
+/* Info de cada producto : Nombre, precio y boton */
+
+.product__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product__name {
+  font-family: "Palanquin Dark", sans-serif;
+  font-size: 1.17em;
+}
+
+/* Button link */
+
+.product__card .product__link-details {
+  align-self: flex-end;
+  background-color: var(--link-details);
+  color: whitesmoke;
+  font-weight: 700;
+  padding: 0.5rem;
+  border-radius: 15px;
+  border: none;
+}
+
+/* QUERIES----------------- */
+
+@media screen and (min-width: 768px) {
+  /* Imagenes de los productos */
+
+  .product__card figure {
+    width: 110px;
+  }
+
+  /* Button un poco mas grande */
+
+  .product__card .product__link-details {
+    padding: 0.6rem;
+  }
+}
