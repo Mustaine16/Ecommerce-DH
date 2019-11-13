@@ -34,12 +34,16 @@ nav {
 
 /* ----CATALOGO---- */
 
+.products__container {
+  padding: 1em;
+}
+
 /* Cards de cada producto */
 .product__card {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 90vw;
+  width: 90%;
   margin: auto;
   margin-bottom: 3px;
   padding: 10px 8px 20px;
@@ -65,7 +69,9 @@ nav {
 .product__info {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   flex: 1;
+  height: 100%;
 }
 
 .product__name {
@@ -98,5 +104,53 @@ nav {
 
   .product__card .product__link-details {
     padding: 0.6rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  /* El contendor de los productos se vuelve gridpara poder mostrar en filas de a 2 */
+
+  .products__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  h1 {
+    grid-column: 1/-1;
+  }
+
+  .product__card {
+    flex-direction: column;
+    flex: 0 0 45%;
+    width: 100%;
+  }
+
+  .product__card figure {
+    width: 150px;
+    margin-bottom: 2em;
+  }
+
+  .product__card .product__price {
+    text-align: center;
+  }
+  .product__card .product__link-details {
+    align-self: initial;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  /* El contendor de los productos se vuelve gridpara poder mostrar en filas de a 3*/
+  .products__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  /* El contendor de los productos se vuelve gridpara poder mostrar en filas de a 3*/
+  .products__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
