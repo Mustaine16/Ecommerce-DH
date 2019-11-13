@@ -44,6 +44,9 @@ nav {
 /* ----CATALOGO---- */
 
 .products__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
   padding: 1em;
 }
 
@@ -59,8 +62,8 @@ h1 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* width: 90%; */
-  margin: auto;
+  width: 100%;
+  /* margin: auto; */
   margin-bottom: 3px;
   padding: 10px 8px 20px;
   background-color: var(--cards);
