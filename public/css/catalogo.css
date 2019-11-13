@@ -8,21 +8,30 @@
 
 /* Variables css para los colores */
 :root {
-  --navbar: rgba(55, 229, 156, 1);
+  --body-background: #fcfcfc;
+  --navbar: rgba(134, 38, 163, 0.81);
+  --violeta-claro: rgb(151, 101, 190);
   --link-details: rgb(121, 35, 200);
-  --color1: rgba(210, 241, 228, 1);
-  --color2: rgba(199, 249, 229, 1);
-  --color3: rgba(101, 247, 186, 1);
-  --color5: rgba(47, 76, 64, 1);
+  --cards: #ffffff;
 }
 
 /* BODY */
 
 body {
-  background-color: #fcfcfc;
+  background-color: var(--body-background);
 }
 
 /* -----HEADER ----- */
+
+header {
+  height: 50vh;
+  background-image: url("../img/background-hero-small.jpg");
+  /* background-image: url("https://andro4all.com/files/2019/08/Samsung-Galaxy-Note10-con-fondo-de-pantalla-para-ocultar-el-agujero.jpg"); */
+  background-position: center;
+  background-size: cover;
+  /* background-position-y: 20px; */
+  background-repeat: no-repeat;
+}
 
 nav {
   background: var(--navbar);
@@ -38,16 +47,23 @@ nav {
   padding: 1em;
 }
 
+h1 {
+  color: var(--violeta-claro);
+  border-bottom: 1px solid var(--violeta-claro);
+  font-size: 1.5rem;
+  padding: 0.3em 0;
+}
+
 /* Cards de cada producto */
 .product__card {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 90%;
+  /* width: 90%; */
   margin: auto;
   margin-bottom: 3px;
   padding: 10px 8px 20px;
-  background-color: #ffffff;
+  background-color: var(--cards);
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.08) 0 2px 4px 0;
 }
@@ -94,6 +110,10 @@ nav {
 /* QUERIES----------------- */
 
 @media screen and (min-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
   /* Imagenes de los productos */
 
   .product__card figure {
