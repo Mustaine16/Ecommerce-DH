@@ -1,65 +1,13 @@
-/* Normalize */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
-}
-
-/* Variables css para los colores */
-:root {
-  --body-background: #fcfcfc;
-  --navbar: #8626a3;
-  --violeta-claro: #9765be;
-  --link-details: rgb(121, 35, 200);
-  --cards: #ffffff;
-}
-
-/* BODY */
-
-body {
-  background-color: var(--body-background);
-}
-
-/* -----HEADER ----- */
+/* --------HEADER --------*/
 
 header {
-  /* height: 50vh;
-  background-image: url("../img/background-hero-small.jpg"); */
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 8.5vh;
 }
 
 nav {
-  background: var(--navbar);
-}
-
-.nav-link {
-  transition: all 0.2s;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: whitesmoke;
-}
-
-/* Dropdwon del Usuario */
-
-.perfil__menu-desplegable {
-  width: 50%;
-  left: 25%;
-  text-align: center;
-}
-
-.dropdown-toggle::after {
-  border-top: 0.3em solid whitesmoke !important;
-}
-
-.logo__brand {
-  transition: transform 0.2s;
-}
-.logo__brand:hover {
-  transform: scale(1.1, 1.1);
+  position: fixed !important;
+  top: 0;
+  width: 100%;
 }
 
 /* ----CATALOGO---- */

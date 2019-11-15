@@ -1,0 +1,19 @@
+/* Nota importante, el header SIEMPRE tiene que tener un height decalrado en su respectivo css para que lo que tenga  abajo no se ponega por debajo de la navbar que tiene position fixed. En este caso uso 50vh para darle espacio a mostrar la imagen de fondo */
+
+/* Header */
+
+header {
+  height: 50vh;
+  /* background-image: url("../img/background-hero-small.jpg"); */
+  background-image: url("../img/background-edit.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+nav {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.507);
+}
