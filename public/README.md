@@ -8,7 +8,7 @@
 - login visual *
 - contacto visual
 - perfil usuario 
-- vista listad productos *
+- vista lista productos *
 - vista detalle producto
 - vista carrito compra
 #### * ya asignado

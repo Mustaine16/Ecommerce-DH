@@ -1,3 +1,8 @@
+header{
+  background-image: none;
+  /* border: 1px solid red; */
+  height: 65px;
+}
 .navigation-general{
   background-color: grey;
   height: 80px;
@@ -13,11 +18,27 @@ a{
   text-align: center; 
 }
 #form-container{
-  
+  overflow: hidden;
+  /* background-color: blueviolet; */
+}
+nav {
+
+  z-index: 100;
+  background: var(--navbar);
+}
+#already-count{
+  float: right;
 }
 
+@media (max-width:575px){
+  #create-count,#already-count,#login, #forgot{
+    margin: 10px 0; 
+  }
+}
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {  }
+@media (min-width: 576px) {
+  
+  }
 
  /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {  }
