@@ -9,8 +9,8 @@
 /* Variables css para los colores */
 :root {
   --body-background: #fcfcfc;
-  --navbar: rgba(134, 38, 163, 0.81);
-  --violeta-claro: rgb(151, 101, 190);
+  --navbar: #8626a3;
+  --violeta-claro: #9765be;
   --link-details: rgb(121, 35, 200);
   --cards: #ffffff;
 }
@@ -24,12 +24,10 @@ body {
 /* -----HEADER ----- */
 
 header {
-  height: 50vh;
-  background-image: url("../img/background-hero-small.jpg");
-  /* background-image: url("https://andro4all.com/files/2019/08/Samsung-Galaxy-Note10-con-fondo-de-pantalla-para-ocultar-el-agujero.jpg"); */
+  /* height: 50vh;
+  background-image: url("../img/background-hero-small.jpg"); */
   background-position: center;
   background-size: cover;
-  /* background-position-y: 20px; */
   background-repeat: no-repeat;
 }
 
@@ -37,8 +35,31 @@ nav {
   background: var(--navbar);
 }
 
+.nav-link {
+  transition: all 0.2s;
+}
+
 .navbar-dark .navbar-nav .nav-link {
   color: whitesmoke;
+}
+
+/* Dropdwon del Usuario */
+
+.perfil__menu-desplegable {
+  width: 50%;
+  left: 25%;
+  text-align: center;
+}
+
+.dropdown-toggle::after {
+  border-top: 0.3em solid whitesmoke !important;
+}
+
+.logo__brand {
+  transition: transform 0.2s;
+}
+.logo__brand:hover {
+  transform: scale(1.1, 1.1);
 }
 
 /* ----CATALOGO---- */
@@ -100,7 +121,7 @@ h1 {
 
 /* Button link */
 
-.product__card .product__link-details {
+.product__link-details {
   align-self: flex-end;
   background-color: var(--link-details);
   color: whitesmoke;
@@ -108,6 +129,21 @@ h1 {
   padding: 0.5rem;
   border-radius: 15px;
   border: none;
+  transition: all 0.2s;
+}
+
+.product__link-details:hover {
+  background: #9e41f3;
+}
+.product__link-details:active {
+  outline: none;
+  transform: translateY(5px);
+  user-select: none;
+  touch-action: manipulation;
+}
+.product__link-details:focus {
+  outline: none;
+  background: #9e41f3;
 }
 
 /* QUERIES----------------- */
@@ -131,11 +167,24 @@ h1 {
 }
 
 @media screen and (min-width: 1024px) {
+  /* Menu desplegable del perfil */
+
+  .perfil__icon {
+    margin-left: auto;
+  }
+
+  .perfil__menu-desplegable {
+    left: -66px;
+  }
+
   /* El contendor de los productos se vuelve gridpara poder mostrar en filas de a 2 */
 
   .products__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   h1 {
@@ -151,6 +200,10 @@ h1 {
   .product__card figure {
     width: 150px;
     margin-bottom: 2em;
+  }
+
+  .product__card .product__info {
+    align-items: center;
   }
 
   .product__card .product__price {
