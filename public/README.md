@@ -6,7 +6,7 @@
 - FAQ *
 - registro visual *
 - login visual *
-- contacto visual
+- contacto visual *
 - perfil usuario 
 - vista lista productos *
 - vista detalle producto
