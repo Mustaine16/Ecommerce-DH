@@ -25,6 +25,7 @@ body {
 
 nav {
   background: var(--navbar);
+  z-index:999;
 }
 
 header {
