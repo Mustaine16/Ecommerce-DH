@@ -35,9 +35,9 @@ h1 {
   /* margin: auto; */
   margin-bottom: 3px;
   padding: 10px 8px 20px;
-  background-color: var(--cards);
+  background-color: var(--cards-background);
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0 2px 4px 0;
+  box-shadow: var(--cards-box-shadow);
 }
 
 .product__card:first-child {
