@@ -4,15 +4,22 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
 }
 
 /* Variables css para los colores */
 :root {
   --body-background: #fcfcfc;
-  --navbar: #8626a3;
+  --link-details: #6e4dbe;
   --violeta-claro: #9765be;
-  --link-details: rgb(121, 35, 200);
-  --cards: #ffffff;
+  --navbar: rgb(121, 35, 200);
+  --cards-box-shadow: rgba(0, 0, 0, 0.08) 0 2px 4px 0;
+  --cards-background: #ffffff;
+  --card-border-radius: 4px;
+  --link-border-radius: 15px;
 }
 
 /* BODY */
@@ -25,15 +32,17 @@ body {
 
 nav {
   background: var(--navbar);
-  z-index:999;
+  z-index: 999;
 }
 
 header {
   height: 8.5vh;
 }
 
-.nav-link {
+.nav-link,
+.perfil__menu-desplegable a {
   transition: all 0.2s;
+  font-family: "Alata", sans-serif;
 }
 
 .navbar-dark .navbar-nav .nav-link {
