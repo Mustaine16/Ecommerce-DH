@@ -82,16 +82,19 @@ h1 {
 
 .product__link-details:hover {
   background: #9e41f3;
+  color: whitesmoke !important;
 }
 .product__link-details:active {
   outline: none;
   transform: translateY(5px);
   user-select: none;
   touch-action: manipulation;
+  color: whitesmoke;
 }
 .product__link-details:focus {
   outline: none;
   background: #9e41f3;
+  color: whitesmoke;
 }
 
 /* QUERIES----------------- */
