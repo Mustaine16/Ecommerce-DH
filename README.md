@@ -14,17 +14,17 @@
 #### * ya asignado
 
 
-#To fix
+# To fix
 
-##En F.A.Q
+## En F.A.Q
 
--Agregar un div.container a la row que no tiene padre
+- Agregar un div.container a la row que no tiene padre
 
-##En Carrito
+## En Carrito
 
--Copiar Head, Header y Footer de base.html
+- Copiar Head, Header y Footer de base.html
 
-##En Login, Registro y Contacto
+## En Login, Registro y Contacto
 
--Copiar Head, Header y Footer de base.html
--Sacar los archivos de las carpetas: dejar los HTML en la raiz y los .css en la carpta Css.
+- Copiar Head, Header y Footer de base.html
+- Sacar los archivos de las carpetas: dejar los HTML en la raiz y los .css en la carpta Css.
