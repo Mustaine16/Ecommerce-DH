@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,20 +10,20 @@
     />
     <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans|Palanquin+Dark&display=swap"
+      href="https://fonts.googleapis.com/css?family=Alata&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Alata&display=swap"
+      href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700&display=swap"
       rel="stylesheet"
     />
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="css/catalogo.css" type="text/css" />
-    <title>Catálogo de Productos</title>
+    <link rel="stylesheet" href="css/detalles.css" />
+    <!-- Title -->
+    <title>Producto - Detalle</title>
   </head>
-
-  <body class="container-fluid p-0">
+  <body>
     <!-- Header -->
     <header>
       <!-- Navbar -->
@@ -75,123 +75,45 @@
         </div>
       </nav>
     </header>
+    <!-- Cuerpo Principal -->
 
-    <!-- Catalogo -->
-
-    <section class="products__container">
-      <h1>Catalogo</h1>
-      <article class="product__card">
-        <figure>
-          <img src="img/1.png" width="100" alt="" class="product__img" />
+    <!-- Container de la vista del detalle -->
+    <section class="container pt-2 mb-2">
+      <article class="producto__container p-2">
+        <!-- Imagen del producto -->
+        <figure class="producto__imagen text-center">
+          <img src="img/1.png" class="img-fluid" alt="" />
         </figure>
-        <div class="product__info">
-          <h3 class="product__name">Samsung Galaxy A8</h3>
-          <p class="product__price">$20.999</p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
+        <!-- Nombre, precio y añadir la carrito -->
+        <div class="producto__vender-container">
+          <h2 class="producto__nombre">Samsung Galaxy A8</h2>
+          <p class="producto__precio">$25.000</p>
+          <button class="producto__carrito">
+            Añadir
+          </button>
         </div>
-      </article>
-      <article class="product__card">
-        <figure>
-          <img src="img/2.png" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Xiamoi Note 3</h3>
-          <p class="product__price">$18.999</p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/3.png" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Google Pixel 2</h3>
-          <p class="product__price">
-            $25.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/4.webp" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Moto E6 Plus</h3>
-          <p class="product__price">
-            $15.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/4.webp" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Moto E6 Plus</h3>
-          <p class="product__price">
-            $15.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/4.webp" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Moto E6 Plus</h3>
-          <p class="product__price">
-            $15.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/4.webp" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Moto E6 Plus</h3>
-          <p class="product__price">
-            $15.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
-        </div>
-      </article>
-
-      <article class="product__card">
-        <figure>
-          <img src="img/4.webp" width="100" alt="" class="product__img" />
-        </figure>
-        <div class="product__info">
-          <h3 class="product__name">Moto E6 Plus</h3>
-          <p class="product__price">
-            $15.999
-          </p>
-          <a href="producto-detalle.html" class="product__link-details"
-            >Ver más</a
-          >
+        <div class="producto__detalles">
+          <h3>Detalles</h3>
+          <div class="producto__detalle">
+            <p class="detalle_nombre">Sistema Operativo</p>
+            <p class="detalle_data">Android</p>
+          </div>
+          <div class="producto__detalle">
+            <p class="detalle_nombre">Pantalla</p>
+            <p class="detalle_data">5.6"</p>
+          </div>
+          <div class="producto__detalle">
+            <p class="detalle_nombre">Cámara</p>
+            <p class="detalle_data">16.0 MP</p>
+          </div>
+          <div class="producto__detalle">
+            <p class="detalle_nombre">Memoria Interna</p>
+            <p class="detalle_data">32GB</p>
+          </div>
+          <div class="producto__detalle">
+            <p class="detalle_nombre">Memoria RAM</p>
+            <p class="detalle_data">4GB</p>
+          </div>
         </div>
       </article>
     </section>
