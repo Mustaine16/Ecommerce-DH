@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+font-family: 'Quicksand', sans-serif;
   text-decoration: none;
 }
 a:hover {
@@ -33,6 +33,9 @@ body {
 nav {
   background: var(--navbar);
   z-index: 999;
+  position: fixed;
+  top:0;
+  width:100%;
 }
 
 header {
