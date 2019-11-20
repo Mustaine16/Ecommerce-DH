@@ -4,12 +4,6 @@ header {
   height: 8.5vh;
 }
 
-nav {
-  position: fixed !important;
-  top: 0;
-  width: 100%;
-}
-
 /* ----CATALOGO---- */
 
 .products__container {
