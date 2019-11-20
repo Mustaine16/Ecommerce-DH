@@ -84,14 +84,19 @@ main {
   margin-bottom: 1em;
 }
 
+.company-info h3 {
+  text-align: center;
+  padding: 0.5em;
+}
+
 .company-info-item {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
-  height: 225px;
-  padding: 3px;
+  /* height: 405px; */
+  padding: 15px;
   background: var(--cards-background);
   border-radius: var(--card-border-radius);
   box-shadow: var(--cards-box-shadow);
@@ -102,6 +107,7 @@ main {
   display: flex;
   width: 100px;
   height: 100px;
+  margin-bottom: 10px;
   background: var(--link-details);
   color: whitesmoke;
   text-align: center;
@@ -114,6 +120,7 @@ main {
 }
 .bubble-text {
   width: 70%;
+  line-height: 1.4;
 }
 
 /* ------Catalogo card ---------*/
@@ -157,11 +164,25 @@ main {
 /* -----QUERIES----- */
 
 @media screen and (min-width: 768px) {
+  .company-info h3 {
+    grid-column: 1/-1;
+  }
+
   .button_catalogo {
     padding: 2em;
   }
 
   .company-info {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .company-info h3 {
+    padding: 1em;
+  }
+
+  .company-info-item {
+    height: 400px;
   }
 }
