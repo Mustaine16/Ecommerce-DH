@@ -1,14 +1,3 @@
-:root {
-  --body-background: #fcfcfc;
-  --navbar: #8626a3;
-  --violeta-claro: #9765be;
-  --link-details: rgb(121, 35, 200);
-  --cards-box-shadow: rgba(0, 0, 0, 0.08) 0 2px 4px 0;
-  --cards-background: #ffffff;
-  --card-border-radius: 4px;
-  --link-border-radius: 15px;
-}
-
 /* Nota importante, el header SIEMPRE tiene que tener un height decalrado en su respectivo css para que lo que tenga  abajo no se ponega por debajo de la navbar que tiene position fixed. En este caso uso 50vh para darle espacio a mostrar la imagen de fondo */
 
 /* Header */
@@ -21,10 +10,6 @@ header {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-nav {
-  background: rgba(0, 0, 0, 0.507);
 }
 
 /* Boton del haeder para acceder al catalogo */

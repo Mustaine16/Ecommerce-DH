@@ -22,6 +22,15 @@ a:hover {
   --link-border-radius: 15px;
 }
 
+/* TITULOS GENERALES */
+
+h1 {
+  color: var(--violeta-claro);
+  border-bottom: 1px solid var(--violeta-claro);
+  font-size: 1.5rem;
+  padding: 0.3em 0;
+}
+
 /* BODY */
 
 body {
@@ -73,7 +82,7 @@ header {
 
 /*---------- QUERIES-------- */
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   /* Menu desplegable del perfil */
 
   .perfil__icon {
