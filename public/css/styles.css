@@ -80,6 +80,12 @@ header {
   transform: scale(1.1, 1.1);
 }
 
+/* Fix height en FAQ, CONTACTO,LOGIN Y REGISTRO */
+
+.fix-height {
+  min-height: 80vh;
+}
+
 /*---------- QUERIES-------- */
 
 @media screen and (min-width: 768px) {

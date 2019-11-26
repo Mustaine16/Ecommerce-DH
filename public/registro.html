@@ -9,10 +9,12 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Alata|Quicksand:400,500,700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Alata|Quicksand:400,500,700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="css/style-login.css">
     <!-- Title -->
     <title>Home</title>
   </head>
@@ -69,66 +71,122 @@
       </nav>
     </header>
 
-
-
-  <h1 class="important-text">Registrate en buyit</h1>
-  <!-- esto envuelve al formulario -->
-  <div class="container container-fluid" id="form-container">
-  <form action="">
-    <div class="form-group">
-      <label for="name">Nombre</label>
-      <input type="text" id="name" class="form-control text-input" name="name">
-    </div>
-    <div class="form-group">
-      <label for="last-name">Apellido</label>
-      <input type="text" class="form-control text-input" id="last-name" name="last-name">
-    </div>
-    <div class="form-group">
-      <label for="dni">DNI</label>
-      <input type="text" id="dni" class="form-control text-input" name="dni">
-    </div>  
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" class="form-control email-input" name="email">
-    </div>
-    <div class="form-group">  
-      <label for="telephone">Teléfono</label>
-      <input type="tel"  id="telephone" class="form-control password-input" name="telephone">
-    </div>
-    <div class="form-group">
-      <label for="address">Dirección</label>
-      <input type="text" class="form-control text-input" id="address" name="address">
-    </div>
-    <div class="form-group">
-      <label for="town">Localidad</label>
-      <input type="text" class="form-control text-input" id="town" name="town">
-    </div>
-    <div class="form-group">
-      <label for="zip-code">Código postal</label>
-      <input type="text" class="form-control text-input" id="zip-code" name="zip-code">
-    </div>
-      <div class="form-group">  
-      <div class="form-group">
-          <label for="user-name">Nombre de usuario</label>
-          <input type="text" class="form-control text-input" id="user-name" name="user-name">
+    <!-- esto envuelve al formulario -->
+    <div class="container container-fluid" id="form-container">
+      <h1 class="important-text">Registrate en buyit</h1>
+      <form action="">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control text-input"
+            name="name"
+          />
         </div>
-      <label for="password">Clave</label>
-      <input type="password"  id="password" class="form-control password-input" name="password">
+        <div class="form-group">
+          <label for="last-name">Apellido</label>
+          <input
+            type="text"
+            class="form-control text-input"
+            id="last-name"
+            name="last-name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input
+            type="text"
+            id="dni"
+            class="form-control text-input"
+            name="dni"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control email-input"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Teléfono</label>
+          <input
+            type="tel"
+            id="telephone"
+            class="form-control password-input"
+            name="telephone"
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Dirección</label>
+          <input
+            type="text"
+            class="form-control text-input"
+            id="address"
+            name="address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="town">Localidad</label>
+          <input
+            type="text"
+            class="form-control text-input"
+            id="town"
+            name="town"
+          />
+        </div>
+        <div class="form-group">
+          <label for="zip-code">Código postal</label>
+          <input
+            type="text"
+            class="form-control text-input"
+            id="zip-code"
+            name="zip-code"
+          />
+        </div>
+        <div class="form-group">
+          <div class="form-group">
+            <label for="user-name">Nombre de usuario</label>
+            <input
+              type="text"
+              class="form-control text-input"
+              id="user-name"
+              name="user-name"
+            />
+          </div>
+          <label for="password">Clave</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control password-input"
+            name="password"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="submit"
+            class="col col-md-auto col-lg-auto btn btn-lg btn-primary"
+            value="Crear cuenta"
+            id="create-count"
+          />
+          <a
+            href="login.html"
+            class="col col-md-auto col-lg-auto btn btn-lg btn-info"
+            id="already-count"
+            >Ya tengo una cuenta</a
+          >
+          <!--      <p>Al crear una cuenta admito haber leído y <a href="" class="conditions">términos y condiciones</a>...</p>-->
+        </div>
+        <div class="form-group">
+          <!--        <p>aca puede ir un captcha o algo</p> -->
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Crear cuenta" id="create-count">
-      <a  href="login.html" class="col col-md-auto col-lg-auto btn btn-lg btn-info" id="already-count">Ya tengo una cuenta</a>
-      <!--      <p>Al crear una cuenta admito haber leído y <a href="" class="conditions">términos y condiciones</a>...</p>-->
-    </div>
-      <div class="form-group">
-	      <!--        <p>aca puede ir un captcha o algo</p> -->
-      </div>
-  </form>
-
-
-</div>
-  <!-- Footer -->
-  <footer class="bg-dark">
+    <!-- Footer -->
+    <footer class="bg-dark">
       <div
         class="col-lg-10 pt-4 pb-4 text-center m-auto row flex-column flex-lg-row justify-content-between align-items-center"
       >
@@ -171,6 +229,5 @@
       src="https://kit.fontawesome.com/2641c51c10.js"
       crossorigin="anonymous"
     ></script>
-
-</body>
+  </body>
 </html>
