@@ -1,25 +1,35 @@
 <?php
 
-require_once 'controladores/funciones.php';
+require_once "autoload.php";
 
 $arrayDeErrores = "";
 
 if ($_POST) {
-    $arrayDeErrores = validarRegistracion($_POST);
+    $arrayDeErrores = validarRegistracion($_POST,$_FILES);
 
     if (count($arrayDeErrores) === 0) {
+        //Todo salió bien!
+
+        //Subir el avatar a la carpeta usuarios/avatars
+
+        $id = uniqid(); //ID unico con el cual vamos a crear el nombre del archivo del avatar
+
+        subirAvatar($_FILES, $_POST, $id);
+
+
+        $username = $_POST["username"];
+
+        $ext = pathinfo($_FILES["avatar"]["name"],PATHINFO_EXTENSION);
+
+
+        $avatarFileName = $username . "_" . $id . "." . $ext;
+
         // REGISTRO AL USUARIO
         $usuarioFinal = [
-            "nombre" => trim($_POST["nombre"]),
-            "apellido" => trim($_POST["apellido"]),
-            "dni" => trim($_POST["dni"]),
             "email" => $_POST["email"],
-            "telefono" => trim($_POST["telefono"]),
-            "direccion" => trim($_POST["direccion"]),
-            "localidad" => trim($_POST["localidad"]),
-            "cp" => trim($_POST["cp"]),
             "username" => trim($_POST["username"]),
-            "password" => password_hash($_POST['password'], PASSWORD_DEFAULT)
+            "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
+            "avatar" => $avatarFileName
         ];
 
         // ENVIAR A LA BASE DE DATOS $usuarioFinal
@@ -29,6 +39,10 @@ if ($_POST) {
     }
 }
 
+if($_FILES){
+    pre($_FILES);
+    // exit;
+}
 
 ?>
 
@@ -44,6 +58,7 @@ if ($_POST) {
     <link href="https://fonts.googleapis.com/css?family=Alata|Quicksand:400,500,700&display=swap" rel="stylesheet">
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <link rel="stylesheet" href="css/registro.css">
     <!-- Title -->
     <title>Home</title>
 </head>
@@ -84,75 +99,49 @@ if ($_POST) {
         </nav>
     </header>
 
-    <!-- esto envuelve al formulario -->
-    <div class="container container-fluid" id="form-container">
+    <!-- Formulario -->
+    <section class="container" id="form-container">
         <br>
-        <h1 class="important-text">Registrate en buyit</h1>
+        <h1 class="important-text">Crear una cuenta</h1>
         <br>
-        <form action="registro.php" method="post">
+        <form action="registro.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" class="form-control text-input" name="nombre" value="<?= persistirDato($arrayDeErrores, "nombre"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["nombre"]) ? $arrayDeErrores["nombre"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control text-input" id="apellido" name="apellido" value="<?= persistirDato($arrayDeErrores, "apellido"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["apellido"]) ? $arrayDeErrores["apellido"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="dni">DNI<span class="small"> (Sólo numeros sin espacios)</span></label>
-                <input type="text" id="dni" class="form-control text-input" name="dni" value="<?= persistirDato($arrayDeErrores, "dni"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["dni"]) ? $arrayDeErrores["dni"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control email-input" name="email" value="<?= persistirDato($arrayDeErrores, "email"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["email"]) ? $arrayDeErrores["email"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono<span class="small"> (Sólo numeros sin espacios)</span></label>
-                <input type="tel" id="telefono" class="form-control password-input" name="telefono" value="<?= persistirDato($arrayDeErrores, "telefono"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["telefono"]) ? $arrayDeErrores["telefono"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input type="text" class="form-control text-input" id="direccion" name="direccion" value="<?= persistirDato($arrayDeErrores, "direccion"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["direccion"]) ? $arrayDeErrores["direccion"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="localidad">Localidad</label>
-                <input type="text" class="form-control text-input" id="localidad" name="localidad" value="<?= persistirDato($arrayDeErrores, "localidad"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["localidad"]) ? $arrayDeErrores["localidad"] : "" ?></small>
-            </div>
-            <div class="form-group">
-                <label for="cp">Código postal<span class="small"> (Sólo numeros sin espacios)</span></label>
-                <input type="text" class="form-control text-input" id="cp" name="cp" value="<?= persistirDato($arrayDeErrores, "cp"); ?>">
-                <small class="text-danger"><?= isset($arrayDeErrores["cp"]) ? $arrayDeErrores["cp"] : "" ?></small>
-            </div>
-            <div class="form-group">
+                <div class="form-group avatar__container">
+                    <label class="avatar__img_container" for="avatar">
+                        <img src="https://www.fourjay.org/myphoto/f/14/143147_avatar-png.jpg" alt="avatar" class="avatar__img">
+                        <p>Elegir un avatar</p>
+                    </label>
+                    <input type="file" name="avatar" id="avatar" class="avatar__input">
+                    <small class="text-danger"><?= isset($arrayDeErrores["avatar"]) ? $arrayDeErrores["avatar"] : "" ?></small>
+                </div>
                 <div class="form-group">
                     <label for="username">Nombre de Usuario</label>
                     <input type="text" class="form-control text-input" id="username" name="username" value="<?= persistirDato($arrayDeErrores, "username"); ?>">
                     <small class="text-danger"><?= isset($arrayDeErrores["username"]) ? $arrayDeErrores["username"] : "" ?></small>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control email-input" name="email" value="<?= persistirDato($arrayDeErrores, "email");  ?>">
+                    <small class="text-danger"><?= isset($arrayDeErrores["email"]) ? $arrayDeErrores["email"] : "" ?></small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
                     <input type="password" id="password" class="form-control password-input" name="password">
                     <small class="text-danger"><?= isset($arrayDeErrores["password"]) ? $arrayDeErrores["password"] : "" ?></small>
                 </div>
                 <div class="form-group">
-                    <label for="repassword">Re-Password</label>
+                    <label for="repassword">Repetir Contraseña</label>
                     <input type="password" id="repassword" class="form-control password-input" name="repassword">
                     <small class="text-danger"><?= isset($arrayDeErrores["repassword"]) ? $arrayDeErrores["repassword"] : "" ?></small>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Registro" id="registracion" />
+                    <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Registrarse" id="registracion" />
                     <a href="login.html" class="col col-md-auto col-lg-auto btn btn-lg btn-info" id="already-count">Ya tengo una cuenta</a>
                 </div>
             </div>
         </form>
-    </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-dark">
         <div class="col-lg-10 pt-4 pb-4 text-center m-auto row flex-column flex-lg-row justify-content-between align-items-center">
@@ -179,6 +168,7 @@ if ($_POST) {
             Copyright © Empresa 2019
         </p>
     </footer>
+
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
