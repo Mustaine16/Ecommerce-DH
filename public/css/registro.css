@@ -26,11 +26,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container {
-    width: 60%;
-    margin: auto;
-  }
-
   .avatar__container {
     align-items: center;
     justify-content: space-between;
@@ -39,10 +34,16 @@
   .avatar__input {
     width: auto;
   }
+
+  /* Container de formularios */
+  .formularios__container {
+    width: 60%;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-  .container {
+  .formularios__container {
     width: 30%;
     margin: auto;
   }

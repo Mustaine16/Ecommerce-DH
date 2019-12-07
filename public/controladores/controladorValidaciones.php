@@ -1,6 +1,6 @@
 <?php
 
-function validarRegistracion($POST,$FILES)
+function validarFormularioRegistracion($POST,$FILES)
 {
 
     $errores = [];
@@ -46,7 +46,7 @@ function validarRegistracion($POST,$FILES)
     if(isset($FILES["avatar"])){
 
         //Extension del archivo
-        $ext = pathinfo($FILES["avatar"]["name"],PATHINFO_EXTENSION);
+        $ext = strtolower(pathinfo($FILES["avatar"]["name"],PATHINFO_EXTENSION));
 
         //Si el Avatar viene vacio
         if($FILES["avatar"]["error"] == 4){
@@ -65,6 +65,40 @@ function validarRegistracion($POST,$FILES)
     return $errores;
 }
 
+function validarRegistracion($POST){
+    //La idea es que no haya 2 usuarios con un mismo mail o nombre de ususario
+    $error = [];
+
+    $usuariosJSON = file_get_contents("usuarios/usuarios.json"); //traerme el json
+
+    $usuarios = json_decode($usuariosJSON,true); //decodearlo
+
+    if($usuarios){
+
+        foreach ($usuarios as $usuario) {
+
+            if($usuario["email"] == strtolower($POST["email"])){
+                $error["email"] = "Ya se existe un usuario registrado con este email";
+                var_dump("MAN EL EMAIL");
+            }
+            
+            if($usuario["username"] == strtolower($POST["username"])){
+                $error["username"] = "Ya se existe un usuario con este nombre";
+            }
+        }   
+        return $error;
+    }else{
+        return $error ;
+    }   
+
+
+    //chequear usuario
+
+    //guardar errores
+
+    //else --> esta todo OK, registrar al usuario
+}
+
 function persistirDato($arrayE, $campo)
 {
     if (isset($arrayE[$campo])) {
@@ -76,4 +110,16 @@ function persistirDato($arrayE, $campo)
     }
 }
 
+function mostrarError($erroresFormulario, $erroresRegistro,$input){
+
+    if(isset($erroresFormulario[$input])) {
+        echo "<small class='text-danger'>" . $erroresFormulario[$input] . "</small>";
+    } 
+    
+    if(isset($erroresRegistro[$input])) {
+        echo "<small class='text-danger'>" . $erroresRegistro[$input] . "</small>";
+    } 
+
+
+}
 ?>

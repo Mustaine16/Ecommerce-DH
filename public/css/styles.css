@@ -42,13 +42,9 @@ body {
 nav {
   background: var(--navbar);
   z-index: 999;
-  position: fixed !important;
+  /* position: fixed !important; */
   top: 0;
   width: 100%;
-}
-
-header {
-  height: 8.5vh;
 }
 
 .nav-link,
