@@ -1,3 +1,7 @@
+<?php
+require_once 'autoload.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +29,7 @@
     <!-- esto envuelve al formulario -->
     <div class="container container-fluid fix-height" id="form-container">
       <h1 class="important-text">Contraseña olvidada</h1>
-      <form action="">
+      <form action="forgotpassword.php" method= "POST">
         <div class="form-group">
           <p>
             introduce el email con el que te registraste <br />
@@ -47,6 +51,8 @@
         />
         <div class="form-group">
           <!--       <p>aca puede ir un captcha o algo</p> -->
+          <?= (recuperarPass($_POST)) ?>
+
         </div>
       </form>
     </div>

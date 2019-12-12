@@ -1,3 +1,15 @@
+<?php
+
+require_once "autoload.php";
+
+$erroresLogin = [];
+
+login($_POST,$erroresLogin);
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +29,7 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
     <link rel="stylesheet" href="css/login.css" />
     <!-- Title -->
-    <title>Home</title>
+    <title>Login</title>
   </head>
   <body>
     <!-- Header -->
@@ -28,15 +40,17 @@
 
       <h1 class="important-text my-3">Inicia Sesión</h1>
 
-      <form action="">
+      <form action="login.php" method="post">
         <div class="form-group">
           <label for="email">Email</label>
           <input
-            type="email"
+            type="text"
             id="email"
             class="form-control email-input"
             name="email"
+            value= '<?php persistirDato($erroresLogin,"email"); ?>'
           />
+          <?php mostrarErrorLogin($erroresLogin,"email")  ?> 
         </div>
         <div class="form-group">
           <label for="password">Clave</label>
@@ -46,7 +60,14 @@
             class="form-control password-input"
             name="password"
           />
+          <?php mostrarErrorLogin($erroresLogin,"password");  ?> 
         </div>
+        <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+    <label class="form-check-label" for="defaultCheck1">
+    Recordarme
+   </label>
+  </div>
         <div class="form-group">
           <input
             type="submit"

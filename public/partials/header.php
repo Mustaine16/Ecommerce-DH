@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+var_dump($_SESSION);
+?>
 
 <header>
 <!-- Navbar -->
@@ -23,12 +26,17 @@
             </li>
         </ul>
         <div class="nav-item dropdown perfil__icon">
-            <a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png" alt="Perfil" style="width:32px;" /></a>
+        <?= (isset($_SESSION['email'])) ? '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/newprofile.png" alt="Perfil" style="width:32px;" class="rounded-circle"/></a>' : 
+         '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png" alt="Perfil" style="width:32px;" /></a>' ?>
             <div class="dropdown-menu perfil__menu-desplegable">
+            
                 <a class="dropdown-item" href="perfil.php">Perfil</a>
-                <a class="dropdown-item" href="login.php">Login</a>
-                <a class="dropdown-item" href="registro.php">Registro</a>
+                <?= (isset($_SESSION['email'])) ? '' : '<a class="dropdown-item" href="login.php">Login</a>'; ?>
+                <?= (isset($_SESSION['email'])) ? '' : '<a class="dropdown-item" href="registro.php">Registro</a>'; ?>
+                <?= (isset($_SESSION['email'])) ? '<a class="dropdown-item" href="logout.php">Logout</a>' : " "; ?>
             </div>
+
+            
         </div>
     </div>
 </nav>

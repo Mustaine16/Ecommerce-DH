@@ -122,4 +122,51 @@ function mostrarError($erroresFormulario, $erroresRegistro,$input){
 
 
 }
+
+
+
+//Funciones para el login?????
+function validarLogin($ArrayMagico){
+    $errores = [];
+    $email = trim($_POST['email']);
+    $pass = trim($_POST['password']);
+    if(empty($email)) {
+      $errores['email'] = 'El campo email es obligatorio';
+    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errores['email'] = 'El formato introducido no es válido';
+    } elseif(!buscarUsuarioPorEmail($email)) {
+      $errores['email'] = 'Mail inexistente';
+    } else {
+      $usuario = buscarUsuarioPorEmail($email);
+      if( !password_verify($pass, $usuario['password']) ) {
+        $errores['password'] = 'Contraseña Incorrecta';
+        
+      }
+    }
+    if(empty($pass)) {
+      $errores['password'] = 'El campo password es obligatorio';
+    }
+    return $errores;
+  }
+
+
+
+     
+
+function mostrarErrorLogin($erroresLogin,$input){
+
+    if(isset($erroresLogin[$input])) {
+        echo "<small class='text-danger'>" . $erroresLogin[$input] . "</small>";
+    } 
+    
+
+}
+function buscarUsuarioPorEmail($email) {
+    $arrayUsuarios = getJSONDecodeado();
+    foreach($arrayUsuarios as $usuario) {
+      if($usuario['email'] == $email) {
+        return $usuario;
+      }
+    }
+  }
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+require_once "helpers.php";
 function crearUsuario($POST,$FILES){
 
   $idAvatar = uniqid("img_"); //ID unico con el cual vamos a crear el nombre del archivo del avatar
@@ -53,5 +53,84 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
   }
 }
 
+function login($arrayPOST,&$erroresLogin){
+  if ($_POST) {
+    $erroresLogin = validarLogin($arrayPOST);
+   
+    if (count($erroresLogin)===0 && (count($erroresLogin)===0)) {
+      // LOGUEO AL USUARIO Y INICIO SESSION
+      $jsonUsuarios = getJSONDecodeado();
+      foreach ($jsonUsuarios as $posicion => $dato) {
+        if ($_POST['email'] == $dato['email']) {
+          if(password_verify($_POST['password'],$dato['password'])){
+            session_start();
+            $_SESSION['email'] = $dato['email'];
+           
+           $_SESSION['avatar'] =  file_get_contents(img/$dato['avatar']);
+            //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
+            if(isset($_POST['recordarme']) && $_POST['recordarme'] == "on") {
+             
+              setcookie('userEmail', $dato['email'], time() + 60 * 60 * 24 * 7);
+              setcookie('userPass', $dato['password'], time() + 60 * 60 * 24 * 7);
+          }
+           header('Location: perfil.php');
+
+
+          }
+              
+          }
+        }
+      }
+  } 
+}
+
+
+
+
+function recuperarPass($arrayPOST){
+  $jsonUsuarios = getJSONDecodeado();
+ 
+ if($_POST){
+  $email = $arrayPOST['email'];
+  foreach ($jsonUsuarios as $posicion => $dato) {
+    if ($arrayPOST['email'] == $dato['email']) {
+
+       
+      echo "<br> Email Correcto <br>".'<br>
+      <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" class="form-control password-input" name="password">
+    </div>
+    <div class="form-group">
+      <label for="repassword">Repetir Contraseña</label>
+      <input type="password" id="repassword" class="form-control password-input" name="repassword">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
+     
+    </div>';
+
+    }elseif (empty($_POST['email'])) {
+      echo "El campo no puede estar vacio";
+    break;
+    }
+    elseif (!(buscarUsuarioPorEmail($email))) {
+      echo "Email no encontrado";
+    break;
+    }
+  }
+}
+}
+
+function imagenDeUsuario(){
+  if(isset($_SESSION['email'])){
+    '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png"alt="Perfil" style="width:32px;" /></a>';
+  }else{
+    '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png" alt="Perfil" style="width:32px;" /></a>' ;
+  }
+        
+  
+
+}
 
 ?>
