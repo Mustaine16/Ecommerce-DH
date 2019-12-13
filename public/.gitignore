@@ -1,1 +1,5 @@
-usuarios/
+*.json
+*.jpg
+*.jpeg
+*.png
+
