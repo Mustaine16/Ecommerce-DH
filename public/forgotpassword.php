@@ -31,11 +31,6 @@ require_once 'autoload.php';
       <h1 class="important-text">Contraseña olvidada</h1>
       <form action="forgotpassword.php" method= "POST">
         <div class="form-group">
-          <p>
-            introduce el email con el que te registraste <br />
-            te enviaremos un correo con instrucciones para restablecer tu
-            contraseña
-          </p>
           <label for="email">Email</label>
           <input
             type="email"
@@ -49,10 +44,9 @@ require_once 'autoload.php';
           class="col col-md-auto col-lg-auto btn btn-lg btn-primary"
           value="Recuperar cuenta"
         />
-        <div class="form-group">
-          <!--       <p>aca puede ir un captcha o algo</p> -->
-          <?= (recuperarPass($_POST)) ?>
 
+        <div class="form-group">
+          <?= (recuperarPass($_POST)) ?>
         </div>
       </form>
     </div>

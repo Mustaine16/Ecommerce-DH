@@ -52,7 +52,7 @@ if(session_status() == PHP_SESSION_NONE){
         </a>
         <div class="dropdown-menu perfil__menu-desplegable">
           <a class="dropdown-item" href="perfil.php">Perfil</a>
-          <a class="dropdown-item" href="logout.php">Logout</a>
+          <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
         </div>
 
         <?php else: ?>

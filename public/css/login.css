@@ -48,6 +48,12 @@ nav {
   margin: 10px 0;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 }

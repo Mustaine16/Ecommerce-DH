@@ -29,7 +29,6 @@ redirigir("login",false);
     />
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="css/cuerpo-base.css" type="text/css" />
     <!-- Title -->
     <title>Home</title>
   </head>

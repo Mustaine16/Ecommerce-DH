@@ -78,7 +78,7 @@ function login($POST, &$erroresLogin){
       //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
       if(isset($_POST['recordarme']) && $_POST['recordarme'] == "on") {
              
-        setcookie('userEmail', $usuario['email'], time() + 60 * 60 * 24 * 7);
+        setcookie('usEmail', $usuario['email'], time() + 60 * 60 * 24 * 7);
         setcookie('userPass', $usuario['password'], time() + 60 * 60 * 24 * 7);
         
       }
@@ -97,20 +97,21 @@ function recuperarPass($arrayPOST){
     foreach ($jsonUsuarios as $posicion => $usuario) {
     if ($arrayPOST['email'] == $usuario['email']) {
 
-       
-    echo "<br> Email Correcto <br>".'<br>
-    <div class="form-group">
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" class="form-controlpassword-input" name="password">
-    </div>
-    <div class="form-group">
-      <label for="repassword">Repetir Contraseña</label>
-      <input type="password" id="repassword" class="form-control password-input" name="repassword">
-    </div>
-    <div class="form-group">
-      <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
-     
-    </div>';
+      echo '
+      <br>
+      <div class="form-group">
+        <label for="password">Nueva Contraseña</label>
+        <input type="password" id="password" class="form-control  password-input" name="password">
+      </div>
+      <div class="form-group">
+        <label for="repassword">Repetir Contraseña</label>
+        <input type="password" id="repassword" class="form-control  password-input" name="repassword">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
+      </div>';
+
+      break;
 
     }elseif (empty($_POST['email'])) {
       echo "El campo no puede estar vacio";

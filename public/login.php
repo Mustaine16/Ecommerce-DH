@@ -70,23 +70,23 @@ redirigir("perfil");
         <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
     <label class="form-check-label" for="defaultCheck1">
-    Recordarme
+    Mantenerme Logueado
    </label>
   </div>
-        <div class="form-group d-md-flex justify-content-between">
-          <a
-            class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-info "
-            href="forgotpassword.php"
-            id="forgot"
-            role="button"
-            >Olvidé mi contraseña</a
-          >
-          <input
+        <div class="form-group buttons">
+        <input
             type="submit"
             class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary"
             value="Ingresar"
             id="login"
           />
+          <a
+            class="col col-md-auto col-lg-auto mb-3 text-center"
+            href="forgotpassword.php"
+            id="forgot"
+            role="button"
+            >Olvidé mi contraseña</a
+          >
         </div>
       </form>
     </section>

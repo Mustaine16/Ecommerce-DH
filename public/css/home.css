@@ -19,7 +19,7 @@ header {
 }
 
 .button_catalogo {
-  display: block;
+  display: block !important;
   position: absolute;
   top: 50%;
   left: 50%;
