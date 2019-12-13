@@ -1,5 +1,7 @@
 <?php
+
 require_once "helpers.php";
+
 function crearUsuario($POST,$FILES){
 
   $idAvatar = uniqid("img_"); //ID unico con el cual vamos a crear el nombre del archivo del avatar
@@ -18,9 +20,11 @@ function crearUsuario($POST,$FILES){
   return $usuarioFinal;
 }
 
+
 function subirAvatar($FILES,$avatarFileName){
   move_uploaded_file($FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
 }
+
 
 function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacionDeRegistro){
   if ($POST) {
@@ -53,6 +57,7 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
   }
 }
 
+
 function login($POST, &$erroresLogin){
   if ($_POST) {
 
@@ -65,6 +70,8 @@ function login($POST, &$erroresLogin){
 
       session_start();
 
+      $usuario = buscarUsuarioPorEmail($_POST['email']);
+
       $_SESSION['email'] = $usuario['email'];
       $_SESSION['avatar'] =  $usuario['avatar'];
 
@@ -73,32 +80,28 @@ function login($POST, &$erroresLogin){
              
         setcookie('userEmail', $usuario['email'], time() + 60 * 60 * 24 * 7);
         setcookie('userPass', $usuario['password'], time() + 60 * 60 * 24 * 7);
-      
-        header('Location: perfil.php');
-
+        
       }
-              
+      //Redirigimos al Perfil
+      header('Location: perfil.php');
     }
   }
 }
 
 
-
-
-
 function recuperarPass($arrayPOST){
   $jsonUsuarios = getJSONDecodeado();
  
- if($_POST){
-  $email = $arrayPOST['email'];
-  foreach ($jsonUsuarios as $posicion => $usuario) {
+  if($_POST){
+    $email = $arrayPOST['email'];
+    foreach ($jsonUsuarios as $posicion => $usuario) {
     if ($arrayPOST['email'] == $usuario['email']) {
 
        
-      echo "<br> Email Correcto <br>".'<br>
-      <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" class="form-control password-input" name="password">
+    echo "<br> Email Correcto <br>".'<br>
+    <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" class="form-controlpassword-input" name="password">
     </div>
     <div class="form-group">
       <label for="repassword">Repetir Contraseña</label>
@@ -117,19 +120,8 @@ function recuperarPass($arrayPOST){
       echo "Email no encontrado";
     break;
     }
-  }
-}
-}
-
-function imagenDeUsuario(){
-  if(isset($_SESSION['email'])){
-    '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png"alt="Perfil" style="width:32px;" /></a>';
-  }else{
-    '<a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#"><img src="img/perfil.png" alt="Perfil" style="width:32px;" /></a>' ;
-  }
-        
-  
-
+    }
+  } 
 }
 
 ?>

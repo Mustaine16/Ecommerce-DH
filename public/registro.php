@@ -2,11 +2,20 @@
 
 require_once "autoload.php";
 
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
+}
+
+
+
 $erroresFormulario = [];
 $errorValidacionDeRegistro = [];
 
 registrarUsuario($_POST, $_FILES, $erroresFormulario, $errorValidacionDeRegistro);
 
+//Si hay nua sesion iniciada, se redirige al perfil
+redirigir("perfil");
+        
 
 ?>
 

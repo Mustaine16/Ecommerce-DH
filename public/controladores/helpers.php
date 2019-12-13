@@ -12,4 +12,18 @@ function dd($algo)
     exit;
 }
 
+function redirigir($location, $logueado = true){
+    
+    //Si hay una sesion iniciada, se redirige al perfil
+    if($logueado){
+        if (isset($_SESSION['email'])) {
+            header("Location: $location.php");
+        }
+    }else{
+        if (!isset($_SESSION['email'])) {
+            header("Location: $location.php");
+        }
+    }
+}
+
 ?>

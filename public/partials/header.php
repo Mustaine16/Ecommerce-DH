@@ -1,6 +1,7 @@
 <?php 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
 }
 
 ?>
@@ -38,6 +39,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="nav-link" href="contacto.php">Contacto</a>
         </li>
       </ul>
+
       <?php if(isset($_SESSION['email'])) : ?>
       <div class="nav-item dropdown perfil__icon">
         <a
@@ -52,7 +54,9 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="dropdown-item" href="perfil.php">Perfil</a>
           <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
+
         <?php else: ?>
+        <?php session_destroy(); ?>
         <ul class="navbar-nav text-center ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="login.php">Login</a>
@@ -61,7 +65,8 @@ if (session_status() == PHP_SESSION_NONE) {
               <a class="nav-link" href="registro.php">Registrate</a>
             </li>
         </ul>
-        <?php endif; ?>
+        <?php 
+        endif; ?>
       </div>
     </div>
   </nav>

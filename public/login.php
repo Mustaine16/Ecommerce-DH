@@ -2,13 +2,18 @@
 
 require_once "autoload.php";
 
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
+}
+
 $erroresLogin = [];
 
 login($_POST,$erroresLogin);
 
+//Si existe una sesion, redirige al perfil
+redirigir("perfil");
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

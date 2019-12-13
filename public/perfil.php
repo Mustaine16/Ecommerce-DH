@@ -1,3 +1,17 @@
+<?php
+
+include_once "controladores/helpers.php";
+
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
+}
+
+//Si no hay una sesion iniciada, se redirige al login
+redirigir("login",false);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
