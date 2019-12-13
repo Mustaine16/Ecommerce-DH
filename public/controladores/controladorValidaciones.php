@@ -1,5 +1,14 @@
 <?php
 
+/*
+***********
+VALIDACIONES
+    DE
+REGISTRO
+***********
+*/
+
+//Valida que los inputs del formulario sean validos, es decir que mail sea mail, que no vengan vacios, etc
 function validarFormularioRegistracion($POST,$FILES)
 {
 
@@ -65,8 +74,10 @@ function validarFormularioRegistracion($POST,$FILES)
     return $errores;
 }
 
-function validarRegistracion($POST){
-    //La idea es que no haya 2 usuarios con un mismo mail o nombre de ususario
+//La idea es que no haya 2 usuarios con un mismo mail o nombre de ususario
+function validarRegistracion($POST)
+{
+    
     $error = [];
 
     $usuariosJSON = file_get_contents("usuarios/usuarios.json"); //traerme el json
@@ -99,9 +110,10 @@ function validarRegistracion($POST){
     //else --> esta todo OK, registrar al usuario
 }
 
-function persistirDato($arrayE, $campo)
+//Persistimos los datos que sean validos en login o registro
+function persistirDato($arrayDeErrores, $campo)
 {
-    if (isset($arrayE[$campo])) {
+    if (isset($arrayDeErrores[$campo])) {
         return "";
     } else {
         if (isset($_POST[$campo])) {
@@ -110,8 +122,9 @@ function persistirDato($arrayE, $campo)
     }
 }
 
-function mostrarError($erroresFormulario, $erroresRegistro,$input){
-
+//Mostramos los errores debajo de cada input del registro
+function mostrarErrorRegistro($erroresFormulario, $erroresRegistro,$input)
+{
     if(isset($erroresFormulario[$input])) {
         echo "<small class='text-danger'>" . $erroresFormulario[$input] . "</small>";
     } 
@@ -120,53 +133,77 @@ function mostrarError($erroresFormulario, $erroresRegistro,$input){
         echo "<small class='text-danger'>" . $erroresRegistro[$input] . "</small>";
     } 
 
-
 }
 
+/*
+***********
+VALIDACIONES
+    DE
+  LOGIN
+***********
+*/
 
 
-//Funciones para el login?????
-function validarLogin($ArrayMagico){
+//Valida que los inputs del formulario sean validos, es decir que mail sea mail, que no vengan vacios, etc
+function validarLogin($POST)
+{
     $errores = [];
-    $email = trim($_POST['email']);
-    $pass = trim($_POST['password']);
+    $email = trim($POST['email']);
+    $pass = trim($POST['password']);
+
+    //Errores de campos invalidos
+    
     if(empty($email)) {
       $errores['email'] = 'El campo email es obligatorio';
-    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $errores['email'] = 'El formato introducido no es válido';
-    } elseif(!buscarUsuarioPorEmail($email)) {
-      $errores['email'] = 'Mail inexistente';
+
+    } else if(empty($pass)) {
+
+      $errores['password'] = 'El campo password es obligatorio';
+
     } else {
+
+    //Errores de validacion en Base de Datos
+        
       $usuario = buscarUsuarioPorEmail($email);
-      if( !password_verify($pass, $usuario['password']) ) {
-        $errores['password'] = 'Contraseña Incorrecta';
+
+      if($usuario){
+
+        if( !password_verify($pass, $usuario['password']) ) {
+            $errores['password'] = 'Contraseña Incorrecta';
+        }
+
+      } else {
+
+        $errores['email'] = "No existe un usuario registrado con ese email";
         
       }
+
+
     }
-    if(empty($pass)) {
-      $errores['password'] = 'El campo password es obligatorio';
-    }
+
     return $errores;
-  }
-
-
-
+}
      
 
-function mostrarErrorLogin($erroresLogin,$input){
+function mostrarErrorLogin($erroresLogin,$input)
+{
 
     if(isset($erroresLogin[$input])) {
         echo "<small class='text-danger'>" . $erroresLogin[$input] . "</small>";
     } 
-    
-
 }
-function buscarUsuarioPorEmail($email) {
+
+function buscarUsuarioPorEmail($email)
+{
     $arrayUsuarios = getJSONDecodeado();
     foreach($arrayUsuarios as $usuario) {
       if($usuario['email'] == $email) {
         return $usuario;
       }
     }
-  }
+}
+
 ?>

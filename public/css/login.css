@@ -13,17 +13,12 @@ a {
   text-decoration: none;
 }
 
-#forgot {
-  float: right;
-}
-
 .important-text {
   text-align: center;
 }
 
 #form-container {
   overflow: hidden;
-  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,6 +63,7 @@ nav {
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   #form-container {
+    height: 660px;
     width: 40%;
     margin: auto;
   }

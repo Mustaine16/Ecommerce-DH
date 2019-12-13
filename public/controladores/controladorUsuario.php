@@ -53,36 +53,35 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
   }
 }
 
-function login($arrayPOST,&$erroresLogin){
+function login($POST, &$erroresLogin){
   if ($_POST) {
-    $erroresLogin = validarLogin($arrayPOST);
+
+    //Se ejecuta la funcion que valida el login
+    $erroresLogin = validarLogin($POST);
    
-    if (count($erroresLogin)===0 && (count($erroresLogin)===0)) {
-      // LOGUEO AL USUARIO Y INICIO SESSION
-      $jsonUsuarios = getJSONDecodeado();
-      foreach ($jsonUsuarios as $posicion => $dato) {
-        if ($_POST['email'] == $dato['email']) {
-          if(password_verify($_POST['password'],$dato['password'])){
-            session_start();
-            $_SESSION['email'] = $dato['email'];
-           
-           $_SESSION['avatar'] =  file_get_contents(img/$dato['avatar']);
-            //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
-            if(isset($_POST['recordarme']) && $_POST['recordarme'] == "on") {
+    if ( count($erroresLogin) === 0 && count($erroresLogin) === 0 ) {
+
+      // LOGUEO AL USUARIO E INICIO SESION
+
+      session_start();
+
+      $_SESSION['email'] = $usuario['email'];
+      $_SESSION['avatar'] =  $usuario['avatar'];
+
+      //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
+      if(isset($_POST['recordarme']) && $_POST['recordarme'] == "on") {
              
-              setcookie('userEmail', $dato['email'], time() + 60 * 60 * 24 * 7);
-              setcookie('userPass', $dato['password'], time() + 60 * 60 * 24 * 7);
-          }
-           header('Location: perfil.php');
+        setcookie('userEmail', $usuario['email'], time() + 60 * 60 * 24 * 7);
+        setcookie('userPass', $usuario['password'], time() + 60 * 60 * 24 * 7);
+      
+        header('Location: perfil.php');
 
-
-          }
-              
-          }
-        }
       }
-  } 
+              
+    }
+  }
 }
+
 
 
 
@@ -92,8 +91,8 @@ function recuperarPass($arrayPOST){
  
  if($_POST){
   $email = $arrayPOST['email'];
-  foreach ($jsonUsuarios as $posicion => $dato) {
-    if ($arrayPOST['email'] == $dato['email']) {
+  foreach ($jsonUsuarios as $posicion => $usuario) {
+    if ($arrayPOST['email'] == $usuario['email']) {
 
        
       echo "<br> Email Correcto <br>".'<br>

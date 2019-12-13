@@ -68,13 +68,7 @@ login($_POST,$erroresLogin);
     Recordarme
    </label>
   </div>
-        <div class="form-group">
-          <input
-            type="submit"
-            class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary"
-            value="Ingresar"
-            id="login"
-          />
+        <div class="form-group d-md-flex justify-content-between">
           <a
             class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-info "
             href="forgotpassword.php"
@@ -82,6 +76,12 @@ login($_POST,$erroresLogin);
             role="button"
             >Olvidé mi contraseña</a
           >
+          <input
+            type="submit"
+            class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary"
+            value="Ingresar"
+            id="login"
+          />
         </div>
       </form>
     </section>

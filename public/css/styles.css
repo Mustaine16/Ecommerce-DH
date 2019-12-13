@@ -76,6 +76,12 @@ nav {
   transform: scale(1.1, 1.1);
 }
 
+/* Boton de ir a catalogo, solo es visible en el Home */
+
+.button_catalogo {
+  display: none;
+}
+
 /* Fix height en FAQ, CONTACTO,LOGIN Y REGISTRO */
 
 .fix-height {
