@@ -31,7 +31,7 @@ redirigir("login",false);
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
     <link rel="stylesheet" href="css/perfil.css">
     <!-- Title -->
-    <title>Perfil</title>
+    <title>Cuenta</title>
   </head>
 
   <body>
@@ -41,13 +41,13 @@ redirigir("login",false);
     <main class="container mt-4" id="form-container">
       <!-- LISTA -->
       <ul>
-        <li><a href="perfil.php" class="active">Perfil</a></li>
-        <li><a href="cuenta.php">Cuenta</a></li>
+        <li><a href="perfil.php">Perfil</a></li>
+        <li><a href="cuenta.php" class="active">Cuenta</a></li>
         <li><a href="password.php">Seguridad</a></li>
       </ul>
 
       <form action="" method="Post"   class="fix-height">
-        <h1 class="">Datos Personales</h1>
+        <h1 class="">Cambiar datos de la cuenta</h1>
       <!-- Datos de la cuenta -->
       <!-- <section>
         <h2 class="pl-3 font-weight-bold">Datos de Cuenta</h2>
@@ -70,23 +70,13 @@ redirigir("login",false);
       <section>
 
         <div class="d-flex flex-column">
-          <label for="nombre">Nombre</label>
-          <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre">
+          <label for="usuario">Usuario</label>
+          <input class="inputs-f" type="text" name="usuario" placeholder="Introduce tu usuario">
         </div>
 
         <div class="d-flex flex-column">
-          <label for="apellido">Apellido</label>
-          <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido">
-        </div>
-
-        <div class="d-flex flex-column">
-          <label for="direccion">Direccion</label>
-          <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion">
-        </div>
-
-        <div class="d-flex flex-column">
-          <label for="ciudad">Ciudad</label>
-          <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad">
+          <label for="email">Email</label>
+          <input class="inputs-f" type="email" name="email" placeholder="Introduce tu email">
         </div>
 
         <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios"></input>
