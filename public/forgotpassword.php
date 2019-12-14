@@ -4,12 +4,10 @@ include_once "autoload.php";
 
 if(session_status() == PHP_SESSION_NONE){
   session_start();
-
  }
 
-
-//Si no hay una sesion iniciada, se redirige al login
-// redirigir("login",false);
+//Si hay sesion iniciada, redirigi al perfil 
+redirigir("perfil");
 
 ?>
 <!DOCTYPE html>

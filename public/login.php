@@ -44,7 +44,7 @@ redirigir("perfil");
             name="email"
             value= '<?php persistirDato($erroresLogin,"email"); ?>'
           />
-          <?php mostrarErrorLogin($erroresLogin,"email")  ?> 
+          <?php mostrarError($erroresLogin,"email")  ?> 
         </div>
         <div class="form-group">
           <label for="password">Clave</label>
@@ -54,10 +54,10 @@ redirigir("perfil");
             class="form-control password-input"
             name="password"
           />
-          <?php mostrarErrorLogin($erroresLogin,"password");  ?> 
+          <?php mostrarError($erroresLogin,"password");  ?> 
         </div>
         <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+    <input class="form-check-input" type="checkbox" value="yes" id="defaultCheck1" name="mantenerLogueado">
     <label class="form-check-label" for="defaultCheck1">
     Mantenerme Logueado
    </label>

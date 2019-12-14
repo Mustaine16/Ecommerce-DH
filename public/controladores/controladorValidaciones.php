@@ -188,37 +188,14 @@ function validarLogin($POST)
 }
      
 
-function mostrarErrorLogin($erroresLogin,$input)
+function mostrarError($arrayErrores,$input)
 {
 
-    if(isset($erroresLogin[$input])) {
-        echo "<small class='text-danger'>" . $erroresLogin[$input] . "</small>";
+    if(isset($arrayErrores[$input])) {
+        echo "<small class='text-danger'>" . $arrayErrores[$input] . "</small>";
     } 
 }
 
-function buscarUsuarioPorEmail($email)
-{
-    $arrayUsuarios = getJSONDecodeado();
-    foreach($arrayUsuarios as $usuario) {
-      if($usuario['email'] == $email) {
-        return $usuario;
-      }
-    }
-}
-/**
- * Devuelve la posici'on en el array de usuarios del usuario cuyo email coincida con
- * el pasado por parametro. 
- */
-function getPositionByEMail($email)
-{  $pos = NULL;
-    $arrayUsuarios = getJSONDecodeado();
-    foreach($arrayUsuarios as $usuario) {
-     $pos++;
-      if($usuario['email'] == $email) {
-        return $pos;
-      }
-    }
-}
 
 /**
  * esta, aunque redundante es solo para el cambio de contrase;a

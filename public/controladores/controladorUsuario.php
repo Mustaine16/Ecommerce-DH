@@ -2,7 +2,7 @@
 
 require_once "helpers.php";
 
-function crearUsuario($POST,$FILES){
+function crearUsuario($POST, $FILES){
 
   $idAvatar = uniqid("img_"); //ID unico con el cual vamos a crear el nombre del archivo del avatar
   $ext = strtolower(pathinfo($FILES["avatar"]["name"],PATHINFO_EXTENSION));
@@ -18,6 +18,78 @@ function crearUsuario($POST,$FILES){
   ];
 
   return $usuarioFinal;
+}
+
+function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
+
+  if($POST){
+
+    /*OBTENER EL USUARIO */
+
+    if($SESSION){
+
+      $usuarioEditado = buscarUsuarioPorEmail($SESSION['email']);
+
+    }else if($COOKIE){
+
+      var_dump("ENTRO AL IF DE COOKIE ");
+
+      $usuarioEditado = buscarUsuarioPorEmail($COOKIE["user-email-for-reset-password"]);
+
+    }
+
+    /*DATOS A MODIFICAR */
+
+    foreach ($POST as $key => $value) {
+
+      //CAMBIAR CONTRASEÑA
+      
+      if($key == "password"){
+        $usuarioEditado["password"] = password_hash($POST["password"],PASSWORD_DEFAULT);
+      }
+
+      if($key != "guardar" && $key != "password" && $key != "repassword"){
+        $usuarioEditado[$key] = $POST[$key];
+      }
+
+    }
+
+    var_dump($POST);
+    var_dump($usuarioEditado);
+
+    //Abrir la base de datos y cambio usuario por UsuarioEditado
+
+    $usuarios = getJSONDecodeado();
+
+    foreach ($usuarios as &$usuario) {
+
+      if($SESSION){
+
+        if($usuario['email'] == $SESSION['email']){
+          $usuario = $usuarioEditado;
+          break;
+        }
+
+      }else if($COOKIE){
+
+        if($usuario['email'] == $COOKIE["user-email-for-reset-password"]){
+          $usuario = $usuarioEditado;
+          break;
+        }
+
+      }
+    }
+
+    guardarJSON($usuarios);
+
+    //Updatear $_SESSION para que se muestren los nuevos datos
+
+    foreach ($SESSION as $key => $value) {
+      $SESSION[$key] = $usuarioEditado[$key] ; 
+    }
+
+  }
+
 }
 
 
@@ -59,7 +131,7 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
 
 
 function login($POST, &$erroresLogin){
-  if ($_POST) {
+  if ($POST) {
 
     //Se ejecuta la funcion que valida el login
     $erroresLogin = validarLogin($POST);
@@ -70,18 +142,23 @@ function login($POST, &$erroresLogin){
 
       session_start();
 
-      $usuario = buscarUsuarioPorEmail($_POST['email']);
+      $usuario = buscarUsuarioPorEmail($POST['email']);
 
-      $_SESSION['email'] = $usuario['email'];
-      $_SESSION['username'] = $usuario['username'];
-      $_SESSION['avatar'] =  $usuario['avatar'];
+      //Creo una posicion en session por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
+
+      foreach ($usuario as $key => $value) {
+
+        if($key != 'password'){
+          $_SESSION[$key] = $value;
+        }
+        
+      }
 
       //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
-      if(isset($_POST['recordarme']) && $_POST['recordarme'] == "on") {
+      if(isset($POST['mantenerLogueado']) && $POST['mantenerLogueado'] == "yes") {
              
-        setcookie('usEmail', $usuario['email'], time() + 60 * 60 * 24 * 7);
-        setcookie('userPass', $usuario['password'], time() + 60 * 60 * 24 * 7);
-        
+        setcookie("email", $usuario['email'], time() + 60 * 60 * 24 * 7);
+
       }
       //Redirigimos al Perfil
       header('Location: perfil.php');
@@ -89,42 +166,54 @@ function login($POST, &$erroresLogin){
   }
 }
 
+function checkCookie(){
+  if(isset($_COOKIE['email'])){
+      // LOGUEO AL USUARIO E INICIO SESION
 
-function recuperarPass($arrayPOST){
+      // session_start();
+
+      $usuario = buscarUsuarioPorEmail($_COOKIE['email']);
+
+      //Creo una posicion en session por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
+
+      foreach ($usuario as $key => $value) {
+
+        if($key != 'password'){
+          $_SESSION[$key] = $value;
+        }
+        
+      }
+  }
+}
+
+
+function recuperarPass($POST){
   $jsonUsuarios = getJSONDecodeado();
  
-  if($_POST){
-    $email = $arrayPOST['email'];
+  if($POST){
+    $email = $POST['email'];
     foreach ($jsonUsuarios as $posicion => $usuario) {
-    if ($arrayPOST['email'] == $usuario['email']) {
+    if ($POST['email'] == $usuario['email']) {
 
-      // echo '
-      // <br>
-      // <div class="form-group">
-      //   <label for="password">Nueva Contraseña</label>
-      //   <input type="password" id="password" class="form-control  password-input" name="password">
-      // </div>
-      // <div class="form-group">
-      //   <label for="repassword">Repetir Contraseña</label>
-      //   <input type="password" id="repassword" class="form-control  password-input" name="repassword">
-      // </div>
-      // <div class="form-group">
-      //   <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
-      // </div>';
+      setcookie("user-email-for-reset-password",$email);
+      header("Location:resetpassword.php");
 
-      // break;
-      setcookie("user-email-for-reset-password",$email, time() + 60 * 10);
-     header("Location:resetpassword.php");
-    }elseif (empty($_POST['email'])) {
+    }elseif (empty($POST['email'])) {
+
       echo "El campo no puede estar vacio";
-    break;
-    }
-    elseif (!(buscarUsuarioPorEmail($email))) {
+      break;
+
+    }elseif (!(buscarUsuarioPorEmail($email))) {
+
       echo "Email no encontrado";
-    break;
+      break;
+
     }
     }
   } 
 }
+
+
+
 
 ?>
