@@ -73,6 +73,7 @@ function login($POST, &$erroresLogin){
       $usuario = buscarUsuarioPorEmail($_POST['email']);
 
       $_SESSION['email'] = $usuario['email'];
+      $_SESSION['username'] = $usuario['username'];
       $_SESSION['avatar'] =  $usuario['avatar'];
 
       //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
@@ -97,22 +98,23 @@ function recuperarPass($arrayPOST){
     foreach ($jsonUsuarios as $posicion => $usuario) {
     if ($arrayPOST['email'] == $usuario['email']) {
 
-      echo '
-      <br>
-      <div class="form-group">
-        <label for="password">Nueva Contraseña</label>
-        <input type="password" id="password" class="form-control  password-input" name="password">
-      </div>
-      <div class="form-group">
-        <label for="repassword">Repetir Contraseña</label>
-        <input type="password" id="repassword" class="form-control  password-input" name="repassword">
-      </div>
-      <div class="form-group">
-        <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
-      </div>';
+      // echo '
+      // <br>
+      // <div class="form-group">
+      //   <label for="password">Nueva Contraseña</label>
+      //   <input type="password" id="password" class="form-control  password-input" name="password">
+      // </div>
+      // <div class="form-group">
+      //   <label for="repassword">Repetir Contraseña</label>
+      //   <input type="password" id="repassword" class="form-control  password-input" name="repassword">
+      // </div>
+      // <div class="form-group">
+      //   <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />
+      // </div>';
 
-      break;
-
+      // break;
+      setcookie("user-email-for-reset-password",$email, time() + 60 * 10);
+     header("Location:resetpassword.php");
     }elseif (empty($_POST['email'])) {
       echo "El campo no puede estar vacio";
     break;

@@ -205,5 +205,45 @@ function buscarUsuarioPorEmail($email)
       }
     }
 }
+/**
+ * Devuelve la posici'on en el array de usuarios del usuario cuyo email coincida con
+ * el pasado por parametro. 
+ */
+function getPositionByEMail($email)
+{  $pos = NULL;
+    $arrayUsuarios = getJSONDecodeado();
+    foreach($arrayUsuarios as $usuario) {
+     $pos++;
+      if($usuario['email'] == $email) {
+        return $pos;
+      }
+    }
+}
+
+/**
+ * esta, aunque redundante es solo para el cambio de contrase;a
+ * 
+ */
+function validarPassword($POST){
+    $errores=[];
+    if (isset($POST["password"])) {
+        if (empty($POST["password"])) {
+            $errores["password"] = "Este campo debe completarse.";
+        } elseif (strlen($POST["password"]) < 6) {
+            $errores["password"] = "Tu contraseña debe tener al menos 6 caracteres.";
+        }
+    }
+
+    // Validamos campo "repassword"
+    if (isset($POST["repassword"])) {
+        if (empty($POST["repassword"])) {
+            $errores["repassword"] = "Este campo debe completarse.";
+        } elseif ($POST["password"] != $POST["repassword"]) {
+            $errores["repassword"] = "Las contraseñas no coinciden.";
+        }
+    }
+
+    return $errores;
+}
 
 ?>
