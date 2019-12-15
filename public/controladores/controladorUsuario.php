@@ -32,12 +32,12 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
 
     }else if($COOKIE){
 
-      var_dump("ENTRO AL IF DE COOKIE ");
+      // var_dump("ENTRO AL IF DE COOKIE ");
 
       $usuarioEditado = buscarUsuarioPorEmail($COOKIE["user-email-for-reset-password"]);
 
     }
-
+   
     /*DATOS A MODIFICAR */
 
     foreach ($POST as $key => $value) {
@@ -54,8 +54,9 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
 
     }
 
-    var_dump($POST);
-    var_dump($usuarioEditado);
+ //   var_dump($POST);
+   // echo"<hr>";
+   // var_dump($usuarioEditado);
 
     //Abrir la base de datos y cambio usuario por UsuarioEditado
 
@@ -82,10 +83,17 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
 
     guardarJSON($usuarios);
 
-    //Updatear $_SESSION para que se muestren los nuevos datos
-
-    foreach ($SESSION as $key => $value) {
-      $SESSION[$key] = $usuarioEditado[$key] ; 
+    //Update $_SESSION para que se muestren los nuevos datos
+  /**
+   * 
+   *  OJO CON ESTO, LO COMENTADO NO ACTUALIZABA LA SESSION
+   * 
+   */
+    // foreach ($SESSION as $key => $value) {
+    //   $SESSION[$key] = $usuarioEditado[$key] ; 
+    // }
+    foreach($usuarioEditado as $k => $v ){
+       $SESSION[$k] = $v;
     }
 
   }

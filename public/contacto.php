@@ -1,9 +1,28 @@
+<?php
+/**
+ * Luego de validar los campos redirige a una pagina
+ * que le informa que el formulario fue enviado
+ * y luego redirige a index.php.
+ * 
+ * Puede obviarse sin lugar a dudas, pero es divertido.
+ */
+
+   require_once "autoload.php";
+    //aca podria ponerse los datos del usuario si es que hay session...
+   if($_POST){
+     $errores = validarFormularioContacto( $_POST );
+
+     if( count( $errores ) == 0){
+        header("Location: form_contacto_enviado.php");    
+     }
+   }
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <?php
-   require_once "partials/head.php";
- ?>
+  <?php include_once "partials/head.php" ;?>  
     <!-- Title -->
     <title>Home</title>
   </head>
@@ -17,24 +36,28 @@
       <h1>Contactanos</h1>
       <!-- esto envuelve al formulario -->
       <article class="container container-fluid" id="form-container">
-        <form action="">
+        <form action="contacto.php" method="post">
           <div class="form-group">
-            <label for="name">Nombre</label>
+            <label for="nombre">Nombre</label>
             <input
               type="text"
-              id="name"
+              id="nombre"
               class="form-control text-input"
-              name="name"
+              name="nombre"
+              value="<?= persistirDato($errores, "nombre"); ?>"
             />
+            <?php mostrarErrorFormularioContacto($errores,"nombre")  ?>
           </div>
           <div class="form-group">
-            <label for="last-name">Apellido</label>
+            <label for="apellido">Apellido</label>
             <input
               type="text"
               class="form-control text-input"
-              id="last-name"
-              name="last-name"
+              id="apellido"
+              name="apellido"
+              value="<?= persistirDato($errores, "apellido"); ?>"
             />
+            <?php mostrarErrorFormularioContacto($errores,"apellido")  ?>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -43,16 +66,19 @@
               id="email"
               class="form-control email-input"
               name="email"
+              
             />
+            <?php mostrarErrorFormularioContacto($errores,"email")  ?>
           </div>
           <div class="form-group">
-            <label for="telephone">Teléfono</label>
+            <label for="telefono">Teléfono</label>
             <input
               type="tel"
-              id="telephone"
+              id="telefono"
               class="form-control password-input"
-              name="telephone"
+              name="telefono"
             />
+            <?php mostrarErrorFormularioContacto($errores,"telefono")  ?>
           </div>
           <div class="form-group">
             <input

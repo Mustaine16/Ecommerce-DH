@@ -48,6 +48,7 @@ if(session_status() == PHP_SESSION_NONE){
       </ul>
 
       <?php if(isset($_SESSION['email'])) : ?>
+      
       <div class="nav-item dropdown perfil__icon">
         <a
           class="nav-link dropdown-toggle text-center"
@@ -55,6 +56,7 @@ if(session_status() == PHP_SESSION_NONE){
           data-toggle="dropdown"
           href="#"
         >
+        
           <img src='<?= "usuarios/avatars/" . $_SESSION["avatar"] ?>' alt="Perfil" style="width:32px;" />
         </a>
         <div class="dropdown-menu perfil__menu-desplegable">

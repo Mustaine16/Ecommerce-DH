@@ -1,8 +1,14 @@
 <?php
+/**
+ * 
+ * 
+ * 
+ */
+
 require_once 'autoload.php';
 
 //Si no hay una sesion iniciada, se redirige al login
-redirigir("login",false);
+// redirigir("login",false);
 
 $errores = [];
 

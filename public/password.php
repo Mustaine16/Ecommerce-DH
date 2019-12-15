@@ -31,6 +31,11 @@ if($_POST){
 <html lang="en">
   <head>
   <?php
+/**
+ * ver comentario en perfil.php
+ * 
+ */
+
    require_once "partials/head.php";
  ?>
     <link rel="stylesheet" href="css/perfil.css">
@@ -43,12 +48,10 @@ if($_POST){
     <?php include_once "partials/header.php" ;?>
 
     <main class="container mt-4" id="form-container">
-      <!-- LISTA -->
-      <ul>
-        <li><a href="perfil.php">Perfil</a></li>
-        <li><a href="cuenta.php">Cuenta</a></li>
-        <li><a href="password.php" class="active">Seguridad</a></li>
-      </ul>
+    
+    <?php
+       require_once "partials/navegador_datos_usuario.php";
+     ?>
 
       <form action="" method="Post"   class="fix-height">
         <h1 class="">Cambiar contraseña</h1>
@@ -67,7 +70,7 @@ if($_POST){
             <?= mostrarError($errores,"repassword")?>
           </div>
 
-          <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios"></input>
+          <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios">
         </form>
 
       </section>
