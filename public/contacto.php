@@ -7,15 +7,19 @@
  * Puede obviarse sin lugar a dudas, pero es divertido.
  */
 
-   require_once "autoload.php";
-    //aca podria ponerse los datos del usuario si es que hay session...
-   if($_POST){
-     $errores = validarFormularioContacto( $_POST );
+$errores = [];
 
-     if( count( $errores ) == 0){
-        header("Location: form_contacto_enviado.php");    
-     }
-   }
+require_once "autoload.php";
+ //aca podria ponerse los datos del usuario si es que hay session...
+if($_POST){
+
+  $errores = validarFormularioContacto( $_POST );
+
+  if( count( $errores ) == 0){
+     header("Location: form_contacto_enviado.php");    
+  }
+
+}
 
 
  ?>
@@ -66,7 +70,7 @@
               id="email"
               class="form-control email-input"
               name="email"
-              
+              value="<?= persistirDato($errores, "email"); ?>"
             />
             <?php mostrarErrorFormularioContacto($errores,"email")  ?>
           </div>
@@ -77,6 +81,7 @@
               id="telefono"
               class="form-control password-input"
               name="telefono"
+              value="<?= persistirDato($errores, "telefono"); ?>"
             />
             <?php mostrarErrorFormularioContacto($errores,"telefono")  ?>
           </div>

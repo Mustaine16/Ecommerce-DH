@@ -48,11 +48,24 @@ if($_POST){
     <?php include_once "partials/header.php" ;?>
 
     <main class="container mt-4" id="form-container">
-    
-    <?php
-       require_once "partials/navegador_datos_usuario.php";
-     ?>
+      <!-- LISTA -->
+      <ul>
+         <li><a href="perfil.php">Perfil</a></li>
+         <li><a href="cuenta.php">Cuenta</a></li>
+         <li><a href="password.php" class="active">Seguridad</a></li>
+      </ul>
 
+      <!-- CARTEL PARA CONFIRMAR QUE LOS CAMBIOS FUERON GUARDADOS -->
+
+      <?php
+
+      if($_POST && count($errores) == 0):?>
+        <div class="confirmar-cambios">
+        <p>Cambios guardados</p>
+        </div>
+      <?php endif; ?>
+
+      <!-- FORMULARIO -->
       <form action="" method="Post"   class="fix-height">
         <h1 class="">Cambiar contraseña</h1>
 

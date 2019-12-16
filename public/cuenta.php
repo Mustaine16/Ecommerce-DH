@@ -46,9 +46,24 @@ if($_POST){
 
     <main class="container mt-4" id="form-container">
       
-    <?php
-       require_once "partials/navegador_datos_usuario.php";
-     ?>
+      <!-- LISTA -->
+      <ul>
+         <li><a href="perfil.php">Perfil</a></li>
+         <li><a href="cuenta.php" class="active">Cuenta</a></li>
+         <li><a href="password.php">Seguridad</a></li>
+      </ul>
+
+      <!-- CARTEL PARA CONFIRMAR QUE LOS CAMBIOS FUERON GUARDADOS -->
+
+      <?php
+
+      if($_POST && count($errores) == 0):?>
+        <div class="confirmar-cambios">
+        <p>Cambios guardados</p>
+        </div>
+      <?php endif; ?>
+
+      <!-- FORMULARIO -->
 
       <form action="" method="Post"   class="fix-height">
 

@@ -1,5 +1,6 @@
 
 <?php
+
 /**
  * Luego de registrarse el usuario puede llenar los datos personales.
  * Si hay errores en los campos recibe la alerta correspondiente, y si no se guardan los datos
@@ -34,8 +35,6 @@ if($_POST){
     editarUsuario($_POST,$_SESSION);
 
   }
-  // echo "<hr>";
-  // var_dump($_SESSION);
 
 }
 
@@ -59,9 +58,22 @@ if($_POST){
 
     <main class="container mt-4" id="form-container">
     
-     <?php
-       require_once "partials/navegador_datos_usuario.php";
-     ?>
+      <!-- LISTA -->
+      <ul>
+         <li><a href="perfil.php" class="active">Perfil</a></li>
+         <li><a href="cuenta.php">Cuenta</a></li>
+         <li><a href="password.php">Seguridad</a></li>
+      </ul>
+
+      <!-- CARTEL PARA CONFIRMAR QUE LOS CAMBIOS FUERON GUARDADOS -->
+
+      <?php
+
+      if($_POST && count($errores) == 0):?>
+        <div class="confirmar-cambios">
+        <p>Cambios guardados</p>
+        </div>
+      <?php endif; ?>
 
       <!-- Formulario Datos Personales -->
       <form action="" method="Post"   class="fix-height">

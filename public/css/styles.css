@@ -88,6 +88,22 @@ nav {
   min-height: 80vh;
 }
 
+/* PERFIL, CUENTA Y CAMBIAR PASSWORD */
+
+.confirmar-cambios {
+  background: #bceebc;
+  border: 1px solid #40d940;
+  text-align: center;
+  border-radius: 10px;
+  padding: 0.3em;
+  width: 70%;
+  margin: auto;
+}
+
+.confirmar-cambios p {
+  margin: 0;
+}
+
 /*---------- QUERIES-------- */
 
 @media screen and (min-width: 768px) {

@@ -66,9 +66,9 @@ redirigir("perfil");
                     <input type="password" id="repassword" class="form-control password-input" name="repassword">
                     <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"repassword")  ?> 
             </div>
-            <div class="form-group">
-                    <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Registrarse" id="registracion" />
-                    <a href="login.php" class="col col-md-auto col-lg-auto btn btn-lg btn-info" id="already-count">Ya tengo una cuenta</a>
+            <div class="form-group buttons">
+                <input type="submit" class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary" value="Registrarse" id="registracion" />
+                <a href="login.php" class="col col-md-auto col-lg-auto mb-3 text-center" id="already-count">Ya tengo una cuenta</a>
             </div>
         </form>
     </section>

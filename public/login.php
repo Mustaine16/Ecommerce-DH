@@ -57,13 +57,11 @@ redirigir("perfil");
           <?php mostrarError($erroresLogin,"password");  ?> 
         </div>
         <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="yes" id="defaultCheck1" name="mantenerLogueado">
-    <label class="form-check-label" for="defaultCheck1">
-    Mantenerme Logueado
-   </label>
-  </div>
+          <input class="form-check-input" type="checkbox" value="yes" id="defaultCheck1" name="mantenerLogueado">
+          <label class="form-check-label" for="defaultCheck1">Mantenerme Logueado</label>
+        </div>
         <div class="form-group buttons">
-        <input
+          <input
             type="submit"
             class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary"
             value="Ingresar"

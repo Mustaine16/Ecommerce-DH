@@ -25,6 +25,12 @@
   width: 100%;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @media screen and (min-width: 768px) {
   .avatar__container {
     align-items: center;
