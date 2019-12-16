@@ -16,12 +16,13 @@
     <!--Aca Empieza el FAQ -->
 
     <!-- Divison Principal-->
+    
     <section class="container fix-height">
       <div class="row Accordion d-flex justify-content-center">
         <!-- Responsive -->
         <div class="col-md-10 col-xl-6 py-5">
           <h1>Compras</h1>
-          <!-- Titulo -->
+          
           <!--Acordeones-->
           <div
             class="accordion md-accordion accordion-2"
@@ -45,7 +46,8 @@
                   aria-controls="collapse1"
                 >
                   <h5 class="mb-0 white-text font-thin">
-                    ¿Como Comprar? <i class="fas fa-angle-down rotate-icon"></i>
+                    <strong>¿Como Comprar?</strong> 
+                   <i class="fas fa-angle-down rotate-icon"></i>
                   </h5>
                 </a>
               </div>
@@ -93,6 +95,7 @@
             </div>
             <!-- Fin Acordeon 1 -->
 
+
             <!-- Acordeon 2-->
             <div class="card">
               <!-- Titulo -->
@@ -110,11 +113,11 @@
                   aria-controls="collapse2"
                 >
                   <h5 class="mb-0 white-text font-thin">
-                    Productos <i class="fas fa-angle-down rotate-icon"></i>
+                  <strong>¿Los productos son nuevos?</strong> <i class="fas fa-angle-down rotate-icon"></i>
                   </h5>
                 </a>
               </div>
-              <!-- Card -->
+            <!-- Card -->
               <div
                 id="collapse2"
                 class="collapse"
@@ -126,35 +129,117 @@
                   <!-- Lista -->
                   <ul class="list-group">
                     <li class="list-group-item">
-                      <strong>¿Los productos son nuevos?</strong> <br />
                       Sí, todos los productos son nuevos y con garantia del
                       fabricante directa.
                     </li>
 
+                  </ul>
+                </div>
+             </div>
+            </div>
+
+
+          <!-- Fin Acordeon 2-->
+
+          <!-- Acordeon 3-->
+            <div class="card">
+              <!-- Titulo -->
+              <div
+                class="card-header rgba-stylish-strong z-depth-1 mb-1"
+                role="tab"
+                id="heading3"
+              >
+                <a
+                  class="collapsed"
+                  data-toggle="collapse"
+                  data-parent="#accordionEx7"
+                  href="#collapse3"
+                  aria-expanded="false"
+                  aria-controls="collapse3"
+                >
+                  <h5 class="mb-0 white-text font-thin">
+                  <strong>¿Los productos son legítimos y oficiales?</strong>
+                  <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+                 <!-- Card -->
+              <div
+                id="collapse3"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="heading3"
+                data-parent="#accordionEx7"
+              >
+                <div class="card-body mb-1 rgba-grey-light white-text">
+                  <!-- Lista -->
+                  <ul class="list-group">
                     <li class="list-group-item">
-                      <strong>¿Los productos son legítimos y oficiales?</strong
-                      ><br />
-                      Sí, todos los productos que comercializamos son
+                    Sí, todos los productos que comercializamos son
                       originales, legítimos, con su embalaje original.
                     </li>
 
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Fin Acordeon 3 -->
+
+            <!-- Acordeon 4 -->
+            <div class="card">
+              <!-- Titulo -->
+              <div
+                class="card-header rgba-stylish-strong z-depth-1 mb-1"
+                role="tab"
+                id="heading4"
+              >
+                <a
+                  class="collapsed"
+                  data-toggle="collapse"
+                  data-parent="#accordionEx7"
+                  href="#collapse4"
+                  aria-expanded="false"
+                  aria-controls="collapse4"
+                >
+                  <h5 class="mb-0 white-text font-thin">
+                  <strong>¿Puedo cambiar o devolver un producto?</strong> 
+                  <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+              <!-- Card -->
+              <div
+                id="collapse4"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="heading4"
+                data-parent="#accordionEx7"
+              >
+                <div class="card-body mb-1 rgba-grey-light white-text">
+                  <!-- Lista -->
+                  <ul class="list-group">
+                   
                     <li class="list-group-item">
-                      <strong>¿Puedo cambiar o devolver un producto?</strong
-                      ><br />
                       Sí, puedes cambiar o devolver un producto dentro de los 5
                       dias de retirado el mismo.
                     </li>
                   </ul>
                   <!-- Fin Lista -->
                 </div>
-              </section>
+              </div>
             </div>
-            <!-- Fin Acordeon 2 -->
-          </div>
+            <!-- Fin Acordeon 4 -->
+          
+            
+           </div>
           <!--RP Fin-->
+
         </div>
+
         <!-- Final de acordeon -->
+
       </div>
+
     </section>
 
     <!-- Footer -->
