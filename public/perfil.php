@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -15,27 +14,24 @@
 
 include_once "autoload.php";
 
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() == PHP_SESSION_NONE) {
   session_start();
-  
 }
-  
+
 //Si no hay una sesion iniciada, se redirige al login
-redirigir("login",false);
+redirigir("login", false);
 
 
 $errores = [];
 
-if($_POST){
+if ($_POST) {
 
   $errores = validarDatosPersonales($_POST);
 
-  if(count($errores) == 0){
+  if (count($errores) == 0) {
 
-    editarUsuario($_POST,$_SESSION);
-
+    editarUsuario($_POST, $_SESSION);
   }
-
 }
 
 ?>
@@ -43,87 +39,82 @@ if($_POST){
 
 <!DOCTYPE html>
 <html lang="en">
- <?php
-   require_once "partials/head.php";
- ?>
+<?php
+require_once "partials/head.php";
+?>
 
-     <link rel="stylesheet" href="css/perfil.css">
-    <!-- Title -->
-    <title>Perfil</title>
-  </head>
+<link rel="stylesheet" href="css/perfil.css">
+<!-- Title -->
+<title>Perfil</title>
+</head>
 
-  <body>
-    <!-- Header -->
-    <?php include_once "partials/header.php" ;?>
+<body>
+  <!-- Header -->
+  <?php include_once "partials/header.php"; ?>
 
-    <main class="container mt-4" id="form-container">
-    
-      <!-- LISTA -->
-      <ul>
-         <li><a href="perfil.php" class="active">Perfil</a></li>
-         <li><a href="cuenta.php">Cuenta</a></li>
-         <li><a href="password.php">Seguridad</a></li>
-      </ul>
+  <main class="container mt-4" id="form-container">
 
-      <!-- CARTEL PARA CONFIRMAR QUE LOS CAMBIOS FUERON GUARDADOS -->
+    <!-- LISTA -->
+    <ul>
+      <li><a href="perfil.php" class="active">Perfil</a></li>
+      <li><a href="cuenta.php">Cuenta</a></li>
+      <li><a href="password.php">Seguridad</a></li>
+    </ul>
 
-      <?php
+    <!-- CARTEL PARA CONFIRMAR QUE LOS CAMBIOS FUERON GUARDADOS -->
 
-      if($_POST && count($errores) == 0):?>
-        <div class="confirmar-cambios">
+    <?php
+
+    if ($_POST && count($errores) == 0) : ?>
+      <div class="confirmar-cambios">
         <p>Cambios guardados</p>
-        </div>
-      <?php endif; ?>
+      </div>
+    <?php endif; ?>
 
-      <!-- Formulario Datos Personales -->
-      <form action="" method="Post"   class="fix-height">
-        <h1 class="">Datos Personales</h1>
+    <!-- Formulario Datos Personales -->
+    <form action="" method="Post" class="fix-height">
+      <h1 class="">Datos Personales</h1>
       <section>
 
         <div class="d-flex flex-column">
           <label for="nombre">Nombre</label>
-          <input class="inputs-f" type="text" name="nombre" 
-          placeholder="Introduce tu nombre"
-          
-          value= '<?= isset($_SESSION["nombre"]) ? $_SESSION["nombre"] : "" ?>'>
-          <?= isset($_SESSION["nombre"]) ? "": mostrarError($errores,"nombre")?>
+          <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre" value='<?= isset($_SESSION["nombre"]) ? $_SESSION["nombre"] : "" ?>'>
+          <span class="text-danger"><?= isset($errores["nombre"]) ? $errores["nombre"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="apellido">Apellido</label>
-          <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido" 
-          value= '<?= isset($_SESSION["apellido"]) ? $_SESSION["apellido"] : "" ?>'>
-          <?=isset($_SESSION["apellido"]) ? "": mostrarError($errores,"apellido")?>
+          <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido" value='<?= isset($_SESSION["apellido"]) ? $_SESSION["apellido"] : "" ?>'>
+          <span class="text-danger"><?= isset($errores["apellido"]) ? $errores["apellido"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="direccion">Direccion</label>
-          <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion" 
-          value='<?= isset($_SESSION["direccion"]) ? $_SESSION["direccion"] : "" ?>'>
-          <?= isset($_SESSION["direccion"]) ? "" :mostrarError($errores,"direccion")?>
+          <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion" value='<?= isset($_SESSION["direccion"]) ? $_SESSION["direccion"] : "" ?>'>
+          <span class="text-danger"><?= isset($errores["direccion"]) ? $errores["direccion"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="ciudad">Ciudad</label>
-          <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad" 
-          value= '<?= isset($_SESSION["ciudad"]) ? $_SESSION["ciudad"] : "" ?>'>
-          <?=isset($_SESSION["ciudad"]) ? "": mostrarError($errores,"ciudad")?>
+          <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad" value='<?= isset($_SESSION["ciudad"]) ? $_SESSION["ciudad"] : "" ?>'>
+          <span class="text-danger"><?= isset($errores["ciudad"]) ? $errores["ciudad"] : ""; ?></span>
         </div>
 
         <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios">
-      </form>
+    </form>
 
-      </section>
+    </section>
 
 
 
     <br />
-    </main>
-    <!-- Footer -->
-    <?php include_once "partials/footer.php" ;?>
-    
-    <?php
-    require_once "partials/javascript_scripts.php";
-    ?>
-  </body>
+  </main>
+  <!-- Footer -->
+  <?php include_once "partials/footer.php"; ?>
+
+  <?php
+                                                                                                            require_once "partials/javascript_scripts.php";
+  ?>
+</body>
+
 </html>

@@ -398,4 +398,5 @@ function validarDatosPersonales($POST){
         return $errores;
 }
 
+
 ?>
