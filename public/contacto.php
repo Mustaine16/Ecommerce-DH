@@ -50,7 +50,7 @@ if($_POST){
               name="nombre"
               value="<?= persistirDato($errores, "nombre"); ?>"
             />
-            <?php mostrarErrorFormularioContacto($errores,"nombre")  ?>
+            <?php mostrarError("nombre",$errores)  ?>
           </div>
           <div class="form-group">
             <label for="apellido">Apellido</label>
@@ -61,7 +61,7 @@ if($_POST){
               name="apellido"
               value="<?= persistirDato($errores, "apellido"); ?>"
             />
-            <?php mostrarErrorFormularioContacto($errores,"apellido")  ?>
+            <?php mostrarError("apellido",$errores)  ?>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -72,7 +72,7 @@ if($_POST){
               name="email"
               value="<?= persistirDato($errores, "email"); ?>"
             />
-            <?php mostrarErrorFormularioContacto($errores,"email")  ?>
+            <?php mostrarError("email",$errores)  ?>
           </div>
           <div class="form-group">
             <label for="telefono">Teléfono</label>
@@ -83,7 +83,7 @@ if($_POST){
               name="telefono"
               value="<?= persistirDato($errores, "telefono"); ?>"
             />
-            <?php mostrarErrorFormularioContacto($errores,"telefono")  ?>
+            <?php mostrarError("telefono",$errores)  ?>
           </div>
           <div class="form-group">
             <input

@@ -2,12 +2,11 @@
 
 require_once "autoload.php";
 
+checkCookie();
+
 if(session_status() == PHP_SESSION_NONE){
   
-  session_start();
-  
-  checkCookie();
-  
+  session_start();  
 
 }
 

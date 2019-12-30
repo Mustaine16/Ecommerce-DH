@@ -8,7 +8,7 @@ if(session_status() == PHP_SESSION_NONE){
 
 $erroresLogin = [];
 
-login($_POST,$erroresLogin);
+loguearUsuario($_POST,$erroresLogin);
 
 //Si existe una sesion, redirige al perfil
 redirigir("perfil");
@@ -42,9 +42,9 @@ redirigir("perfil");
             id="email"
             class="form-control email-input"
             name="email"
-            value= '<?php persistirDato($erroresLogin,"email"); ?>'
+            value= '<?= persistirDato($erroresLogin,"email"); ?>'
           />
-          <?php mostrarError($erroresLogin,"email")  ?> 
+          <?php mostrarError("email",$erroresLogin)  ?> 
         </div>
         <div class="form-group">
           <label for="password">Clave</label>
@@ -54,7 +54,7 @@ redirigir("perfil");
             class="form-control password-input"
             name="password"
           />
-          <?php mostrarError($erroresLogin,"password");  ?> 
+          <?php mostrarError("password",$erroresLogin);  ?> 
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="yes" id="defaultCheck1" name="mantenerLogueado">

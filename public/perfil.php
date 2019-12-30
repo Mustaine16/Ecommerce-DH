@@ -5,9 +5,9 @@
  * Si hay errores en los campos recibe la alerta correspondiente, y si no se guardan los datos
  * y aparecen visibles siempre que exista la session.
  * En los casos de persistencia, se verifica que el usuario no pueda
- * dejar alg'un campo vac'io una vez que ha llenado el mismo y quiera modificar sus datos;
+ * dejar algun campo vacio una vez que ha llenado el mismo y quiera modificar sus datos;
  * es decir que si su email es abc@mail.com y quiere modificarlo y deja el campo vacio
- * y guarda cambios simplemente se volver'a a llenar el campo con el dato de la session.
+ * y guarda cambios simplemente se volvera a llenar el campo con el dato de la session.
  * 
  */
 
@@ -78,25 +78,45 @@ require_once "partials/head.php";
 
         <div class="d-flex flex-column">
           <label for="nombre">Nombre</label>
-          <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre" value='<?= isset($_SESSION["nombre"]) ? $_SESSION["nombre"] : "" ?>'>
+          <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre" 
+          <?php if($_POST) : ?>
+            value='<?= persistirDato($errores,"nombre") ?>'>
+          <?php else : ?>
+            value='<?= isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "" ?>'>
+          <?php endif; ?>
           <span class="text-danger"><?= isset($errores["nombre"]) ? $errores["nombre"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="apellido">Apellido</label>
-          <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido" value='<?= isset($_SESSION["apellido"]) ? $_SESSION["apellido"] : "" ?>'>
+          <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido"
+          <?php if($_POST) : ?>
+            value='<?= persistirDato($errores,"apellido") ?>'>
+          <?php else : ?>
+            value='<?= isset($_SESSION['apellido']) ? $_SESSION['apellido'] : "" ?>'>
+          <?php endif; ?>
           <span class="text-danger"><?= isset($errores["apellido"]) ? $errores["apellido"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="direccion">Direccion</label>
-          <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion" value='<?= isset($_SESSION["direccion"]) ? $_SESSION["direccion"] : "" ?>'>
+          <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion" 
+          <?php if($_POST) : ?>
+            value='<?= persistirDato($errores,"direccion") ?>'>
+          <?php else : ?>
+            value='<?= isset($_SESSION['direccion']) ? $_SESSION['direccion'] : "" ?>'>
+          <?php endif; ?>
           <span class="text-danger"><?= isset($errores["direccion"]) ? $errores["direccion"] : ""; ?></span>
         </div>
 
         <div class="d-flex flex-column">
           <label for="ciudad">Ciudad</label>
-          <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad" value='<?= isset($_SESSION["ciudad"]) ? $_SESSION["ciudad"] : "" ?>'>
+          <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad" 
+          <?php if($_POST) : ?>
+            value='<?= persistirDato($errores,"ciudad") ?>'>
+          <?php else : ?>
+            value='<?= isset($_SESSION['ciudad']) ? $_SESSION['ciudad'] : "" ?>'>
+          <?php endif; ?>
           <span class="text-danger"><?= isset($errores["ciudad"]) ? $errores["ciudad"] : ""; ?></span>
         </div>
 

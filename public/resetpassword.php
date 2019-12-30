@@ -50,12 +50,12 @@ if($_POST){
        <div class="form-group">
          <label for="password">Nueva Contraseña</label>
          <input type="password" id="password" class="form-control  password-input" name="password">
-         <?= mostrarError($errores, "password")  ?>
+         <?= mostrarError("password",$errores)  ?>
        </div>
        <div class="form-group">
          <label for="repassword">Repetir Contraseña</label>
          <input type="password" id="repassword" class="form-control  password-input" name="repassword">
-         <?= mostrarError($errores, "repassword")  ?>
+         <?= mostrarError( "repassword",$errores)  ?>
        </div>
        <div class="form-group">
          <input type="submit" class="col col-md-auto col-lg-auto btn btn-lg btn-primary" value="Cambiar contraseña" id="registracion" />

@@ -30,9 +30,9 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
 
       $usuarioEditado = buscarUsuarioPorEmail($SESSION['email']);
 
-    }else if($COOKIE){
+    }else if($COOKIE){ 
 
-      // var_dump("ENTRO AL IF DE COOKIE ");
+      /*Este caso se da, cuando el usuario olvidó su contraseña y necesita resetearla */
 
       $usuarioEditado = buscarUsuarioPorEmail($COOKIE["user-email-for-reset-password"]);
 
@@ -48,15 +48,18 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
         $usuarioEditado["password"] = password_hash($POST["password"],PASSWORD_DEFAULT);
       }
 
+      //SI EL USUARIO CAMBIA EL EMAIL, TAMBIEN DEBE ACTUALIZARSE LA COOKIE DE EMAIL
+      if($key == "email" && isset($_COOKIE["email"])){
+        setcookie("email", $POST['email'], time() + 60 * 60 * 24 * 7);
+      }
+
+      //DATOS RESTANTES
+
       if($key != "guardar" && $key != "password" && $key != "repassword"){
         $usuarioEditado[$key] = $POST[$key];
       }
 
     }
-
- //   var_dump($POST);
-   // echo"<hr>";
-   // var_dump($usuarioEditado);
 
     //Abrir la base de datos y cambio usuario por UsuarioEditado
 
@@ -84,14 +87,7 @@ function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
     guardarJSON($usuarios);
 
     //Update $_SESSION para que se muestren los nuevos datos
-  /**
-   * 
-   *  OJO CON ESTO, LO COMENTADO NO ACTUALIZABA LA SESSION
-   * 
-   */
-    // foreach ($SESSION as $key => $value) {
-    //   $SESSION[$key] = $usuarioEditado[$key] ; 
-    // }
+     
     foreach($usuarioEditado as $k => $v ){
        $SESSION[$k] = $v;
     }
@@ -110,7 +106,7 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
   if ($POST) {
     //Guardamos posibles errores
     $erroresFormulario = validarFormularioRegistracion($POST,$FILES);
-    $erroresValidacionDeRegistro = validarRegistracion($POST);
+    $erroresValidacionDeRegistro = validarUsuarioEmailDuplicado($POST);
 
     //Si no hubo errores, se registra al usuario
     if (count($erroresFormulario) == 0 & !$erroresValidacionDeRegistro) {
@@ -138,7 +134,7 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
 }
 
 
-function login($POST, &$erroresLogin){
+function loguearUsuario($POST, &$erroresLogin){
   if ($POST) {
 
     //Se ejecuta la funcion que valida el login
@@ -175,14 +171,21 @@ function login($POST, &$erroresLogin){
 }
 
 function checkCookie(){
-  if(isset($_COOKIE['email'])){
+
+  if(session_status() == PHP_SESSION_NONE){
+
+  session_start(); 
+
+  }
+
+  if(isset($_COOKIE['email']) && !isset($_SESSION['email'])){
       // LOGUEO AL USUARIO E INICIO SESION
 
       // session_start();
 
       $usuario = buscarUsuarioPorEmail($_COOKIE['email']);
 
-      //Creo una posicion en session por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
+      //Creo una posicion en $_SESSION por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
 
       foreach ($usuario as $key => $value) {
 

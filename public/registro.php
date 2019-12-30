@@ -44,27 +44,27 @@ redirigir("perfil");
                         <p>Elegí un avatar</p>
                     </label>
                     <input type="file" name="avatar" id="avatar" class="avatar__input">
-                    <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"avatar")  ?>
+                    <?php mostrarError("avatar",$erroresFormulario, $errorValidacionDeRegistro)  ?>
             </div>
             <div class="form-group">
                     <label for="username">Nombre de Usuario</label>
                     <input type="text" class="form-control text-input" id="username" name="username" value="<?= persistirDato($erroresFormulario, "username"); ?>">
-                    <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"username")  ?> 
+                    <?php mostrarError("username",$erroresFormulario, $errorValidacionDeRegistro)  ?> 
             </div>
             <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" class="form-control email-input" name="email" value="<?= persistirDato($erroresFormulario, "email");  ?>">
-                    <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"email")  ?> 
+                    <?php mostrarError("email",$erroresFormulario, $errorValidacionDeRegistro)  ?> 
             </div>
             <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" class="form-control password-input" name="password">
-                    <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"password")  ?> 
+                    <?php mostrarError("password",$erroresFormulario, $errorValidacionDeRegistro)  ?> 
             </div>
             <div class="form-group">
                     <label for="repassword">Repetir Contraseña</label>
                     <input type="password" id="repassword" class="form-control password-input" name="repassword">
-                    <?php mostrarErrorRegistro($erroresFormulario, $errorValidacionDeRegistro,"repassword")  ?> 
+                    <?php mostrarError("repassword",$erroresFormulario, $errorValidacionDeRegistro)  ?> 
             </div>
             <div class="form-group buttons">
                 <input type="submit" class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary" value="Registrarse" id="registracion" />

@@ -74,13 +74,13 @@ if($_POST){
           <div class="d-flex flex-column">
             <label for="password">Nueva contraseña</label>
             <input class="inputs-f" type="password" name="password" placeholder="Introduce tu password">
-            <?= mostrarError($errores,"password")?>
+            <?= mostrarError("password",$errores)?>
           </div>
 
           <div class="d-flex flex-column">
             <label for="repassword">Repite la contraseña</label>
             <input class="inputs-f" type="password" name="repassword" placeholder="Repite la contraseña">
-            <?= mostrarError($errores,"repassword")?>
+            <?= mostrarError("repassword",$errores)?>
           </div>
 
           <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios">
