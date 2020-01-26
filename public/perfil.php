@@ -133,7 +133,7 @@ require_once "partials/head.php";
   <?php include_once "partials/footer.php"; ?>
 
   <?php
-                                                                                                            require_once "partials/javascript_scripts.php";
+    require_once "partials/javascript_scripts.php";
   ?>
 </body>
 

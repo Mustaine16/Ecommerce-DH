@@ -46,6 +46,7 @@ if(session_status() == PHP_SESSION_NONE){
         </li>
       </ul>
 
+      <!-- Si el usuarioe esta logueado, puede ver el link del perfil -->
       <?php if(isset($_SESSION['email'])) : ?>
       
       <div class="nav-item dropdown perfil__icon">
@@ -58,11 +59,18 @@ if(session_status() == PHP_SESSION_NONE){
         
           <img src='<?= "usuarios/avatars/" . $_SESSION["avatar"] ?>' alt="Perfil" style="width:32px;" />
         </a>
+        <!-- lINKS PARA ENTRAR AL A-B-M -->
         <div class="dropdown-menu perfil__menu-desplegable">
+        <?php if($_SESSION["email"] == "admin@admin.com") : ?>
+          <a class="dropdown-item" href="abm.php">Admin Panel</a>
+          <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
+        <?php else : ?>   
           <a class="dropdown-item" href="perfil.php">Perfil</a>
           <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
+        <?php endif;?>
         </div>
 
+        <!-- De lo contrario ve los links para loguearse o registrarse -->
         <?php else: ?>
         <?php session_destroy(); ?>
         <ul class="navbar-nav text-center ml-auto">
