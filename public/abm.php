@@ -1,5 +1,7 @@
 <?php
 
+include_once("autoload.php");
+
 if($_POST){
 
   if(isset($_POST["borrar"])){
@@ -52,12 +54,12 @@ require_once "partials/head.php";
               <td>Mark</td>
               <!-- Botones -->
               <td>
-                <form method="post" action="">
-                  <!-- ID DEL PRODUCTO, OCULTO, PARA PODER FILTRARLO EN LAS PAGNIAS SIGUIENTES -->
+                <form method="post" action="" class="d-flex justify-content-around">
+                  <!-- ID DEL PRODUCTO, OCULTO, PARA PODER FILTRARLO EN LAS PAGINAS SIGUIENTES -->
                   <!-- EL VALUE TIENE QUE VENIR DE LA BBDD -->
                   <input type="text" name="id" value="1" style="display:none">
                   <button class="btn btn-danger mb-2" name="borrar">Borrar</button>
-                  <button class="btn btn-success mb-2 ml-sm-auto d-inline-block" name="editar">Editar</button>
+                  <button class="btn btn-success mb-2" name="editar">Editar</button>
                 </form>
               </td>
             </tr> 

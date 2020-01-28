@@ -110,20 +110,22 @@ function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacio
 
     //Si no hubo errores, se registra al usuario
     if (count($erroresFormulario) == 0 & !$erroresValidacionDeRegistro) {
-        //Todo salió bien!
 
-        //Crear el aray del usuario
+        //Crear el objeto del usuario/Admin
 
-        $usuarioFinal = crearUsuario($POST,$FILES);
-        subirAvatar($FILES,$usuarioFinal["avatar"]);
+        $usuario;
+
+        if($POST["username"] == "_admin"){
+          $usuario = new Admin($POST["username"], $POST["password"], $POST["email"]);
+        }else{
+          $usuario = new Cliente($POST["username"], $POST["password"], $POST["email"]);
+        }
 
         // Registrando al usuario
 
-        $jsonUsuarios = getJSONDecodeado();
+        $usuario->registrarse();
 
-        $jsonUsuarios[] = $usuarioFinal;
-
-        guardarJSON($jsonUsuarios);
+        var_dump($usuario);
 
         //Redireccionar
 

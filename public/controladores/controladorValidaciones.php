@@ -99,8 +99,8 @@ function validarFormularioRegistracion($POST,$FILES){
             $errores["avatar"] = "Hubo un error al cargar el avatar";
         }
         //Tipo de archivo invalido
-        else if($ext != "jpg" && $ext != "jpeg" && $ext != "png" && $ext != "webp"){
-            $errores["avatar"] = "Solo se admiten imagenes .png , .jpg , .jpeg o .webp";
+        else if($ext != "jpg" && $ext != "jpeg" && $ext != "png"){
+            $errores["avatar"] = "Solo se admiten imagenes .png , .jpg o .jpeg ";
         }
     }
 
