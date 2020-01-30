@@ -2,23 +2,20 @@
 require_once "autoload.php";
 $creacionOK ="";
   if(isset($_POST)&& count($_POST)!=0){
-    var_dump($_POST);
-    echo '<hr>';
+
     //Crear el producto solamente si tiene nombre
     if(!empty($_POST['nombre']) ){
       $_POST['id']="";
       $p = new Producto($_POST);
-      var_dump($p);
-      echo '<hr>';
       $transaccion0k = $p->agregarProducto();
-      if($transaccion0k){
-        echo "Transaccion ok";
+      if($transaccion0k==true){
+        //echo "Transaccion ok";
         header("location:abm.php");
       }
         else {
           echo "Transaccion no OK :";
         }
-      $creacionOK = true;
+      // $creacionOK = true;
     }
   }
 
@@ -45,7 +42,14 @@ require_once "partials/head.php";
     <!-- Cuerpo Principal -->
     <main class="py-4">
       <section class="container">
-              <div class='alert alert-info' role='alert'><?= $creacionOK==true? "Producto agregado":"Producto no agregado"?></div>
+
+                <?php if(isset($transaccion0k)){
+                        if($creacionOK!=true){
+                          echo "<div class='alert alert-danger' role='alert'>No se pudo agregar el producto</div>";
+                        }
+                }
+                ?>
+
         <form method="POST" action="agregarProducto.php">
 
           <!-- Imagen, Nombre del producto, marca y precio -->

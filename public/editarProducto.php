@@ -8,6 +8,9 @@ if(isset($_POST)&& $_POST!=null){
   //var_dump($_POST);
   $p = new Producto($_POST);
   $edicionOK = $p->editarProducto();
+  if($edicionOK){
+    header("location:abm.php");
+  }
 }
 
 ?>
@@ -25,7 +28,15 @@ if(isset($_POST)&& $_POST!=null){
 
     <!-- Cuerpo Principal -->
     <main class="py-4">
-      <div class='alert alert-info' role='alert'><?= $edicionOK==true? "Producto modificado: $p->getNombre()":"El producto no existe"?></div>
+
+        <?php if(isset($edicionOK)){
+                if($edicionOK!=true){
+                  echo "<div class='alert alert-danger' role='alert'>No se pudo editar el producto</div>";
+                }
+        }
+        ?>
+
+      <!-- <div class='alert alert-info' role='alert'>  </div> -->
         <section class="container">
         <form method="POST" action="">
 

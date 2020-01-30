@@ -1,21 +1,36 @@
 <?php
 require_once "autoload.php";
-  if($_POST){
-    // var_dump($_POST);
-    $p = new Producto($_POST);
-    $baja="";
-    if(  $p->eliminarProducto() ) {
-      $baja = true;
-      //echo "eliminado";
-    }
-    else {
-      $baja = false;
-      //echo "no eliminado";
-    }
-    //echo "eliminado";
-    // else echo "no pasa nada";
+  // if($_POST){
+  //   // var_dump($_POST);
+  //   $p = new Producto($_POST);
+  //   $baja="";
+  //   if(  $p->eliminarProducto() ) {
+  //     $baja = true;
+  //
+  //   }
+  //   else {
+  //     $baja = false;
+  //   }
+  //
+  // }
+  $eliminarOK ="";
+    if(isset($_POST)&& count($_POST)!=0){
 
-  }
+      //Crear el producto solamente si tiene nombre
+      // if(!empty($_POST['nombre']) ){
+        // $_POST['id']="";
+        $p = new Producto($_POST);
+        $transaccion0k = $p->eliminarProducto();
+        if($transaccion0k){
+          //echo "Transaccion ok";
+          header("location:abm.php");
+        }
+          else {
+            echo "Transaccion no OK :";
+          }
+        // $creacionOK = true;
+      }
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +43,12 @@ require_once "partials/head.php";
 <body>
       <!-- Header -->
       <?php include_once "partials/headerAdmin.php" ;?>
-      <div>
-        <div class='p-3 m-3  text-white'><?= isset($baja)&&$baja==true? "<p class='p-3 m-3 bg-success text-white'>producto eliminado</p>":"<p class='p-3 m-3 bg-warning '>product No existe</p>" ?></div>
-
-      </div>
+      <?php if(isset($transaccion0k)){
+              if($eliminarOK!=true){
+                echo "<div class='alert alert-danger' role='alert'>No se pudo eliminar el producto</div>";
+              }
+      }
+      ?>
       <br>
 
       <!-- Cuerpo Principal -->
