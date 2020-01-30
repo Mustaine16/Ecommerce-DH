@@ -8,7 +8,12 @@ if(session_status() == PHP_SESSION_NONE){
 
 $erroresLogin = [];
 
-loguearUsuario($_POST,$erroresLogin);
+//Si hay POST, es porque el usuario esta intentando loguearse
+if($_POST){
+  
+  loguearUsuario($_POST, $erroresLogin);
+
+}
 
 //Si existe una sesion, redirige al perfil
 redirigir("perfil");

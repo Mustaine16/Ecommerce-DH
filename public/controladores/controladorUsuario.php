@@ -102,73 +102,63 @@ function subirAvatar($FILES,$avatarFileName){
 }
 
 
-function registrarUsuario($POST, $FILES, &$erroresFormulario, &$erroresValidacionDeRegistro){
-  if ($POST) {
-    //Guardamos posibles errores
-    $erroresFormulario = validarFormularioRegistracion($POST,$FILES);
-    $erroresValidacionDeRegistro = validarUsuarioEmailDuplicado($POST);
+function registrarUsuario($POST, $FILES, $erroresFormulario, $erroresRegistracionBBDD){
 
-    //Si no hubo errores, se registra al usuario
-    if (count($erroresFormulario) == 0 & !$erroresValidacionDeRegistro) {
+  var_dump($erroresFormulario);
+  var_dump($erroresRegistracionBBDD);
 
-        //Crear el objeto del usuario/Admin
+  if ($POST && count($erroresFormulario) == 0 && count($erroresRegistracionBBDD) == 0){
 
-        $usuario;
+    //Crear el objeto del usuario/Admin
 
-        if($POST["username"] == "_admin"){
-          $usuario = new Admin($POST["username"], $POST["password"], $POST["email"]);
-        }else{
-          $usuario = new Cliente($POST["username"], $POST["password"], $POST["email"]);
-        }
+    $usuario;
 
-        // Registrando al usuario
-
-        $usuario->registrarse();
-
-        var_dump($usuario);
-
-        //Redireccionar
-
-        header("Location:login.php");
-
+    if($POST["username"] == "_admin"){
+      $usuario = new Admin($POST["username"], $POST["password"], $POST["email"]);
+    }else{
+       $usuario = new Cliente($POST["username"], $POST["password"], $POST["email"]);
     }
+
+    // Registrando al usuario
+
+    $usuario->registrarse();
+
+    var_dump($usuario);
+
+    //Redireccionar
+
+    header("Location:login.php");
+
   }
 }
 
 
 function loguearUsuario($POST, &$erroresLogin){
-  if ($POST) {
 
-    //Se ejecuta la funcion que valida el login
-    $erroresLogin = validarLogin($POST);
+  $Autenticador = new Autenticador;
+  
+  //Estos metodos validan los inputs y datos del usuario
+  $Autenticador->validarLogin($_POST);
+  
+  //Arrays donde vamos a guardar los posibles errores
+  $erroresLogin = $Autenticador->getErroresLogin();
    
-    if ( count($erroresLogin) === 0 && count($erroresLogin) === 0 ) {
+  if ( count($erroresLogin) === 0 ) {
 
-      // LOGUEO AL USUARIO E INICIO SESION
+    // LOGUEO AL USUARIO E INICIO SESION
 
-      session_start();
+    session_start();
 
-      $usuario = buscarUsuarioPorEmail($POST['email']);
+    $dataUsuario = $Autenticador->buscarUsuarioPorEmail($POST['email']);
 
-      //Creo una posicion en session por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
-
-      foreach ($usuario as $key => $value) {
-
-        if($key != 'password'){
-          $_SESSION[$key] = $value;
-        }
-        
-      }
-
-      //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
-      if(isset($POST['mantenerLogueado']) && $POST['mantenerLogueado'] == "yes") {
-             
-        setcookie("email", $usuario['email'], time() + 60 * 60 * 24 * 7);
-
-      }
-      //Redirigimos al Perfil
-      header('Location: perfil.php');
+    if($dataUsuario["permisos"]){
+      $admin = new Admin();
+      $admin->loguearse($dataUsuario);
+    }else{
+      $cliente = new Cliente();
+      $cliente->loguearse($dataUsuario);
     }
+
   }
 }
 
@@ -206,27 +196,23 @@ function recuperarPass($POST){
   if($POST){
     $email = $POST['email'];
     foreach ($jsonUsuarios as $posicion => $usuario) {
-    if ($POST['email'] == $usuario['email']) {
+      if ($POST['email'] == $usuario['email']) {
 
       setcookie("user-email-for-reset-password",$email);
       header("Location:resetpassword.php");
 
-    }elseif (empty($POST['email'])) {
+      }elseif (empty($POST['email'])) {
 
-      echo "El campo no puede estar vacio";
-      break;
+        echo "El campo no puede estar vacio";
+        break;
 
-    }elseif (!(buscarUsuarioPorEmail($email))) {
+      }elseif (!(buscarUsuarioPorEmail($email))) {
 
-      echo "Email no encontrado";
-      break;
+        echo "Email no encontrado";
+        break;
 
-    }
+      }
     }
   } 
 }
 
-
-
-
-?>
