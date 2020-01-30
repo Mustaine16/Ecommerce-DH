@@ -1,8 +1,26 @@
-<?php 
-
-  if($_POST){
+<?php
+require_once "autoload.php";
+$creacionOK ="";
+  if(isset($_POST)&& count($_POST)!=0){
     var_dump($_POST);
+    echo '<hr>';
+    //Crear el producto solamente si tiene nombre
+    if(!empty($_POST['nombre']) ){
+      $p = new Producto($_POST);
+      var_dump($p);
+      echo '<hr>';
+      $transaccion0k = $p->agregarProducto();
+      if($transaccion0k){
+        echo "Transaccion ok";
+      }
+        else {
+          echo "Transaccion no OK :";
+        }
+      $creacionOK = true;
+    }
   }
+
+  //var_dump($p);
 
 ?>
 
@@ -20,12 +38,13 @@ require_once "partials/head.php";
   <body>
 
     <!-- Header -->
-    <?php include_once "partials/header.php" ;?>
+    <?php include_once "partials/headerAdmin.php" ;?>
 
     <!-- Cuerpo Principal -->
     <main class="py-4">
       <section class="container">
-        <form method="POST" action="">
+              <div class='alert alert-info' role='alert'><?= $creacionOK==true? "Producto agregado":"Producto no agregado"?></div>
+        <form method="POST" action="agregarProducto.php">
 
           <!-- Imagen, Nombre del producto, marca y precio -->
           <div class="datos-importante">
@@ -132,7 +151,7 @@ require_once "partials/head.php";
 
     <!-- Footer -->
     <?php include_once "partials/footer.php" ;?>
-    
+
     <!-- Scripts -->
     <?php
       require_once "partials/javascript_scripts.php";

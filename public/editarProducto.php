@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+require_once "autoload.php";
 require_once "partials/head.php";
+$edicionOK=false; //para mostrar un alert
+if(isset($_POST)&& $_POST!=null){
+  //var_dump($_POST);
+  $p = new Producto($_POST);
+  $edicionOK = $p->editarProducto();
+}
+
 ?>
 
 <link rel="stylesheet" href="css/editarProducto.css">
@@ -12,11 +20,13 @@ require_once "partials/head.php";
   <body>
 
     <!-- Header -->
-    <?php include_once "partials/header.php" ;?>
+    <?php include_once "partials/headerAdmin.php" ;?>
+
 
     <!-- Cuerpo Principal -->
     <main class="py-4">
-      <section class="container">
+      <div class='alert alert-info' role='alert'><?= $edicionOK==true? "Producto modificado: $p->getNombre()":"El producto no existe"?></div>
+        <section class="container">
         <form method="POST" action="">
 
           <!-- Imagen, Nombre del producto, marca y precio -->
@@ -30,6 +40,17 @@ require_once "partials/head.php";
               <input type="file" name="imagen" id="imagen" class="imagen__input">
             </div>
             <div class="form-group">
+              <label for="id">Id producto</label>
+              <input
+                type="text"
+                class="form-control"
+                id="id"
+                name="id"
+                aria-describedby="IdProducto"
+                value="<?=$_POST['id']?>"
+                placeholder="Ingrese el id del producto a modificar"
+
+              />
               <label for="nombre">Nombre del Producto</label>
               <input
                 type="text"
@@ -37,8 +58,9 @@ require_once "partials/head.php";
                 id="nombre"
                 name="nombre"
                 aria-describedby="NombreProducto"
+                value="<?=$_POST['nombre']?>"
                 placeholder="Ingrese un nombre de producto"
-                value=""
+
               />
             </div>
             <div class="form-group">
@@ -124,12 +146,10 @@ require_once "partials/head.php";
 
     <!-- Footer -->
     <?php include_once "partials/footer.php" ;?>
-    
+
     <!-- Scripts -->
     <?php
       require_once "partials/javascript_scripts.php";
     ?>
   </body>
 </html>
-
-

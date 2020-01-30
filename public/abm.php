@@ -54,7 +54,7 @@ require_once "partials/head.php";
               <td>Mark</td>
               <!-- Botones -->
               <td>
-                <form method="post" action="" class="d-flex justify-content-around">
+                <form method="post" action="abm.php" class="d-flex justify-content-around">
                   <!-- ID DEL PRODUCTO, OCULTO, PARA PODER FILTRARLO EN LAS PAGINAS SIGUIENTES -->
                   <!-- EL VALUE TIENE QUE VENIR DE LA BBDD -->
                   <input type="text" name="id" value="1" style="display:none">
@@ -62,18 +62,17 @@ require_once "partials/head.php";
                   <button class="btn btn-success mb-2" name="editar">Editar</button>
                 </form>
               </td>
-            </tr> 
+            </tr>
           </tbody>
         </table>
     </main>
 
     <!-- Footer -->
     <?php include_once "partials/footer.php" ;?>
-    
+
     <!-- Scripts -->
     <?php
       require_once "partials/javascript_scripts.php";
     ?>
   </body>
 </html>
-
