@@ -1,8 +1,10 @@
 <?php
 
-abstract class Autenticador{
+class Autenticador{
 
-  private static $errores;
+  private $erroresRegistracionFormulario = [];
+  private $erroresRegistracionBBDD = [];
+  private $erroresLogin = [];
 
   /*
   ***********
@@ -74,18 +76,33 @@ abstract class Autenticador{
         }
     }
 
-    return $errores;
+    $this->setErroresRegistracionFormulario($errores);
   }
 
 //La idea es que no haya 2 usuarios con un mismo mail o nombre de ususario
   public function validarRegistracionEnBBDD($POST){
   
-    $errores = [];
+    $errores = []; //Array donde se almacenan los errores
 
-    $usuariosJSON = file_get_contents("usuarios/usuarios.json"); //traerme el json
+    $db = BBDD::getConexion();
 
-    $usuarios = json_decode($usuariosJSON,true); //decodearlo
+    //Resultado de la consulta para verificar si hay, o no, un usuario con este email
+    $resultadoPorEmail = $this->buscarUsuarioPorEmail($db); 
 
+    //Resultado de la consulta para verificar si hay, o no, un usuario con este username
+    $resultadoPorNombreDeUsuario = $this->buscarUsuarioPorUsername($db);
+
+    if($resultadoPorEmail){
+      $errores["email"] = "Ya existe un usuario registrado con ese email";
+    }
+
+    if($resultadoPorNombreDeUsuario){
+      $errores["username"] = "Ya existe un usuario registrado con ese nombre de usuario";
+    }
+
+    $this->setErroresRegistracionBBDD($errores);
+
+    /*
     if($usuarios){
 
         foreach ($usuarios as $usuario) {
@@ -103,6 +120,7 @@ abstract class Autenticador{
         /*
         * Puede ocurrir que el usuario solo quiera cambiar el usuario pero no el email, y viceversa 
         */
+        /*
         if($_SESSION){
 
             if($_SESSION["email"] && $_SESSION["email"] == $POST["email"]){
@@ -112,33 +130,177 @@ abstract class Autenticador{
             if($_SESSION["username"] && $_SESSION["username"] == $POST["username"]){
                 unset($errores["username"]);
             }
+            
+            
+          }
+        }*/
+  }
+
+  /*
+  ***********
+  VALIDACIONES
+      DE
+    LOGIN
+  ***********
+  */
+
+  public function validarLogin($POST){
+
+    $errores = [];
+    $email = trim($POST['email']);
+    $pass = trim($POST['password']);
+
+    //Errores de campos invalidos
+    
+    if(empty($email)) {
+      $errores['email'] = 'El campo email es obligatorio';
+
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errores['email'] = 'El formato introducido no es válido';
+
+    } else if(empty($pass)) {
+
+      $errores['password'] = 'El campo password es obligatorio';
+
+    } else {
+
+      //Errores de validacion en Base de Datos
+
+      //Resultado de la consulta para verificar si hay, o no, un usuario con este email
+      $usuario = $this->buscarUsuarioPorEmail(); 
+
+      if($usuario){
+
+        if( !password_verify($pass, $usuario['pass']) ) {
+            $errores['password'] = 'Contraseña Incorrecta';
         }
 
-        return $errores;
+      } else {
 
-    }else{
-        return $errores ;
-    }   
+        $errores['email'] = "No existe un usuario registrado con ese email";
+        
+      }
+
+
+    }
+
+    $this->setErroresLogin($errores);
+}
+
+  public function buscarUsuarioPorEmail(){
+
+    $db = BBDD::getConexion();
+
+    $db->beginTransaction();
+
+    try {
+      
+      $sql = $db->prepare("SELECT * FROM usuarios where email = :email");
+
+      $sql->bindValue(":email", $_POST["email"]);
+
+      $sql->execute();
+
+      $resultado =  $sql->fetch(PDO::FETCH_ASSOC);
+
+      $db->commit();
+      
+      return $resultado;
+
+    } catch (PDOException $e) {
+      echo "Error en la consulta SQL: " . $e->getMessage();
+      $db->rollBack();
+      die();
+    }
+
+  }
+
+  private function buscarUsuarioPorUsername($db){
+
+    $db->beginTransaction();
+
+    try {
+      
+      $sql = $db->prepare("SELECT username FROM usuarios where username = :username");
+      $sql->bindValue(":username", $_POST["username"]);
+
+      $sql->execute();
+
+      $resultado =  $sql->fetch(PDO::FETCH_ASSOC);
+
+      $db->commit();
+      
+      return $resultado;
+
+      $db-commit();
+
+    } catch (PDOException $e) {
+      echo "Error en la consulta SQL: " . $e->getMessage();
+      $db->rollBack();
+      die();
+    }
+
   }
 
 
 
+
   /**
-   * Get the value of errores
+   * Get the value of erroresRegistracionFormulario
    */ 
-  public function getErrores()
+  public function getErroresRegistracionFormulario()
   {
-    return self::$errores;
+    return $this->erroresRegistracionFormulario;
   }
 
   /**
-   * Set the value of errores
+   * Set the value of erroresRegistracionFormulario
    *
    * @return  self
    */ 
-  public function setErrores($errores)
+  public function setErroresRegistracionFormulario($erroresRegistracionFormulario)
   {
-    $this->errores = $errores;
+    $this->erroresRegistracionFormulario = $erroresRegistracionFormulario;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of erroresRegistracionBBDD
+   */ 
+  public function getErroresRegistracionBBDD()
+  {
+    return $this->erroresRegistracionBBDD;
+  }
+
+  /**
+   * Set the value of erroresRegistracionBBDD
+   *
+   * @return  self
+   */ 
+  public function setErroresRegistracionBBDD($erroresRegistracionBBDD)
+  {
+    $this->erroresRegistracionBBDD = $erroresRegistracionBBDD;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of erroresLogin
+   */ 
+  public function getErroresLogin()
+  {
+    return $this->erroresLogin;
+  }
+
+  /**
+   * Set the value of erroresLogin
+   *
+   * @return  self
+   */ 
+  public function setErroresLogin($erroresLogin)
+  {
+    $this->erroresLogin = $erroresLogin;
 
     return $this;
   }

@@ -7,7 +7,7 @@
     protected $pass;
     protected $avatar;
 
-    public function __construct($username, $pass, $email){
+    public function __construct($username = "", $pass = "", $email = ""){
       
       $this->setUsername($username);
       $this->setpass($pass);
@@ -15,8 +15,33 @@
       
     }
     
-    public function loguearse(){
-        
+    public function loguearse($data){
+     
+      if(session_status() == PHP_SESSION_NONE){
+
+        session_start(); 
+  
+      }
+    
+      //Creo una posicion en session por cada posicion del usuario, paraevitar tener que hardcodear y checkear si existe tal o cual dato
+
+      foreach ($data as $key => $value) {
+
+        if($key != 'pass'){
+          $_SESSION[$key] = $value;
+        }
+          
+      }
+  
+      //SI EL CHECKBOX DE RECORDAME esta tickeado entonces crea cookies C:
+      if(isset($_POST['mantenerLogueado']) && $_POST['mantenerLogueado'] =="yes") {
+               
+        setcookie("email", $data['email'], time() + 60 * 60 * 24 * 7);
+  
+      }
+      //Redirigimos al Perfil
+      header('Location: perfil.php');
+      
     }
     
     public function registrarse(){
@@ -32,15 +57,20 @@
         try{
             
             $sql = $db->prepare("
-                INSERT INTO usuarios (id,username,email,pass,avatar) 
-                VALUES(default,:username,:email,:pass,:avatar)"
+                INSERT INTO usuarios (id,username,email,pass,avatar,permisos) 
+                VALUES(default,:username,:email,:pass,:avatar,:permisos)"
             );
 
-            
             $sql->bindValue(":pass", $this->getPass(),PDO::PARAM_STR);
             $sql->bindValue(":username", $this->getUsername(),PDO::PARAM_STR);
             $sql->bindValue(":email", $this->getEmail(),PDO::PARAM_STR);
             $sql->bindValue(":avatar", $this->getAvatar(),PDO::PARAM_STR);
+
+            if($this instanceof Admin){
+                $sql->bindValue(":permisos", 1);
+            }else{
+                $sql->bindValue(":permisos", 0);
+            }
             
             // var_dump($_POST);die;
             $sql->execute();
@@ -58,6 +88,7 @@
     }
 
     public function subirAvatar($avatarFileName){
+        var_dump($_FILES["avatar"]["tmp_name"]);
         move_uploaded_file($_FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
     }
 
@@ -143,6 +174,8 @@
         $avatarFileName = $idAvatar . "." . $ext;
 
         $this->avatar = $avatarFileName;
+        
+        
 
         $this->subirAvatar($avatarFileName);
       
