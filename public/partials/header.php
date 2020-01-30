@@ -1,15 +1,15 @@
-<?php 
+<?php
 
 require_once "autoload.php";
 
 checkCookie();
 
 if(session_status() == PHP_SESSION_NONE){
-  
-  session_start();  
+
+  session_start();
 
 }
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 ?>
 
@@ -49,7 +49,7 @@ var_dump($_SESSION);
 
       <!-- Si el usuarioe esta logueado, puede ver el link del perfil -->
       <?php if(isset($_SESSION['email'])) : ?>
-      
+
       <div class="nav-item dropdown perfil__icon">
         <a
           class="nav-link dropdown-toggle text-center"
@@ -57,7 +57,7 @@ var_dump($_SESSION);
           data-toggle="dropdown"
           href="#"
         >
-        
+
           <img src='<?= "usuarios/avatars/" . $_SESSION["avatar"] ?>' alt="Perfil" style="width:32px;" />
         </a>
         <!-- lINKS PARA ENTRAR AL A-B-M -->
@@ -65,7 +65,7 @@ var_dump($_SESSION);
         <?php if($_SESSION["email"] == "admin@admin.com") : ?>
           <a class="dropdown-item" href="abm.php">Admin Panel</a>
           <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
-        <?php else : ?>   
+        <?php else : ?>
           <a class="dropdown-item" href="perfil.php">Perfil</a>
           <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
         <?php endif;?>
@@ -82,7 +82,7 @@ var_dump($_SESSION);
               <a class="nav-link" href="registro.php">Registrate</a>
             </li>
         </ul>
-        <?php 
+        <?php
         endif; ?>
       </div>
     </div>

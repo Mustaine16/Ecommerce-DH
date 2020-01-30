@@ -12,10 +12,17 @@ Class Producto{
   private $imagen;
   private $precio;
 
+/* el constructor recie un array del forumulario*/
   public function __construct($a){
        $this->setNombre($a['nombre']);
        $this->setId($a['id']);
-       $this->setMarca( $a['marca']);
+       // $this->setMarca( $a['marca');
+       /*
+         Solo para pruebas, ya que se usa para setear id_marca
+         (ver comentario en script ecommerce_dh_para_pruebas_ABM.sql)
+       */
+       $this->setMarca(1);
+
        $this->setPrecio($a['precio']) ;
        $this->setSistemaOperativo($a['sistemaOperativo']) ;
        $this->setMemoriaRam($a['memoriaRam']) ;
@@ -29,32 +36,24 @@ Class Producto{
 
     $db->beginTransaction();
 
-    // $query = "INSERT INTO productos(
-    //   id,nombre,marca,sist_operativo,memoria_ram,procesador,camara,pantalla,
-    // image,precio,id_marca)
-    //     VALUES
-    //     (default,:id,:nombre,:marca,:sistemaOperativo,:memoriaRam,:procesador,:camara,:pantalla,:imagen,:precio,default)";
-
     try{
-        // $sql = $db->prepare("INSERT INTO prod(id,nombre)
-        //      VALUES
-        //      (default,:nombre)");
-        $sql = $db->prepare("INSERT INTO productos(
-           id,nombre,precio,image,sist_operativo,pantalla,camara,memoria_ram)
-             VALUES
-        (default,:nombre,:precio,:image,:sistemaOperativo,:pantalla,:camara,:memoriaRam)");
 
-        // $sql->bindValue(':id', $this->getId(), PDO::PARAM_INT);
+        $sql = $db->prepare("INSERT INTO productos(
+           id,nombre,procesador,precio,imagen,sist_operativo,pantalla,camara,memoria_ram,id_marca)
+             VALUES
+        (default,:nombre,:procesador,:precio,:imagen,:sistemaOperativo,:pantalla,:camara,:memoriaRam,:id_marca)");
+
+        // $sql->bindValue('id', $this->getId(), PDO::PARAM_INT);
         $sql->bindValue(":nombre",$this->getNombre(),PDO::PARAM_STR);
         // $sql->bindValue(":marca",$this->getMarca(),PDO::PARAM_STR);
         $sql->bindValue(":sistemaOperativo",$this->getSistemaOperativo(),PDO::PARAM_STR);
         $sql->bindValue(":memoriaRam",$this->getMemoriaRam(),PDO::PARAM_STR);
         $sql->bindValue(":precio",$this->getPrecio(),PDO::PARAM_STR);
-        // $sql->bindValue(":procesador",$this->getProcesador(),PDO::PARAM_STR);
+        $sql->bindValue(":procesador",$this->getProcesador(),PDO::PARAM_STR);
         $sql->bindValue(":camara",$this->getCamara(),PDO::PARAM_STR);
-        $sql->bindValue(":image",$this->getImagen(),PDO::PARAM_STR);
+        $sql->bindValue(":imagen",$this->getImagen(),PDO::PARAM_STR);
         $sql->bindValue(":pantalla",$this->getPantalla(),PDO::PARAM_STR);
-        // $sql->bindValue(':id_marca', $this->getId(), PDO::PARAM_INT);
+        $sql->bindValue('id_marca', $this->getMarca(), PDO::PARAM_INT);
 
         // var_dump($_POST);die;
         $sql->execute();
@@ -67,7 +66,7 @@ Class Producto{
         }
 
         else{
-            var_dump($sql);
+            //var_dump($sql);
            return false;
         }
 
@@ -84,18 +83,28 @@ Class Producto{
     $db->beginTransaction();
 
     try{
-        $sql = $db->prepare("UPDATE productos SET nombre=:nombre  WHERE id =:id ");
+        $sql = $db->prepare("UPDATE productos SET nombre=:nombre,
+                                              procesador=:procesador,
+                                              precio=:precio,
+                                              imagen=:imagen,
+                                              sist_operativo=:sistemaOperativo,
+                                              pantalla=:pantalla,
+                                              camara=:camara,
+                                              memoria_ram=:memoriaRam,
+                                              id_marca=:id_marca
+                                              WHERE
+                                                  id =:id ");
 
         $sql->bindValue(":nombre",$this->getNombre(),PDO::PARAM_STR);
         $sql->bindValue(':id', $this->getId(), PDO::PARAM_INT);
-        // $sql->bindValue(":marca",$this->getMarca(),PDO::PARAM_STR);
-        // $sql->bindValue(":sistemaOperativo",$this->getSistemaOperativo(),PDO::PARAM_STR);
-        // $sql->bindValue(":memoriaRam",$this->getMemoriaRam(),PDO::PARAM_STR);
-        // $sql->bindValue(":precio",$this->getPrecio(),PDO::PARAM_INT);
-        // $sql->bindValue(":procesador",$this->getProcesador(),PDO::PARAM_STR);
-        // $sql->bindValue(":camara",$this->getCamara(),PDO::PARAM_STR);
-        // $sql->bindValue(":imagen",$this->getImagen(),PDO::PARAM_STR);
-        // $sql->bindValue(":pantalla",$this->getPantalla(),PDO::PARAM_STR);
+        $sql->bindValue(":id_marca",$this->getMarca(),PDO::PARAM_STR);
+        $sql->bindValue(":sistemaOperativo",$this->getSistemaOperativo(),PDO::PARAM_STR);
+        $sql->bindValue(":memoriaRam",$this->getMemoriaRam(),PDO::PARAM_STR);
+        $sql->bindValue(":precio",$this->getPrecio(),PDO::PARAM_STR);
+        $sql->bindValue(":procesador",$this->getProcesador(),PDO::PARAM_STR);
+        $sql->bindValue(":camara",$this->getCamara(),PDO::PARAM_STR);
+        $sql->bindValue(":imagen",$this->getImagen(),PDO::PARAM_STR);
+        $sql->bindValue(":pantalla",$this->getPantalla(),PDO::PARAM_STR);
 
         // var_dump($_POST);die;
         $sql->execute();

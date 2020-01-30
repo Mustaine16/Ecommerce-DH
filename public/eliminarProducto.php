@@ -6,11 +6,11 @@ require_once "autoload.php";
     $baja="";
     if(  $p->eliminarProducto() ) {
       $baja = true;
-      echo "eliminado";
+      //echo "eliminado";
     }
     else {
       $baja = false;
-      echo "no eliminado";
+      //echo "no eliminado";
     }
     //echo "eliminado";
     // else echo "no pasa nada";

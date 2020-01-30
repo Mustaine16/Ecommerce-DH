@@ -11,10 +11,11 @@ $creacionOK ="";
       echo '<hr>';
       $transaccion0k = $p->agregarProducto();
       if($transaccion0k){
-        echo "Transaccion ok";
+      //  echo "Transaccion ok";
+        header("location:abm.php");
       }
         else {
-          echo "Transaccion no OK :";
+        //  echo "Transaccion no OK :";
         }
       $creacionOK = true;
     }

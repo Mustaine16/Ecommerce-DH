@@ -19,8 +19,7 @@ if($_POST){
 <!DOCTYPE html>
 <html lang="en">
 <?php
-require_once "partials/head.php";
-?>
+require_once "partials/head.php";?>
 
 <!-- Title -->
 <title>Alta-Baja-Modificacion</title>
