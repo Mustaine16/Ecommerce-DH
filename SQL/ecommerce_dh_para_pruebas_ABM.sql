@@ -93,8 +93,8 @@ CREATE TABLE `productos` (
   `camara` float DEFAULT NULL,
   `memoria_ram` float DEFAULT NULL,
   `id_marca` int(11) ,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `id_marca` FOREIGN KEY (`id`) REFERENCES `marcas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id`)
+  /*CONSTRAINT `id_marca` FOREIGN KEY (`id`) REFERENCES `marcas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

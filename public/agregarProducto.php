@@ -6,16 +6,17 @@ $creacionOK ="";
     echo '<hr>';
     //Crear el producto solamente si tiene nombre
     if(!empty($_POST['nombre']) ){
+      $_POST['id']="";
       $p = new Producto($_POST);
       var_dump($p);
       echo '<hr>';
       $transaccion0k = $p->agregarProducto();
       if($transaccion0k){
-      //  echo "Transaccion ok";
+        echo "Transaccion ok";
         header("location:abm.php");
       }
         else {
-        //  echo "Transaccion no OK :";
+          echo "Transaccion no OK :";
         }
       $creacionOK = true;
     }

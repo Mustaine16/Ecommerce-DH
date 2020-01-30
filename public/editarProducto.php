@@ -3,8 +3,8 @@
 <?php
 require_once "autoload.php";
 require_once "partials/head.php";
-$edicionOK=false; //para mostrar un alert
 if(isset($_POST)&& $_POST!=null){
+  $edicionOK=false; //para mostrar un alert
   //var_dump($_POST);
   $p = new Producto($_POST);
   $edicionOK = $p->editarProducto();
@@ -47,7 +47,7 @@ if(isset($_POST)&& $_POST!=null){
                 id="id"
                 name="id"
                 aria-describedby="IdProducto"
-                value="<?=$_POST['id']?>"
+                value="id"
                 placeholder="Ingrese el id del producto a modificar"
 
               />
@@ -58,7 +58,7 @@ if(isset($_POST)&& $_POST!=null){
                 id="nombre"
                 name="nombre"
                 aria-describedby="NombreProducto"
-                value="<?=$_POST['nombre']?>"
+                value="nombre"
                 placeholder="Ingrese un nombre de producto"
 
               />
