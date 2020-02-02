@@ -2,33 +2,12 @@
 
     require_once "autoload.php";
 
-    if(session_status() == PHP_SESSION_NONE){
-    session_start();
-    }
+    $errores = [];
 
-    //En caso de no haber POST, las variables de errores estaran vacias
+    registrarUsuario($_POST, $_FILES, $errores);
 
-    $erroresFormulario = [];
-    $erroresRegistracionBBDD = [];
-
-    if($_POST){
-
-        $Autenticador = new Autenticador;
-
-        //Estos metodos validan los inputs y datos del usuario
-        $Autenticador->validarFormularioRegistracion($_POST,$_FILES);
-        $Autenticador->validarRegistracionEnBBDD($_POST);
-
-        //Arrays donde vamos a guardar los posibles errores
-        $erroresFormulario = $Autenticador->getErroresRegistracionFormulario();
-        $erroresRegistracionBBDD = $Autenticador->getErroresRegistracionBBDD();
-
-        registrarUsuario($_POST, $_FILES, $erroresFormulario, $erroresRegistracionBBDD);
-
-        //Si hay una sesion iniciada, se redirige al perfil
-        redirigir("perfil");
-
-    }
+    //Si hay una sesion iniciada, se redirige al perfil
+    redirigir("perfil");
 
 ?>
 
@@ -60,27 +39,27 @@
                         <p>Elegí un avatar</p>
                     </label>
                     <input type="file" name="avatar" id="avatar" class="avatar__input">
-                    <?php mostrarError("avatar",$erroresFormulario, $erroresRegistracionBBDD)  ?>
+                    <?php mostrarError("avatar",$errores)  ?>
             </div>
             <div class="form-group">
                     <label for="username">Nombre de Usuario</label>
-                    <input type="text" class="form-control text-input" id="username" name="username" value="<?= persistirDato($erroresFormulario, "username"); ?>">
-                    <?php mostrarError("username",$erroresFormulario, $erroresRegistracionBBDD)  ?> 
+                    <input type="text" class="form-control text-input" id="username" name="username" value="<?= persistirDato($errores, "username"); ?>">
+                    <?php mostrarError("username",$errores)  ?> 
             </div>
             <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control email-input" name="email" value="<?= persistirDato($erroresFormulario, "email");  ?>">
-                    <?php mostrarError("email",$erroresFormulario, $erroresRegistracionBBDD)  ?> 
+                    <input type="email" id="email" class="form-control email-input" name="email" value="<?= persistirDato($errores, "email");  ?>">
+                    <?php mostrarError("email",$errores)  ?> 
             </div>
             <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" class="form-control password-input" name="password">
-                    <?php mostrarError("password",$erroresFormulario, $erroresRegistracionBBDD)  ?> 
+                    <?php mostrarError("password",$errores)  ?> 
             </div>
             <div class="form-group">
                     <label for="repassword">Repetir Contraseña</label>
                     <input type="password" id="repassword" class="form-control password-input" name="repassword">
-                    <?php mostrarError("repassword",$erroresFormulario, $erroresRegistracionBBDD)  ?> 
+                    <?php mostrarError("repassword",$errores)  ?> 
             </div>
             <div class="form-group buttons">
                 <input type="submit" class="col col-md-auto col-lg-auto mb-3 btn btn-lg btn-primary" value="Registrarse" id="registracion" />

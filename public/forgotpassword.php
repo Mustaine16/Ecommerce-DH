@@ -43,7 +43,7 @@ redirigir("perfil");
           value="Recuperar cuenta"
         />
 
-        <div class="form-group">
+        <div class="form-group d">
           <?= (recuperarPass($_POST)) ?>
         </div>
       </form>

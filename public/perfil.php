@@ -12,27 +12,21 @@
  */
 
 
-include_once "autoload.php";
+  include_once "autoload.php";
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-
-//Si no hay una sesion iniciada, se redirige al login
-redirigir("login", false);
-
-
-$errores = [];
-
-if ($_POST) {
-
-  $errores = validarDatosPersonales($_POST);
-
-  if (count($errores) == 0) {
-
-    editarUsuario($_POST, $_SESSION);
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
   }
-}
+
+  //Si no hay una sesion iniciada, se redirige al login
+  redirigir("login", false);
+
+
+  $errores = [];
+
+
+  editarPerfil($_POST, $_SESSION, $errores);
+
 
 ?>
 

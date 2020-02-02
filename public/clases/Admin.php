@@ -2,7 +2,7 @@
 
 class Admin extends Usuario{
 
-  private $permisos = true;
+  private $permisos = 1;
 
   /**
    * Get the value of permisos

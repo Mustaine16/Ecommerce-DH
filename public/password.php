@@ -9,20 +9,10 @@ if(session_status() == PHP_SESSION_NONE){
 redirigir("login",false);
 
 
-//Funcion para editar la informacion del usuario
+//Posibles Errores
 $errores = [];
 
-if($_POST){
-
-  $errores = validarPassword($_POST);
-
-  if(count($errores) == 0){
-
-    editarUsuario($_POST,$_SESSION);
-
-  }
-
-}
+cambiarPassword($_POST, $_SESSION, $errores);
 
 ?>
 

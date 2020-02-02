@@ -108,7 +108,7 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   `email` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
-  `pass` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
+  `pass` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `permisos` tinyint(4) DEFAULT NULL,
   `avatar` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   `nombre` varchar(45) CHARACTER SET latin1 DEFAULT NULL,

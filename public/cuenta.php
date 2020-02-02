@@ -13,21 +13,9 @@ if(session_status() == PHP_SESSION_NONE){
 //Si no hay una sesion iniciada, se redirige al login
 redirigir("login",false);
 
-$erroresFormulario = [];
-$erroresDeValidacion = []; //Cuando se intenta modificar usuario o email, no puede ser igual a alguno que ya se encuentre en la Base de Datos
+$errores = [];
 
-if($_POST){
-
-  $erroresFormulario = validarCuenta($_POST);
-  $erroresDeValidacion = validarUsuarioEmailDuplicado($_POST);
-
-  if(count($erroresFormulario) == 0 && count($erroresDeValidacion) == 0){
-
-    editarUsuario($_POST,$_SESSION);
-
-  }
-
-}
+editarCuenta($_POST, $_SESSION, $errores);
 
 ?>
 
@@ -59,7 +47,7 @@ if($_POST){
 
       <?php
 
-      if($_POST && count($erroresFormulario) == 0 && count($erroresDeValidacion) == 0):?>
+      if($_POST && count($errores) == 0):?>
         <div class="confirmar-cambios">
         <p>Cambios guardados</p>
         </div>
@@ -76,13 +64,13 @@ if($_POST){
           <div class="d-flex flex-column">
             <label for="usuario">Usuario</label>
             <input class="inputs-f" type="text" name="username" placeholder="Introduce tu usuario" value= '<?= $_SESSION["username"]; ?>'>
-            <?=mostrarError("username",$erroresFormulario, $erroresDeValidacion)?>
+            <?=mostrarError("username",$errores)?>
           </div>
 
           <div class="d-flex flex-column">
             <label for="email">Email</label>
             <input class="inputs-f" type="email" name="email" placeholder="Introduce tu email" value= '<?= $_SESSION["email"]; ?>'>
-            <?=mostrarError("email",$erroresFormulario, $erroresDeValidacion)?>
+            <?=mostrarError("email",$errores)?>
           </div>
 
           <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios">

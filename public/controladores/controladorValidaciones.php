@@ -23,15 +23,10 @@ function persistirDato($arrayDeErrores, $campo){
 }
 
 //Mostramos los errores debajo de cada input del registro
-function mostrarError(string $input,$erroresFormulario, $erroresBBDD = null){
-    if(isset($erroresFormulario[$input])) {
-        echo "<small class='text-danger'>" . $erroresFormulario[$input] . "</small>";
+function mostrarError(string $input,$errores){
+    if(isset($errores[$input])) {
+        echo "<small class='text-danger'>" . $errores[$input] . "</small>";
     } 
-    
-    if(isset($erroresBBDD[$input])) {
-        echo "<small class='text-danger'>" . $erroresBBDD[$input] . "</small>";
-    } 
-
 }
 
 /*

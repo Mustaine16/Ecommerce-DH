@@ -6,11 +6,12 @@
     protected $email;
     protected $pass;
     protected $avatar;
+    protected $id;
 
     public function __construct($username = "", $pass = "", $email = ""){
       
       $this->setUsername($username);
-      $this->setpass($pass);
+      $this->setPass($pass);
       $this->setEmail($email);
       
     }
@@ -81,15 +82,10 @@
             $db->rollBack();
             echo "Error al intentar registrarse: " . $e->getMessage() . "<br>"; 
         }
-
-
-
-
     }
 
     public function subirAvatar($avatarFileName){
-        var_dump($_FILES["avatar"]["tmp_name"]);
-        move_uploaded_file($_FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
+      move_uploaded_file($_FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
     }
 
 
@@ -135,7 +131,7 @@
     /**
      * Get the value of pass
      */ 
-    public function getpass()
+    public function getPass()
     {
         return $this->pass;
     }
@@ -145,7 +141,7 @@
      *
      * @return  self
      */ 
-    public function setpass($pass)
+    public function setPass($pass)
     {
         $this->pass = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -179,6 +175,26 @@
 
         $this->subirAvatar($avatarFileName);
       
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }
 

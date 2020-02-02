@@ -2,136 +2,44 @@
 
 require_once "helpers.php";
 
-function crearUsuario($POST, $FILES){
 
-  $idAvatar = uniqid("img_"); //ID unico con el cual vamos a crear el nombre del archivo del avatar
-  $ext = strtolower(pathinfo($FILES["avatar"]["name"],PATHINFO_EXTENSION));
+function registrarUsuario($POST, $FILES, &$errores){
 
-  $avatarFileName = $idAvatar . "." . $ext;
 
-  // Crear el array para cada usuario y retornalo
-  $usuarioFinal = [
-      "email" => strtolower($POST["email"]),
-      "username" => strtolower(trim($POST["username"])),
-      "password" => password_hash($POST['password'], PASSWORD_DEFAULT),
-      "avatar" => $avatarFileName
-  ];
+  if ($POST){
 
-  return $usuarioFinal;
-}
+    $Autenticador = new Autenticador;
 
-function editarUsuario($POST, &$SESSION = false, $COOKIE = false){
+    //Estos metodos validan los inputs y datos del usuario
+    $Autenticador->validarRegistracion($_POST,$_FILES);
+    //Arrays donde vamos a guardar los posibles errores
+    $errores = $Autenticador->getErrores();
 
-  if($POST){
+    if(count($errores) == 0){
 
-    /*OBTENER EL USUARIO */
+      //Crear el objeto del Cliente/Admin
 
-    if($SESSION){
+      $usuario;
 
-      $usuarioEditado = buscarUsuarioPorEmail($SESSION['email']);
-
-    }else if($COOKIE){ 
-
-      /*Este caso se da, cuando el usuario olvidó su contraseña y necesita resetearla */
-
-      $usuarioEditado = buscarUsuarioPorEmail($COOKIE["user-email-for-reset-password"]);
-
-    }
-   
-    /*DATOS A MODIFICAR */
-
-    foreach ($POST as $key => $value) {
-
-      //CAMBIAR CONTRASEÑA
-      
-      if($key == "password"){
-        $usuarioEditado["password"] = password_hash($POST["password"],PASSWORD_DEFAULT);
+      if($POST["username"] == "_admin"){
+        $usuario = new Admin($POST["username"], $POST["password"], $POST["email"]);
+      }else{
+        $usuario = new Cliente($POST["username"], $POST["password"], $POST["email"]);
       }
 
-      //SI EL USUARIO CAMBIA EL EMAIL, TAMBIEN DEBE ACTUALIZARSE LA COOKIE DE EMAIL
-      if($key == "email" && isset($_COOKIE["email"])){
-        setcookie("email", $POST['email'], time() + 60 * 60 * 24 * 7);
-      }
+      // Registrando al usuario
 
-      //DATOS RESTANTES
+      $usuario->registrarse();
 
-      if($key != "guardar" && $key != "password" && $key != "repassword"){
-        $usuarioEditado[$key] = $POST[$key];
-      }
+      //Redireccionar
 
+      header("Location:login.php");
     }
 
-    //Abrir la base de datos y cambio usuario por UsuarioEditado
 
-    $usuarios = getJSONDecodeado();
-
-    foreach ($usuarios as &$usuario) {
-
-      if($SESSION){
-
-        if($usuario['email'] == $SESSION['email']){
-          $usuario = $usuarioEditado;
-          break;
-        }
-
-      }else if($COOKIE){
-
-        if($usuario['email'] == $COOKIE["user-email-for-reset-password"]){
-          $usuario = $usuarioEditado;
-          break;
-        }
-
-      }
-    }
-
-    guardarJSON($usuarios);
-
-    //Update $_SESSION para que se muestren los nuevos datos
-     
-    foreach($usuarioEditado as $k => $v ){
-       $SESSION[$k] = $v;
-    }
-
-  }
-
-}
-
-
-function subirAvatar($FILES,$avatarFileName){
-  move_uploaded_file($FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
-}
-
-
-function registrarUsuario($POST, $FILES, $erroresFormulario, $erroresRegistracionBBDD){
-
-  var_dump($erroresFormulario);
-  var_dump($erroresRegistracionBBDD);
-
-  if ($POST && count($erroresFormulario) == 0 && count($erroresRegistracionBBDD) == 0){
-
-    //Crear el objeto del usuario/Admin
-
-    $usuario;
-
-    if($POST["username"] == "_admin"){
-      $usuario = new Admin($POST["username"], $POST["password"], $POST["email"]);
-    }else{
-       $usuario = new Cliente($POST["username"], $POST["password"], $POST["email"]);
-    }
-
-    // Registrando al usuario
-
-    $usuario->registrarse();
-
-    var_dump($usuario);
-
-    //Redireccionar
-
-    header("Location:login.php");
 
   }
 }
-
 
 function loguearUsuario($POST, &$erroresLogin){
 
@@ -141,7 +49,7 @@ function loguearUsuario($POST, &$erroresLogin){
   $Autenticador->validarLogin($_POST);
   
   //Arrays donde vamos a guardar los posibles errores
-  $erroresLogin = $Autenticador->getErroresLogin();
+  $erroresLogin = $Autenticador->getErrores();
    
   if ( count($erroresLogin) === 0 ) {
 
@@ -162,6 +70,84 @@ function loguearUsuario($POST, &$erroresLogin){
   }
 }
 
+function editarPerfil($POST, &$SESSION, &$errores){
+
+  if($POST){ 
+
+    //VERIFICAMOS ERRORES
+
+    $Autenticador = new Autenticador;
+  
+    $Autenticador->validarPerfil($_POST);
+  
+    $errores = $Autenticador->getErrores();
+  
+    //En caso de no haber errores, creamos una instancia de Cliente
+    //Su metodo EditarPerfil Modificara la BBDD y $_SESSION actual
+  
+    if (count($errores) == 0){
+  
+      $Cliente = new Cliente($SESSION["email"], "", "");
+  
+      $Cliente->editarPerfil($POST, $SESSION);
+  
+    } 
+
+  }
+}
+
+function editarCuenta($POST, &$SESSION, &$errores){
+
+  if($POST){
+    //VERIFICAMOS ERRORES
+
+    $Autenticador = new Autenticador;
+
+    $Autenticador->validarCuenta($_POST);
+
+    $errores = $Autenticador->getErrores();
+
+    //En caso de no haber errores, creamos una instancia de   Cliente
+    //Su metodo EditarCuenta Modificara la BBDD y $_SESSION actual
+
+    if (count($errores) == 0){
+
+      $Cliente = new Cliente($SESSION["email"], "", "");
+
+      $Cliente->editarCuenta($POST, $SESSION);
+
+    } 
+  }
+}
+
+function cambiarPassword($POST, &$SESSION, &$errores){
+
+  if($POST){
+    //VERIFICAMOS ERRORES
+
+    $Autenticador = new Autenticador;
+
+    $Autenticador->validarPassword($_POST);
+
+    $errores = $Autenticador->getErrores();
+
+    //En caso de no haber errores, creamos una instancia de   Cliente
+    //Su metodo EditarCuenta Modificara la BBDD y $_SESSION actual
+
+    if (count($errores) == 0){
+
+      $Cliente = new Cliente($SESSION["email"], "", "");
+
+      $Cliente->cambiarPassword($POST, $SESSION);
+
+    } 
+  }
+}
+
+function subirAvatar($FILES,$avatarFileName){
+  move_uploaded_file($FILES["avatar"]["tmp_name"], "usuarios/avatars/" . $avatarFileName);
+}
+
 function checkCookie(){
 
   if(session_status() == PHP_SESSION_NONE){
@@ -175,7 +161,9 @@ function checkCookie(){
 
       // session_start();
 
-      $usuario = buscarUsuarioPorEmail($_COOKIE['email']);
+      $Autenticador = new Autenticador;
+
+      $usuario = $Autenticador->buscarUsuarioPorEmail($_COOKIE['email']);
 
       //Creo una posicion en $_SESSION por cada posicion del usuario, para evitar tener que hardcodear y checkear si existe tal o cual dato
 
@@ -188,7 +176,6 @@ function checkCookie(){
       }
   }
 }
-
 
 function recuperarPass($POST){
   $jsonUsuarios = getJSONDecodeado();
@@ -216,3 +203,4 @@ function recuperarPass($POST){
   } 
 }
 
+?>
