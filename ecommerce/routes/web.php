@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//solo por testing
+Route::get('/catalogo',function(){
+  return view('catalogo');
+});
+Route::get('/login',function(){
+  return view('login');
+});
+
+Route::get('/register',function(){
+    return view('register');
+});
+Route::get('/abm',function(){
+  return "este es el ABM";
+});
