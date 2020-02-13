@@ -19,7 +19,9 @@ if($_POST){
 <!DOCTYPE html>
 <html lang="en">
 <?php
-require_once "partials/head.php";?>
+require_once "partials/head.php";
+$productos = Producto::mostrarProducto();
+?>
 
 <!-- Title -->
 <title>Alta-Baja-Modificacion</title>
@@ -41,28 +43,34 @@ require_once "partials/head.php";?>
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <?php
+          
+          foreach ($productos as $key => $value) {
+            
+          echo '<tbody>
             <tr>
               <!-- Id -->
-              <th scope="row" id="id">1</th>
+              <th scope="row" id="id">'.$value["id"].'</th>
               <!-- Imagen -->
               <td>
-                <img src="img/1.png" alt="imagen-celular" width="40px">
+                <img src='.$value["imagen"].' alt="Responsive image" width="40px" class="img-fluid">
               </td>
               <!-- Nombre -->
-              <td>Mark</td>
+              <td>'.$value["nombre"].'</td>
               <!-- Botones -->
               <td>
                 <form method="post" action="abm.php" class="d-flex justify-content-around">
                   <!-- ID DEL PRODUCTO, OCULTO, PARA PODER FILTRARLO EN LAS PAGINAS SIGUIENTES -->
                   <!-- EL VALUE TIENE QUE VENIR DE LA BBDD -->
-                  <input type="text" name="id" value="1" style="display:none">
+                  <input type="text" name="id" value='.$value["id"].' style="display:none">
                   <button class="btn btn-danger mb-2" name="borrar">Borrar</button>
                   <button class="btn btn-success mb-2" name="editar">Editar</button>
                 </form>
               </td>
             </tr>
-          </tbody>
+          </tbody>';
+          }
+          ?>
         </table>
     </main>
 

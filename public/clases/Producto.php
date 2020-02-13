@@ -164,7 +164,21 @@ Class Producto{
     }
   }
   public function mostrarProducto(){
+    $db = BBDD::getConexion();
+    $db->beginTransaction();
+    try{
+      $sql = "SELECT * FROM productos";
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+      $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
+      return $resultado;
 
+    }catch(PDOException $e){
+        $db->rollBack();
+        echo "Emmm..." . $e->getMessage() . "<br>";
+        // return false
+    }
   }
 
   /**
