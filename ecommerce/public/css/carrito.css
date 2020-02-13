@@ -1,0 +1,22 @@
+h1 {
+  color: var(--violeta-claro);
+  border-bottom: 1px solid var(--violeta-claro);
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
+@media (max-width: 575px) {
+  section {
+    font-size: 0.8rem;
+  }
+  h1 {
+    font-size: 1.2rem;
+  }
+  section h2 {
+    font-size: 1rem;
+  }
+}
