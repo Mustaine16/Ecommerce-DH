@@ -11,37 +11,6 @@
 |
 */
 
-
-/*
-* Vistas Estaticas
-*/
-
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get("/faq",function(){
-  return view("faq");
-});
-
-Route::get("/contacto", function(){
-  return view("contacto");
-});
-
-
-/**
- * Vista de Catalogo y Detalles de Productos
- */
-
-Route::get('/catalogo',function(){
-  return view('catalogo');
-});
-
-Route::get("/detalle-producto", function(){
-  return view("detalle-producto");
-});
-
-
 /*
 * CRUD Usarios
 */
@@ -59,14 +28,57 @@ Route::get('/registro',function(){
  * CRUD Productos
  */
 
-Route::get('/producto/admin',function(){
-  return view("adminProductos");
-});
+Route::get('/producto/admin',"ProductosController@index");
 
 Route::get("/producto/agregar", function(){
   return view("agregarProducto");
 });
 
-Route::get("/producto/editar",function(){
+Route::post("/producto/editar",function(){
   return view("editarProducto");
+});
+
+Route::get("/producto/{id}",function(){
+  return ("id");
+});
+
+
+/**
+ * Vistas Perfil de usuario
+*/
+
+Route::get("/perfil",function(){
+  return view("perfil");
+});
+
+Route::get("/cuenta",function(){
+  return view("cuenta");
+});
+
+Route::get("/seguridad",function(){
+  return view("seguridad");
+});
+
+/**
+ * Vista de Catalogo y Detalles de Productos
+ */
+
+Route::get('/catalogo',"ProductosController@index");
+
+Route::get("/detalle-producto/{id}","ProductosController@show");
+
+/*
+* Vistas Estaticas
+*/
+
+Route::get('/', function () {
+  return view('home');
+});
+
+Route::get("/faq",function(){
+return view("faq");
+});
+
+Route::get("/contacto", function(){
+return view("contacto");
 });

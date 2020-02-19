@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `ecommerce_dh` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ecommerce_dh`;
--- MariaDB dump 10.17  Distrib 10.4.6-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.17  Distrib 10.4.8-MariaDB, for Win64 (AMD64)
 --
 -- Host: 127.0.0.1    Database: ecommerce_dh
 -- ------------------------------------------------------
--- Server version	10.4.6-MariaDB
+-- Server version	10.4.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -89,6 +89,7 @@ CREATE TABLE `productos` (
   `camara` float DEFAULT NULL,
   `memoria_ram` float DEFAULT NULL,
   `id_marca` int(11) DEFAULT NULL,
+  `memoria_int` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_marcas_idx` (`id_marca`),
   CONSTRAINT `fk_marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`) ON DELETE NO ACTION
@@ -101,7 +102,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Samsung Galaxy A8 2018','Exynos 7885',20999,'\"img/1.png\"','9.0',5.6,16,4,1),(2,'Redmi Note 3','Snapdragon 650',18999,'\"img/2.png\"','6.0.1',5.5,16,3,4),(3,'Google Pixel 2','Snapdragon 835',25999,'\"img/3.png\"','10.0',5,12.2,4,5),(4,'Moto E6 Plus','Helio P22',15999,'\"img/4.png\"','9.0',6.1,13,4,3),(5,'Galaxy S9+','Exynos 9810',37500,'\"img/5.png\"','10.0',6.2,12,6,1),(6,'Redmi Note 8 PRO','Helio G90T',21500,'\"img/6.png\"','9.0',6.53,64,8,4),(7,'LG V30','Snapdragon 835',29500,'\"img/7.png\"','9.0',6,16,4,2),(8,'Iphone 11 PRO Max','A13 Bionic',1000000000,'\"img/8.png\"','IOS 13.3',6.5,12,4,6);
+INSERT INTO `productos` VALUES (1,'Samsung Galaxy A8 2018','Exynos 7885',20999,'img/1.png','9.0',5.6,16,4,1,32),(2,'Redmi Note 3','Snapdragon 650',18999,'img/2.png','6.0.1',5.5,16,3,4,32),(3,'Google Pixel 2','Snapdragon 835',25999,'img/3.png','10.0',5,12.2,4,5,32),(4,'Moto E6 Plus','Helio P22',15999,'img/4.png','9.0',6.1,13,4,3,32),(5,'Galaxy S9+','Exynos 9810',37500,'img/5.png','10.0',6.2,12,6,1,32),(6,'Redmi Note 8 PRO','Helio G90T',21500,'img/6.png','9.0',6.53,64,8,4,32),(7,'LG V30','Snapdragon 835',29500,'img/7.png','9.0',6,16,4,2,32),(8,'Iphone 11 PRO Max','A13 Bionic',1000000000,'img/8.png','IOS 13.3',6.5,12,4,6,32);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-18 19:20:15
+-- Dump completed on 2020-02-18 22:50:11

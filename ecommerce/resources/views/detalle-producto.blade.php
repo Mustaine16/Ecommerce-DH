@@ -11,12 +11,12 @@
       <article class="producto__container p-2">
         <!-- Imagen del producto -->
         <figure class="producto__imagen text-center">
-          <img src="{{asset('img/1.png')}}" class="img-fluid" alt="" />
+          <img src="{{asset($producto->imagen)}}" class="img-fluid" alt="" />
         </figure>
         <!-- Nombre, precio y añadir la carrito -->
         <div class="producto__vender-container">
-          <h2 class="producto__nombre">Samsung Galaxy A8</h2>
-          <p class="producto__precio">$25.000</p>
+          <h2 class="producto__nombre">{{$producto->nombre}}</h2>
+          <p class="producto__precio">$ {{number_format($producto->precio)}}</p>
           <button class="producto__carrito">
             + Añadir al carrito
           </button>
@@ -25,23 +25,23 @@
           <h3>Detalles</h3>
           <div class="producto__detalle">
             <p class="detalle_nombre">Sistema Operativo</p>
-            <p class="detalle_data">Android</p>
+            <p class="detalle_data">Android {{$producto->sist_operativo}}</p>
           </div>
           <div class="producto__detalle">
             <p class="detalle_nombre">Pantalla</p>
-            <p class="detalle_data">5.6"</p>
+            <p class="detalle_data">{{$producto->pantalla}}"</p>
           </div>
           <div class="producto__detalle">
             <p class="detalle_nombre">Cámara</p>
-            <p class="detalle_data">16.0 MP</p>
+            <p class="detalle_data">{{$producto->camara}} MP</p>
           </div>
           <div class="producto__detalle">
             <p class="detalle_nombre">Memoria Interna</p>
-            <p class="detalle_data">32GB</p>
+            <p class="detalle_data">{{$producto->memoria_int}} GB</p>
           </div>
           <div class="producto__detalle">
             <p class="detalle_nombre">Memoria RAM</p>
-            <p class="detalle_data">4GB</p>
+            <p class="detalle_data">{{$producto->memoria_ram}} GB</p>
           </div>
         </div>
       </article>
