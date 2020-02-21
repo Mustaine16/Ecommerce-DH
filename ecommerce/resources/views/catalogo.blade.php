@@ -9,7 +9,6 @@
 @section("main")
 
     <!-- Catalogo -->
-    <section class="products__container">
 
     <h1>Catalogo</h1>
      

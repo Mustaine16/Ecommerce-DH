@@ -12,7 +12,7 @@
 */
 
 /*
-* CRUD Usarios
+* CRUD Usuarios
 */
 
 Route::get('/login',function(){
@@ -60,12 +60,16 @@ Route::get("/seguridad",function(){
 });
 
 /**
- * Vista de Catalogo y Detalles de Productos
+ * Vista de Catalogo,Detalles de Productos, Carrito
  */
 
 Route::get('/catalogo',"ProductosController@index");
 
 Route::get("/detalle-producto/{id}","ProductosController@show");
+
+Route::get('/carrito', function(){
+  return view('carrito');
+});
 
 /*
 * Vistas Estaticas
