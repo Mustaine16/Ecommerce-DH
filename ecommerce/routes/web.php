@@ -40,9 +40,6 @@ Route::post("/producto/{id}/editar", "ProductosController@update");
 
 Route::post("/producto/{id}/borrar", "ProductosController@destroy");
 
-Route::get("/producto/{id}", function () {
-    return ("id");
-});
 
 
 /**

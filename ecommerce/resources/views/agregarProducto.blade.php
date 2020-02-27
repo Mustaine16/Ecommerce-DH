@@ -6,8 +6,6 @@
 
 @section("title", "Agregar Producto")
 
-@section("title")@endsection
-
 @section("main")
 <ul style="color:red" class="errores text-center">
     @foreach ($errors->all() as $error)

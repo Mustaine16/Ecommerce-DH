@@ -11,7 +11,7 @@
       <article class="producto__container p-2">
         <!-- Imagen del producto -->
         <figure class="producto__imagen text-center">
-          <img src="{{asset($producto->imagen)}}" class="img-fluid" alt="" />
+          <img src="{{asset('/storage/'.$producto->imagen)}}" class="img-fluid" alt="" />
         </figure>
         <!-- Nombre, precio y añadir la carrito -->
         <div class="producto__vender-container">
@@ -24,8 +24,12 @@
         <div class="producto__detalles">
           <h3>Detalles</h3>
           <div class="producto__detalle">
+            <p class="detalle_nombre">Marca</p>
+            <p class="detalle_data">{{$producto->marca->nombre}}</p>
+          </div>
+          <div class="producto__detalle">
             <p class="detalle_nombre">Sistema Operativo</p>
-            <p class="detalle_data">Android {{$producto->sist_operativo}}</p>
+            <p class="detalle_data">{{$producto->sist_operativo}}</p>
           </div>
           <div class="producto__detalle">
             <p class="detalle_nombre">Pantalla</p>

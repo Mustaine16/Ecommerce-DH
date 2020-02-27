@@ -13,7 +13,7 @@
     @endforeach
 </ul>
 
-<img src="/storage/{{$producto->imagen}}" alt="no image" width="300px" class="mx-auto d-block">
+<img src="/storage/{{$producto->imagen}}" alt="{{$producto->nombre}}" width="300px" class="mx-auto d-block">
 
 <main class="py-4">
     <section class="container">
@@ -32,10 +32,11 @@
                 <label for="id_marca">Marca</label>
                 <select class="form-control" id="marca" name="id_marca">
                     @foreach($marcas as $marca)
-                    <option value="{{$marca->id}}" @if($marca->id == $producto->id_marca)
-                        SELECTED
+                    <option value="{{$marca->id}}" 
+                        @if($marca->id == $producto->id_marca)
+                            SELECTED
                         @endif
-                        >{{$marca->nombre}}</option>
+                    >{{$marca->nombre}}</option>
                     @endforeach
                 </select>
             </div>

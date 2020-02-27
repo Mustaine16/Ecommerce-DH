@@ -87,8 +87,6 @@
         <a class="button_catalogo" href="/catalogo">Entrá al catálogo</a>
     </header>
 
-    <h1 class="text-center">@yield("title")</h1>
-
     <!-- Main -->
     @yield("main")
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Producto;
 use App\Marca;
@@ -86,7 +87,7 @@ class ProductosController extends Controller
 
         $producto->save();
 
-        return redirect('/producto/admin');
+        return redirect('/producto/admin')->with('mensajeExito', 'Producto: ' . $producto->nombre . ' agregado correctamente');
     }
 
     public function edit($id)
@@ -133,7 +134,18 @@ class ProductosController extends Controller
         $producto->camara = $request["camara"];
         $producto->precio = $request["precio"];
 
+        //Si el usuario decide cambiar de imagen, se borra la anterior para liberar espacio
+        //Caso contrario, no se hace ninguna modificacion
         if ($request->file("imagen")) {
+
+            $imagenVieja = $producto->imagen;
+
+            //Se verifica que no sea la imagen de stock
+            if($imagenVieja != 'no-image.jpg'){
+                Storage::delete("/public" . "/" . $imagenVieja);
+            }
+
+            //Se guarda la imagen en Storage y BBDD
             $ruta = $request->file("imagen")->store("public");
             $imagen = basename($ruta);
             $producto->imagen = $imagen;
@@ -141,13 +153,21 @@ class ProductosController extends Controller
 
         $producto->save();
 
-        return redirect("/producto/$id/editar");
+        return redirect("/producto/admin")->with('mensajeExito', 'Producto: ' . $producto->nombre . ' editado correctamente');;
     }
 
     public function destroy($id)
     {
         $producto = Producto::find($id);
+
+        //Se borra la imagen para no malgastar almacenamiento
+        $imagenVieja = $producto->imagen;
+        //Se verifica que no sea la imagen de stock
+        if($imagenVieja != 'no-image.jpg'){
+            Storage::delete("/public" . "/" . $imagenVieja);
+        }
+
         $producto->delete();
-        return redirect('/producto/admin');
+        return redirect('/producto/admin')->with('mensajeEliminacion', 'Producto: ' . $producto->nombre . ' eliminado correctamente');;
     }
 }
