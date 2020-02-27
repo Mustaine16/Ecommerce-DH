@@ -3,39 +3,41 @@
 @section("title", "Admin - Productos")
 
 @section("main")
-  <main class="py-4 px-2 px-md-5">
+<main class="py-4 px-2 px-md-5">
     <a class="btn btn-success mb-3 d-block ml-auto p-3" href="/producto/agregar">Agregar nuevo producto</a>
-      <table class="table">
+    <table class="table">
         <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th>Imagen</th>
-            <th scope="col">Nombre del Producto</th>
-            <th>Acciones</th>
-          </tr>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre del Producto</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <!-- Id -->
-            <th scope="row" id="id">1</th>
-            <!-- Imagen -->
-            <td>
-              <img src="{{asset('img/1.png')}}" alt="imagen-celular" width="40px">
-            </td>
-            <!-- Nombre -->
-            <td>Mark</td>
-            <!-- Botones -->
-            <td>
-              <form method="post" action="">
-                <!-- ID DEL PRODUCTO, OCULTO, PARA PODER FILTRARLO EN LAS PAGNIAS SIGUIENTES -->
-                <!-- EL VALUE TIENE QUE VENIR DE LA BBDD -->
-                <input type="text" name="id" value="1" style="display:none">
-                <button class="btn btn-danger mb-2" name="borrar">Borrar</button>
-                <a href="/producto/editar"class="btn btn-success mb-2 ml-sm-auto d-inline-block" >Editar</a>
-              </form>
-            </td>
-          </tr> 
+            @foreach($productos as $producto)
+            <tr>
+                <td>
+                    {{$producto->id}}
+                </td>
+                <td>
+                    <img src="/storage/{{$producto->imagen}}" alt="no image" width="40px">
+                </td>
+                <td>
+                    {{$producto->nombre}}
+                </td>
+                <td>
+                    <a href="/producto/{{$producto->id}}/editar"
+                        class="btn btn-success mb-2 ml-sm-auto d-inline-block">Editar</a>
+                </td>
+                <td>
+                    <form action="/producto/{{$producto->id}}/borrar" method="post">
+                        {{csrf_field()}}
+                        <button class="btn btn-danger mb-2">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
-      </table>
-  </main>
+    </table>
+</main>
 @endsection
