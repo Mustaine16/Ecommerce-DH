@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Marca;
 use Illuminate\Http\Request;
 
 class MarcasController extends Controller
@@ -11,11 +11,15 @@ class MarcasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+     public function index()
+     {
+         $marcas = Marca::all();
 
+         $vac = compact("marcas");
+
+             return view("adminMarcas", $vac);
+
+     }
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +27,7 @@ class MarcasController extends Controller
      */
     public function create()
     {
-        //
+      return view("agregarMarca");
     }
 
     /**
@@ -34,7 +38,25 @@ class MarcasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $reglas = [
+        "nombre" => "required"
+      ];
+
+      $mensajes = [
+          "required" => "El campo :attribute es obligatorio perri."
+      ];
+
+      $this->validate($request, $reglas, $mensajes);
+
+
+      $marca = new Marca();
+
+      $marca->nombre = $request["nombre"];
+
+
+      $marca->save();
+
+      return redirect('/marca/admin')->with('mensajeExito', 'Marca: ' . $marca->nombre . ' agregada correctamente fiera');
     }
 
     /**
@@ -56,7 +78,10 @@ class MarcasController extends Controller
      */
     public function edit($id)
     {
-        //
+      $marcas = Marca::all();
+      $marcaAEditar = Marca::find($id);
+      $vac = compact('marcaAEditar');
+      return view('editarMarca', $vac);
     }
 
     /**
@@ -68,7 +93,24 @@ class MarcasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $reglas = [
+        "nombre" => "required"
+      ];
+
+      $mensajes = [
+          "required" => "El campo :attribute es obligatorio maestro."
+      ];
+
+      $this->validate($request, $reglas, $mensajes);
+
+      $marca = Marca::find($id);
+
+      $marca->nombre = $request["nombre"];
+
+      $marca->save();
+
+      return redirect("/marca/admin")->with('mensajeExito', 'Marca: ' . $marca->nombre . ' editada correctamente');;
+
     }
 
     /**
@@ -79,6 +121,10 @@ class MarcasController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $marca = Marca::find($id);
+
+
+      $marca->delete();
+      return redirect('/marca/admin')->with('mensajeEliminacion', 'Marca: ' . $marca->nombre . ' eliminada correctamente');;
     }
 }

@@ -40,7 +40,20 @@ Route::post("/producto/{id}/editar", "ProductosController@update");
 
 Route::post("/producto/{id}/borrar", "ProductosController@destroy");
 
+/**
+ * CRUD marcas
+ */
+Route::get('/marca/admin', "MarcasController@index");
 
+Route::get("/marca/agregar", "MarcasController@create");
+
+Route::post('/marca/agregar', 'MarcasController@store');
+
+Route::get("/marca/{id}/editar", "MarcasController@edit");
+
+Route::post("/marca/{id}/editar", "MarcasController@update");
+
+Route::post("/marca/{id}/borrar", "MarcasController@destroy");
 
 /**
  * Vistas Perfil de usuario
