@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-02-2020 a las 19:23:44
+-- Tiempo de generación: 28-02-2020 a las 00:51:37
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -21,8 +21,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ecommerce_dh`
 --
+
 CREATE DATABASE  IF NOT EXISTS `ecommerce_dh` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ecommerce_dh`;
+
 -- --------------------------------------------------------
 
 --
@@ -130,13 +132,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `procesador`, `precio`, `imagen`, `sist_operativo`, `pantalla`, `camara`, `memoria_ram`, `id_marca`, `memoria_int`) VALUES
-(2, 'Redmi Note 3', 'Snapdragon 650', 18999, 'SEbDipTyB9Bkbauca7VIRGo7S0uzzlfBTvZiiyTG.png', 'Android 6.0.1', 5.5, 16, 32, 4, 32),
-(3, 'Google Pixel 2', 'Snapdragon 835', 25999, 'yJfGf1xObsAwUIg1EYVqAqPmgnSld1Znsqw2qUQE.png', 'Android 10.0', 5, 12.2, 4, 5, 32),
-(4, 'Moto E6 Plus', 'Helio P22', 15999, 'ZU0NtEKNRfiHcjbOr5sMJwKIx77stMFLll0GmI1i.webp', 'Android 9.0', 6.1, 13, 4, 3, 32),
-(5, 'Galaxy S9+', 'Exynos 9810', 37500, '6nrHs2U0ZLo0Dto63DBfq0z9lvIg8ZIV309110n3.png', 'Android 10.0', 6.2, 12, 6, 1, 32),
-(7, 'LG V30', 'Snapdragon 835', 29500, 'EAi08cvm8v9dVm367fG2euj4hDDHvj2Zccuf6grP.png', 'Android 9.0', 6, 16, 4, 2, 32),
-(8, 'Iphone 11 PRO Max', 'A13 Bionic', 1000000000, 'uqBaMQMNmTmnDglkm9pgqvddKDhdtGjjgoYKVQTq.png', 'iOS 13.3', 6.5, 12, 4, 6, 32),
-(13, 'Redmi Note 8 PRO', 'Snapdragon 650', 218999, 'RMKMmVlQzlOfj6beSpVHhsz7rqLCOvjjsJCu4lwH.png', 'Android 9', 6.8, 16, 32, 4, 32);
+(2, 'Redmi Note 3', 'Snapdragon 650', 18999, 'r4qPhDMdR6WMYKNvTF6E3mq5Nmxi442xYPGwOUJq.png', 'Android 6.0.1', 5.5, 16, 32, 4, 32),
+(3, 'Google Pixel 2', 'Snapdragon 835', 25999, 'wTASqiaLyHCmuLknpP5r2I05bTYzfE1kExKbvy7m.png', 'Android 10.0', 5, 12.2, 4, 5, 32),
+(4, 'Moto E6 Plus', 'Helio P22', 15999, 'JqgJRxy5VltajdtDLyBlzxOeGSoQQsYv9lycGfZV.webp', 'Android 9.0', 6.1, 13, 4, 3, 32),
+(5, 'Galaxy S9+', 'Exynos 9810', 37500, 'OCkunztKAepDX6u9KnoGYCVVVLTzlZgri9HQCPWu.png', 'Android 10.0', 6.2, 12, 6, 1, 32),
+(7, 'LG V30', 'Snapdragon 835', 29500, 'g7ES67dB188Z2PyHro5rDtnFHDzN2v37uOS9CSp5.png', 'Android 9.0', 6, 16, 4, 2, 32),
+(8, 'Iphone 11 PRO Max', 'A13 Bionic', 1000000000, '3qk7I4D8Rt4MpSqT3blIUtklWFikTIDjTywmXoHz.png', 'iOS 13.3', 6.5, 12, 4, 6, 32),
+(13, 'Redmi Note 8 PRO', 'Snapdragon 650', 218999, 'ONQxYGtbSh4juGvaeglyeL2M0vZ2swpzbQmDbzW6.png', 'Android 9', 6.8, 16, 32, 4, 32);
 
 -- --------------------------------------------------------
 

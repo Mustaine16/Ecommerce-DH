@@ -15,30 +15,24 @@
 * CRUD Usuarios
 */
 
-Route::get('/login', function () {
-    return view('login');
-});
 
-Route::get('/registro', function () {
-    return view('registro');
-});
 
 
 /**
  * CRUD Productos
  */
 
-Route::get('/producto/admin', "ProductosController@index");
+Route::get('/producto/admin', "ProductosController@index")->middleware('auth');
 
-Route::get("/producto/agregar", "ProductosController@create");
+Route::get("/producto/agregar", "ProductosController@create")->middleware('auth');
 
-Route::post("/producto/agregar", "ProductosController@store");
+Route::post("/producto/agregar", "ProductosController@store")->middleware('auth');
 
-Route::get("/producto/{id}/editar", "ProductosController@edit");
+Route::get("/producto/{id}/editar", "ProductosController@edit")->middleware('auth');
 
-Route::post("/producto/{id}/editar", "ProductosController@update");
+Route::post("/producto/{id}/editar", "ProductosController@update")->middleware('auth');
 
-Route::post("/producto/{id}/borrar", "ProductosController@destroy");
+Route::post("/producto/{id}/borrar", "ProductosController@destroy")->middleware('auth');
 
 /**
  * CRUD marcas
@@ -61,15 +55,15 @@ Route::post("/marca/{id}/borrar", "MarcasController@destroy");
 
 Route::get("/perfil", function () {
     return view("perfil");
-});
+})->middleware('auth');
 
 Route::get("/cuenta", function () {
     return view("cuenta");
-});
+})->middleware('auth');
 
 Route::get("/seguridad", function () {
     return view("seguridad");
-});
+})->middleware('auth');
 
 /**
  * Vista de Catalogo,Detalles de Productos, Carrito
@@ -98,3 +92,7 @@ Route::get("/faq", function () {
 Route::get("/contacto", function () {
     return view("contacto");
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
