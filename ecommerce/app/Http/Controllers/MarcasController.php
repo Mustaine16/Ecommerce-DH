@@ -127,4 +127,17 @@ class MarcasController extends Controller
       $marca->delete();
       return redirect('/marca/admin')->with('mensajeEliminacion', 'Marca: ' . $marca->nombre . ' eliminada correctamente');;
     }
+
+    /*
+      mostar todas las marcas
+    */
+    public function directory()
+    {
+        $marcas = Marca::all();
+
+        $vac = compact("marcas");
+
+        return view("catalogoMarcas", $vac);
+
+    }
 }

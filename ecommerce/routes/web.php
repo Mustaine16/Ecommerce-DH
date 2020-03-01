@@ -77,6 +77,7 @@ Route::get('/carrito', function () {
     return view('carrito');
 });
 
+Route::get('/catalogo/marcas',"MarcasController@directory");
 /*
 * Vistas Estaticas
 */
