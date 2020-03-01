@@ -42,6 +42,9 @@
                         <a class="nav-link" href="/catalogo">Catálogo</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/catalogo/marcas">Marcas</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/faq">F.A.Q</a>
                     </li>
                     <li class="nav-item">
@@ -50,7 +53,7 @@
                 </ul>
 
                 <!-- Si el usuario esta logueado, puede ver el link del perfil -->
-                
+
                 @auth
                  <!-- Si el usuario esta flageado como admin o es admin  -->
                 @if ( (Auth::user()->email) == 'admin@admin.com')
@@ -73,7 +76,7 @@
                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                      @csrf
                         </form>
-                </div>
+                    </div>
         
                   
                   
@@ -101,9 +104,9 @@
                             @csrf
                             </form>
                         </div>
-                    @endif
+                @endif
 
-                    @endauth
+                @endauth
 
 
                         <!-- De lo contrario ve los links para loguearse o registrarse -->
@@ -120,10 +123,6 @@
 
                     @endguest
 
-
-                  
-                 
-                 
                 </div>
             </div>
         </nav>
