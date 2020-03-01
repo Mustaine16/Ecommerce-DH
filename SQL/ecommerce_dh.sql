@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-02-2020 a las 00:51:37
+-- Tiempo de generación: 01-03-2020 a las 22:45:42
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ecommerce_dh`
 --
+
+-- --------------------------------------------------------
 
 CREATE DATABASE  IF NOT EXISTS `ecommerce_dh` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ecommerce_dh`;
@@ -72,7 +74,7 @@ INSERT INTO `marcas` (`id`, `nombre`) VALUES
 (3, 'Motorola'),
 (4, 'Xiaomi'),
 (5, 'Google'),
-(6, 'Applecito');
+(6, 'Apple');
 
 -- --------------------------------------------------------
 
@@ -132,9 +134,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `procesador`, `precio`, `imagen`, `sist_operativo`, `pantalla`, `camara`, `memoria_ram`, `id_marca`, `memoria_int`) VALUES
-(2, 'Redmi Note 3', 'Snapdragon 650', 18999, 'r4qPhDMdR6WMYKNvTF6E3mq5Nmxi442xYPGwOUJq.png', 'Android 6.0.1', 5.5, 16, 32, 4, 32),
 (3, 'Google Pixel 2', 'Snapdragon 835', 25999, 'wTASqiaLyHCmuLknpP5r2I05bTYzfE1kExKbvy7m.png', 'Android 10.0', 5, 12.2, 4, 5, 32),
-(4, 'Moto E6 Plus', 'Helio P22', 15999, 'JqgJRxy5VltajdtDLyBlzxOeGSoQQsYv9lycGfZV.webp', 'Android 9.0', 6.1, 13, 4, 3, 32),
+(4, 'Moto E6 Plus', 'Helio P22', 15999, 'wvFs6FP2zQj5NuKBvTmCFVWxAw7jCtzrFlodFyGs.webp', 'Android 9.0', 6.1, 13, 4, 3, 32),
 (5, 'Galaxy S9+', 'Exynos 9810', 37500, 'OCkunztKAepDX6u9KnoGYCVVVLTzlZgri9HQCPWu.png', 'Android 10.0', 6.2, 12, 6, 1, 32),
 (7, 'LG V30', 'Snapdragon 835', 29500, 'g7ES67dB188Z2PyHro5rDtnFHDzN2v37uOS9CSp5.png', 'Android 9.0', 6, 16, 4, 2, 32),
 (8, 'Iphone 11 PRO Max', 'A13 Bionic', 1000000000, '3qk7I4D8Rt4MpSqT3blIUtklWFikTIDjTywmXoHz.png', 'iOS 13.3', 6.5, 12, 4, 6, 32),
@@ -148,14 +149,23 @@ INSERT INTO `productos` (`id`, `nombre`, `procesador`, `precio`, `imagen`, `sist
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `name`, `avatar`) VALUES
+(3, 'admin', 'admin@admin.com', NULL, '$2y$10$eYo6lhGM8ad.qg4xdoaj8u7MNnXYEs.HyXX2b06YgrBmIdq/1eq6u', NULL, '2020-03-01 22:58:41', '2020-03-01 22:58:41', '', '6d57lqb1hRswdgj4O2Ye7QyOYsnTM2WCInjwFCcN.png');
 
 -- --------------------------------------------------------
 
@@ -272,7 +282,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

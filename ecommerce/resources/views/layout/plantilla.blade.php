@@ -57,30 +57,28 @@
 
                 <div class="nav-item dropdown perfil__icon">
                     <a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#">
-                        <img src='storage/{{ Auth::user()->avatar }}' alt="Perfil" style="width:42px;"  class="rounded-circle"/>
+                        <img src='{{asset("storage/" . Auth::user()->avatar )}}' alt="Perfil" style="width:42px;"  class="rounded-circle"/>
                     </a>
 
                     <!-- ehh...magia de laravel? -->
-                    <div class="dropdown-menu perfil__menu-desplegable">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
+                    <div class="dropdown-menu perfil__menu-desplegable">   
+                        <a class="dropdown-item text-center p-3" href="/producto/admin">Productos</a>
+                        <a class="dropdown-item text-center p-3" href="/marca/admin">Marcas</a>
+                        <hr>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                        </a>
                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                      @csrf
                         </form>
-                        <a class="dropdown-item" href="/perfil">Perfil</a>
-
-                        <a class="dropdown-item" href="/producto/admin">Admin Productos</a>
-
-
-                    </div>
+                </div>
+        
+                  
+                  
                
-                      
-                      
-                   
-                
+            
                 @else
 
                  <!-- Si no es admin -->
@@ -88,40 +86,39 @@
 
                 <div class="nav-item dropdown perfil__icon">
                     <a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#">
-                        <img src='storage/{{ Auth::user()->avatar }}' alt="Perfil" style="width:46px;"  class="rounded-circle"/>
+                        <img src='{{asset("storage/" . Auth::user()->avatar )}}' alt="Perfil" style="width:46px;"  class="rounded-circle"/>
                     </a>
 
-                    <!-- ehh... -->
+                    <!-- Magia de Laravel para Desloguear.. -->
                     <div class="dropdown-menu perfil__menu-desplegable">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                     @csrf
-                        </form>
                         <a class="dropdown-item" href="/perfil">Perfil</a>
-                    </div>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                            </form>
+                        </div>
                     @endif
-                @endauth
+
+                    @endauth
 
 
-                    <!-- De lo contrario ve los links para loguearse o registrarse -->
-                @guest
-                
-                    <ul class="navbar-nav text-center ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Registrate</a>
-                        </li>
-                        <li>
-                        <img src="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg" alt="Perfil" style="width:42px;"  class="rounded-circle"/>
-                        </li>
-                    </ul>
-                  @endguest
+                        <!-- De lo contrario ve los links para loguearse o registrarse -->
+                    @guest
+
+                        <ul class="navbar-nav text-center ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Registrate</a>
+                            </li>
+                        </ul>
+
+                    @endguest
 
 
                   

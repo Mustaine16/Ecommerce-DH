@@ -94,8 +94,13 @@ class ProductosController extends Controller
     {
         $marcas = Marca::all();
         $producto = Producto::find($id);
-        $vac = compact('marcas', 'producto');
-        return view('editarProducto', $vac);
+
+        if($producto){
+          $vac = compact('marcas', 'producto');
+          return view('editarProducto', $vac);
+        }else{
+            abort(404);
+        }
     }
 
     public function update(Request $request, $id)

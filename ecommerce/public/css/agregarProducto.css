@@ -24,6 +24,9 @@
 .imagen__input {
   width: 100%;
 }
+label{
+  font-weight: 700;
+}
 
 .buttons {
   display: flex;
