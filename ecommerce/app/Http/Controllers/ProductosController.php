@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Ixudra\Curl\Facades\Curl;
 
 use App\Producto;
 use App\Marca;
@@ -170,4 +171,14 @@ class ProductosController extends Controller
         $producto->delete();
         return redirect('/producto/admin')->with('mensajeEliminacion', 'Producto: ' . $producto->nombre . ' eliminado correctamente');;
     }
+
+
+   // Send a GET request to: http://www.foo.com/bar
+   public function productosExternos(){
+
+     $productos = Curl::to('https://jsonplaceholder.typicode.com/photos')->get();
+     // dd($productos);
+     $productos = json_decode($productos);
+     return view('catalogoExterno',compact('productos'));
+   }
 }

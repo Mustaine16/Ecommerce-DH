@@ -71,8 +71,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'name' => "",
-            'avatar' => ""
-
+            'avatar' => "",
+            'nombre' => "",
+            'apellido' =>"",
+            'direccion'=>"",
+            'ciudad' =>""
         ]);
 
         if (request()->hasfile('avatar')){

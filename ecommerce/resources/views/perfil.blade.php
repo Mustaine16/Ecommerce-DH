@@ -27,38 +27,41 @@
   <?php endif; ?>
 
   <!-- Formulario Datos Personales -->
-  <form action="" method="Post" class="fix-height">
+  <form action="/perfil/{{$usuario->id}}" method="Post" class="fix-height">
+    @csrf
     <h1 class="">Datos Personales</h1>
     <section>
 
       <div class="d-flex flex-column">
         <label for="nombre">Nombre</label>
-        <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre"/>
+        <input class="inputs-f" type="text" name="nombre" placeholder="Introduce tu nombre"
+    value="{{$usuario->nombre}}">
         <!-- ACA VA LA PERSISTENCIA -->
         <span class="text-danger"><?= isset($errores["nombre"]) ? $errores["nombre"] : ""; ?></span>
       </div>
 
       <div class="d-flex flex-column">
         <label for="apellido">Apellido</label>
-        <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido"/>
+        <input class="inputs-f" type="text" name="apellido" placeholder="Introduce tu apellido"/ value="{{$usuario->apellido}}">
         <!-- ACA VA LA PERSISTENCIA -->
         <span class="text-danger"><?= isset($errores["apellido"]) ? $errores["apellido"] : ""; ?></span>
       </div>
 
       <div class="d-flex flex-column">
         <label for="direccion">Direccion</label>
-        <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion"/>
+        <input class="inputs-f" type="text" name="direccion" placeholder="Introduce tu direccion"/ value="{{$usuario->direccion}}">
         <!-- ACA VA LA PERSISTENCIA -->
         <span class="text-danger"><?= isset($errores["direccion"]) ? $errores["direccion"] : ""; ?></span>
       </div>
 
       <div class="d-flex flex-column">
         <label for="ciudad">Ciudad</label>
-        <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad"/>
+        <input class="inputs-f" type="text" name="ciudad" placeholder="Introduce tu ciudad"/ value="{{$usuario->ciudad}}">
         <!-- ACA VA LA PERSISTENCIA -->
         <span class="text-danger"><?= isset($errores["ciudad"]) ? $errores["ciudad"] : ""; ?></span>
       </div>
 
+       <input type="hidden" name="_method" value="PUT">
       <input type="submit" name="guardar" class="btn btn-primary" value="Guardar Cambios">
     </section>
   </form>

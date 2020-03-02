@@ -53,9 +53,12 @@ Route::post("/marca/{id}/borrar", "MarcasController@destroy");
  * Vistas Perfil de usuario
  */
 
-Route::get("/perfil", function () {
-    return view("perfil");
-})->middleware('auth');
+// Route::get("/perfil", function () {
+//     return view("perfil");
+// })->middleware('auth');
+Route::get("/perfil", "UsersController@edit")->middleware('auth');
+
+Route::put('/perfil/{id}','UsersController@update');
 
 Route::get("/cuenta", function () {
     return view("cuenta");
@@ -93,6 +96,10 @@ Route::get("/faq", function () {
 Route::get("/contacto", function () {
     return view("contacto");
 });
+// prueba de usar una api
+//API
+//  Route::get('/productosExternos','ProductosController@productosExternos');
+//
 
 Auth::routes();
 
