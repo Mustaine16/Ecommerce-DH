@@ -18,7 +18,7 @@
 
         <div class="form-group avatar__container">
           <label class="avatar__img_container" for="avatar">
-            <img src="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg" alt="avatar" class="avatar__img">
+            <img src="{{asset('img/perfil.png')}}" alt="avatar" class="avatar__img">
             <p>Elegí un avatar</p>
           </label>
           <input type="file" name="avatar" id="avatar" class="avatar__input" required autocomplete ='avatar'>

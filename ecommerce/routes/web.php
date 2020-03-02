@@ -22,32 +22,32 @@
  * CRUD Productos
  */
 
-Route::get('/producto/admin', "ProductosController@index")->middleware('auth');
+Route::get('/producto/admin', "ProductosController@index")->middleware('verificarAdmin');
 
-Route::get("/producto/agregar", "ProductosController@create")->middleware('auth');
+Route::get("/producto/agregar", "ProductosController@create")->middleware('verificarAdmin');
 
-Route::post("/producto/agregar", "ProductosController@store")->middleware('auth');
+Route::post("/producto/agregar", "ProductosController@store")->middleware('verificarAdmin');
 
-Route::get("/producto/{id}/editar", "ProductosController@edit")->middleware('auth');
+Route::get("/producto/{id}/editar", "ProductosController@edit")->middleware('verificarAdmin');
 
-Route::post("/producto/{id}/editar", "ProductosController@update")->middleware('auth');
+Route::post("/producto/{id}/editar", "ProductosController@update")->middleware('verificarAdmin');
 
-Route::post("/producto/{id}/borrar", "ProductosController@destroy")->middleware('auth');
+Route::post("/producto/{id}/borrar", "ProductosController@destroy")->middleware('verificarAdmin');
 
 /**
  * CRUD marcas
  */
-Route::get('/marca/admin', "MarcasController@index");
+Route::get('/marca/admin', "MarcasController@index")->middleware('verificarAdmin');
 
-Route::get("/marca/agregar", "MarcasController@create");
+Route::get("/marca/agregar", "MarcasController@create")->middleware('verificarAdmin');
 
-Route::post('/marca/agregar', 'MarcasController@store');
+Route::post('/marca/agregar', 'MarcasController@store')->middleware('verificarAdmin');
 
-Route::get("/marca/{id}/editar", "MarcasController@edit");
+Route::get("/marca/{id}/editar", "MarcasController@edit")->middleware('verificarAdmin');
 
-Route::post("/marca/{id}/editar", "MarcasController@update");
+Route::post("/marca/{id}/editar", "MarcasController@update")->middleware('verificarAdmin');
 
-Route::post("/marca/{id}/borrar", "MarcasController@destroy");
+Route::post("/marca/{id}/borrar", "MarcasController@destroy")->middleware('verificarAdmin');
 
 /**
  * Vistas Perfil de usuario

@@ -1,5 +1,9 @@
 @extends('layout.plantilla')
 
+@section("estilos")
+<link rel="stylesheet" href="{{asset('css/adminProductos.css')}}" />
+@endsection
+
 @section("title", "Admin - Productos")
 
 @section("main")
@@ -41,15 +45,12 @@
                 <td>
                     {{$producto->nombre}}
                 </td>
-                <td>
-                    <a href="/producto/{{$producto->id}}/editar"
-                        class="btn btn-success mb-2 ml-sm-auto d-inline-block">Editar</a>
-                </td>
-                <td>
-                    <form action="/producto/{{$producto->id}}/borrar" method="post">
+                <td class="acciones">                
+                    <a href="/producto/{{$producto->id}}/editar" class="btn btn-success d-inline-block">Editar</a>
+                     <form action="/producto/{{$producto->id}}/borrar" method="post">
                         {{csrf_field()}}
-                        <button class="btn btn-danger mb-2">Borrar</button>
-                    </form>
+                        <button class="btn btn-danger" width="100">Borrar</button>
+                     </form>
                 </td>
             </tr>
             @endforeach

@@ -20,7 +20,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-group">
-                    <label for="nombre">Editar marca</label>
+                    <label class="font-weight-bold" for="nombre">Editar marca</label>
                     <input type="text" class="form-control" id="nombre" aria-describedby="NombreMarca"
                         placeholder="Ingrese un nuevo valor marca" name="nombre" value="{{$marcaAEditar->nombre}}" />
                 </div>
