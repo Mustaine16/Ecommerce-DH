@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-03-2020 a las 22:45:42
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.2
+-- Tiempo de generación: 05-03-2020 a las 15:49:17
+-- Versión del servidor: 5.7.26-0ubuntu0.18.10.1
+-- Versión de PHP: 7.2.19-0ubuntu0.18.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,11 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ecommerce_dh`
 --
-
--- --------------------------------------------------------
-
-CREATE DATABASE  IF NOT EXISTS `ecommerce_dh` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ecommerce_dh`;
 
 -- --------------------------------------------------------
 
@@ -95,7 +90,8 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2020_02_21_173848_create_carritos_table', 1);
+(3, '2020_02_21_173848_create_carritos_table', 1),
+(4, '2020_03_01_230602_add_perfil_columns_to_users_table', 2);
 
 -- --------------------------------------------------------
 
@@ -134,12 +130,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `procesador`, `precio`, `imagen`, `sist_operativo`, `pantalla`, `camara`, `memoria_ram`, `id_marca`, `memoria_int`) VALUES
-(3, 'Google Pixel 2', 'Snapdragon 835', 25999, 'wTASqiaLyHCmuLknpP5r2I05bTYzfE1kExKbvy7m.png', 'Android 10.0', 5, 12.2, 4, 5, 32),
-(4, 'Moto E6 Plus', 'Helio P22', 15999, 'wvFs6FP2zQj5NuKBvTmCFVWxAw7jCtzrFlodFyGs.webp', 'Android 9.0', 6.1, 13, 4, 3, 32),
-(5, 'Galaxy S9+', 'Exynos 9810', 37500, 'OCkunztKAepDX6u9KnoGYCVVVLTzlZgri9HQCPWu.png', 'Android 10.0', 6.2, 12, 6, 1, 32),
-(7, 'LG V30', 'Snapdragon 835', 29500, 'g7ES67dB188Z2PyHro5rDtnFHDzN2v37uOS9CSp5.png', 'Android 9.0', 6, 16, 4, 2, 32),
-(8, 'Iphone 11 PRO Max', 'A13 Bionic', 1000000000, '3qk7I4D8Rt4MpSqT3blIUtklWFikTIDjTywmXoHz.png', 'iOS 13.3', 6.5, 12, 4, 6, 32),
-(13, 'Redmi Note 8 PRO', 'Snapdragon 650', 218999, 'ONQxYGtbSh4juGvaeglyeL2M0vZ2swpzbQmDbzW6.png', 'Android 9', 6.8, 16, 32, 4, 32);
+(3, 'Google Pixel 2', 'Snapdragon 835', 25999, '5e5daa51db978.png', 'Android 10.0', 5, 12.2, 4, 5, 32),
+(4, 'Moto E6 Plus', 'Helio P22', 15999, '5e5daa598c489.png', 'Android 9.0', 6.1, 13, 4, 3, 32),
+(5, 'Galaxy S9+', 'Exynos 9810', 37500, '5e5daa75ecc75.png', 'Android 10.0', 6.2, 12, 6, 1, 32),
+(7, 'LG V30', 'Snapdragon 835', 29500, '5e5daa7eddf02.png', 'Android 9.0', 6, 16, 4, 2, 32),
+(8, 'Iphone 11 PRO Max', 'A13 Bionic', 1000000000, '5e5daa85c114f.png', 'iOS 13.3', 6.5, 12, 4, 6, 32),
+(13, 'Redmi Note 8 PRO', 'Snapdragon 650', 218999, '5e5daa8f42065.png', 'Android 9', 6.8, 16, 32, 4, 32);
 
 -- --------------------------------------------------------
 
@@ -157,15 +153,20 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `name` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `name`, `avatar`) VALUES
-(3, 'admin', 'admin@admin.com', NULL, '$2y$10$eYo6lhGM8ad.qg4xdoaj8u7MNnXYEs.HyXX2b06YgrBmIdq/1eq6u', NULL, '2020-03-01 22:58:41', '2020-03-01 22:58:41', '', '6d57lqb1hRswdgj4O2Ye7QyOYsnTM2WCInjwFCcN.png');
+INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `name`, `avatar`, `nombre`, `apellido`, `direccion`, `ciudad`) VALUES
+(3, 'admin', 'admin@admin.com', NULL, '$2y$10$eYo6lhGM8ad.qg4xdoaj8u7MNnXYEs.HyXX2b06YgrBmIdq/1eq6u', NULL, '2020-03-01 22:58:41', '2020-03-01 22:58:41', '', '6d57lqb1hRswdgj4O2Ye7QyOYsnTM2WCInjwFCcN.png', '', '', '', ''),
+(4, 'ezeeeee', 'eze@gmailcom', NULL, '$2y$10$BV/NpA/8vOzLJVgTF6bUQe/actTdEIbJntrPEaLZBtois67MtjWKe', NULL, '2020-03-05 21:03:59', '2020-03-05 21:03:59', '', 'jXV1MKTmx9HNJWkNNsRzrDXv3eekZiWVcIO3rHdX.png', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -270,7 +271,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -282,7 +283,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

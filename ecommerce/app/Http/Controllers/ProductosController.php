@@ -147,7 +147,6 @@ class ProductosController extends Controller
         if ($request->file("imagen")) {
 
             $imagenVieja = $producto->imagen;
-            dd($imagenVieja);
 
             //Se verifica que no sea la imagen de stock
             if($imagenVieja != 'no-image.jpg'){
@@ -169,7 +168,7 @@ class ProductosController extends Controller
     }
 
 
-    
+
 
     public function destroy($id)
     {
