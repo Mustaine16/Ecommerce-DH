@@ -11,7 +11,7 @@
       <article class="producto__container p-2">
         <!-- Imagen del producto -->
         <figure class="producto__imagen text-center">
-          <img src="{{asset('/storage/'.$producto->imagen)}}" class="img-fluid" alt="" />
+          <img src="{{asset('img/productos/' . $producto->imagen)}}" class="img-fluid" alt="" />
         </figure>
         <!-- Nombre, precio y añadir la carrito -->
         <div class="producto__vender-container">

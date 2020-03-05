@@ -60,7 +60,7 @@
 
                 <div class="nav-item dropdown perfil__icon">
                     <a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#">
-                        <img src='{{asset("storage/" . Auth::user()->avatar )}}' alt="Perfil" style="width:42px;"  class="rounded-circle"/>
+                        <img src='{{asset("img/avatars/" . Auth::user()->avatar )}}' alt="Perfil" style="width:42px;"  class="rounded-circle"/>
                     </a>
 
                     <!-- ehh...magia de laravel? -->
@@ -89,7 +89,7 @@
 
                 <div class="nav-item dropdown perfil__icon">
                     <a class="nav-link dropdown-toggle text-center" id="navbardrop" data-toggle="dropdown" href="#">
-                        <img src='{{asset("storage/" . Auth::user()->avatar )}}' alt="Perfil" style="width:46px;"  class="rounded-circle"/>
+                        <img src='{{asset("img/avatars/" . Auth::user()->avatar )}}' alt="Perfil" style="width:46px;"  class="rounded-circle"/>
                     </a>
 
                     <!-- Magia de Laravel para Desloguear.. -->

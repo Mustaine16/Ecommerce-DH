@@ -27,7 +27,7 @@
 
             <div class="form-group imagen__container">
                 <label class="imagen__img_container" for="imagen">
-                    <img src="{{asset('storage/' .$producto->imagen)}}" alt="{{$producto->nombre}}"
+                    <img src="{{asset('img/productos/' . $producto->imagen)}}" alt="{{$producto->nombre}}"
                         class="imagen__img mx-auto d-block">
                     <p>Elegí una imagen</p>
                 </label>

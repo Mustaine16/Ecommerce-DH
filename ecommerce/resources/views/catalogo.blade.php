@@ -15,7 +15,7 @@
        @foreach ($productos as $key => $producto)
         <article class="product__card">
           <figure>
-            <img src="{{asset('/storage/'.$producto->imagen)}}" width="100" alt="{{$producto->nombre}}" class="product__img" />
+            <img src="{{asset('img/productos/' . $producto->imagen)}}" width="100" alt="{{$producto->nombre}}" class="product__img" />
           </figure>
           <div class="product__info">
             <h3 class="product__name">{{$producto->nombre}}</h3>

@@ -79,9 +79,11 @@ class ProductosController extends Controller
         $producto->precio = $request["precio"];
 
         if ($request->file("imagen")) {
-            $ruta = $request->file("imagen")->store("public");
-            $imagen = basename($ruta);
-            $producto->imagen = $imagen;
+            $imagenOrigin = $request->imagen->getClientOriginalName(); //Nombre original de la imagen
+            $imagenExt = $request->imagen->getClientOriginalExtension(); //Extension de la imagen
+            $imagenNombre = uniqid() . "." . $imagenExt; //Nombre a guardar en BBDD
+            $producto->imagen = $imagenNombre;
+            $request->imagen->move(public_path('img/productos/'), $imagenNombre);
         } else {
             $producto->imagen = 'no-image.jpg';
         }
@@ -145,22 +147,29 @@ class ProductosController extends Controller
         if ($request->file("imagen")) {
 
             $imagenVieja = $producto->imagen;
+            dd($imagenVieja);
 
             //Se verifica que no sea la imagen de stock
             if($imagenVieja != 'no-image.jpg'){
-                Storage::delete("/public" . "/" . $imagenVieja);
+                \File::delete($imagenVieja);
             }
 
-            //Se guarda la imagen en Storage y BBDD
-            $ruta = $request->file("imagen")->store("public");
-            $imagen = basename($ruta);
-            $producto->imagen = $imagen;
-        }
+            //Se guarda la imagen en Public y BBDD
+            $imagenOrigin = $request->imagen->getClientOriginalName(); //Nombre original de la imagen
+            $imagenExt = $request->imagen->getClientOriginalExtension(); //Extension de la imagen
+            $imagenNombre = uniqid() . "." . $imagenExt; //Nombre a guardar en BBDD
+            $producto->imagen = $imagenNombre;
+            $request->imagen->move(public_path('img/productos'), $imagenNombre);
+            } else {
+                $producto->imagen = 'no-image.jpg';
+            }
 
-        $producto->save();
-
-        return redirect("/producto/admin")->with('mensajeExito', 'Producto: ' . $producto->nombre . ' editado correctamente');;
+            $producto->save();
+            return redirect("/producto/admin")->with('mensajeExito', 'Producto: ' . $producto->nombre . ' editado correctamente');;
     }
+
+
+    
 
     public function destroy($id)
     {

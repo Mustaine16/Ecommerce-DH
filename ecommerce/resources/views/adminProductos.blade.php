@@ -40,7 +40,7 @@
                     {{$producto->id}}
                 </td>
                 <td>
-                    <img src="/storage/{{$producto->imagen}}" alt="{{$producto->nombre}}" width="40px">
+                    <img src="{{asset('img/productos') . '/' . $producto->imagen}}" alt="{{$producto->nombre}}" width="40px">
                 </td>
                 <td>
                     {{$producto->nombre}}
