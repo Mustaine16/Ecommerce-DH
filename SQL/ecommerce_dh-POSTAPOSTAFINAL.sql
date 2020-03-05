@@ -7,6 +7,10 @@
 -- Versión del servidor: 5.7.26-0ubuntu0.18.10.1
 -- Versión de PHP: 7.2.19-0ubuntu0.18.10.1
 
+ 
+CREATE DATABASE  IF NOT EXISTS `ecommerce_dh` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ecommerce_dh`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
